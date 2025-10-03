@@ -41,7 +41,7 @@
             href="https://github.com/hannahjliu">GitHub</a>
     </p>
     <h3 class="small"> <!-- We have added a class to the header called "small" which we can use to style it in the CSS -->
-        Welcome to my PP434 project page! 
+        Hello world! Welcome to my PP434 project page.
     </h3>
 
     <!-- We're organising the page into sections, with each section containing a chart, title and a description -->
@@ -54,6 +54,26 @@
             </p>
         </div>
         <figure id="Location1"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+    </section>
+
+    <section>
+        <div class="chart-description">
+            <h2>Section 2: A cool chart</h2>
+            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
+                Here's a chart that I thought was cool.
+            </p>
+        </div>
+        <figure id="Location2"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+    </section>
+
+        <section>
+        <div class="chart-description">
+            <h2>Section 3: An even cooler chart</h2>
+            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
+                Here's a chart that I thought was even cooler.
+            </p>
+        </div>
+        <figure id="Location3"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
     </section>
 
     <!-- Do you want to add more sections? -->
@@ -76,8 +96,12 @@
         // e.g. 
         // let figure_3_spec = ...
         // vegaEmbed('#Location3', figure_3_spec)
-
-
+        let figure_2_spec = "https://raw.githubusercontent.com/EconomicsObservatory/datavis/refs/heads/main/newsletters/2025-07-04-tennis-time/visualisation/fig1_strawberry_prices.json"; // We're storing the URL of the graph we want to display in a variable
+                                                                                                                    // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
+        vegaEmbed('#Location2', figure_2_spec)
+        let figure_3_spec = "https://raw.githubusercontent.com/EconomicsObservatory/ECOvisualisations/refs/heads/main/articles/2021-05-12-what-is-the-future-of-commuting-to-work/visualisation/fig4_days_commuting.json"; // We're storing the URL of the graph we want to display in a variable
+                                                                                                                    // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
+        vegaEmbed('#Location3', figure_3_spec)
     </script>
 
 </body>
