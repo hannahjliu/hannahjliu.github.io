@@ -76,6 +76,16 @@
         <figure id="Location3"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
     </section>
 
+            <section>
+        <div class="chart-description">
+            <h2>Section 4: A cool chart that I made</h2>
+            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
+                I made this cool chart.
+            </p>
+        </div>
+        <figure id="Location4"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+    </section>
+
     <!-- Do you want to add more sections? -->
         <!-- Try copying pasting the section above -->
         <!-- You'll need to change the id of the figure "<figure id="Location3"... -->
@@ -102,6 +112,10 @@
         let figure_3_spec = "https://raw.githubusercontent.com/EconomicsObservatory/ECOvisualisations/refs/heads/main/articles/2021-05-12-what-is-the-future-of-commuting-to-work/visualisation/fig4_days_commuting.json"; // We're storing the URL of the graph we want to display in a variable
                                                                                                                     // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
         vegaEmbed('#Location3', figure_3_spec)
+
+        let figure_4_spec = "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/MSlinegraph.vl.json"; // We're storing the URL of the graph we want to display in a variable
+                                                                                                                    // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
+        vegaEmbed('#Location4', figure_4_spec)
     </script>
 
 </body>
