@@ -1,0 +1,18 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/simplified%20arrest%20data.csv"
+  },
+  "mark": "bar",
+  "title": {"text": "ICE Arrests by Month from FY 2024 to July 2025"},
+  "encoding": {
+    "x": {
+      "timeUnit": "yearmonth",
+      "type": "temporal",
+      "bin": false,
+      "field": "apprehension_date"
+    },
+    "y": {"aggregate": "count"}
+  },
+  "config": {}
+}
