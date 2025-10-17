@@ -94,6 +94,15 @@
         </div>
         <figure id="Location5"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
     </section>
+    <section>
+        <div class="chart-description">
+            <h2>Section 6: An very econ-y chart I made with Altair</h2>
+            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
+                Learned how to use altair to make this cool chart.
+            </p>
+        </div>
+        <figure id="Location6"></figure> 
+    </section>
 
     <!-- Do you want to add more sections? -->
         <!-- Try copying pasting the section above -->
@@ -128,6 +137,8 @@
 
         let figure_5_spec = "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICE%20arrests%20histogram.json"
         vegaEmbed('#Location5', figure_5_spec)
+        let figure_6_spec = "visualizations/shiller_pe_ratio_chart.json"
+        vegaEmbed('#Location6', figure_6_spec)
     </script>
         
 
