@@ -1,0 +1,26 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "url": "https://api.worldbank.org/v2/country/kor;prk/indicator/SP.DYN.TFRT.IN?format=json&date=1960:2025&per_page=160",
+    "format":{"property": "[1]"}
+    },
+  "mark": {
+    "type": "line",
+    "color": "tomato"
+  },
+  "width":500,
+  "height":350,
+  "title": {
+    "text": "Comparing fertility rates between North and South Korea",
+    "subtitle": "Fertility data from World Bank"
+  },
+  "encoding": {
+    "x": {
+      "field": "date", 
+      "type": "temporal"},
+    "color":{"field":"countryiso3code", "title":"Country"},
+    "y": {
+      "field": "value", 
+      "type": "quantitative"}
+  }
+}

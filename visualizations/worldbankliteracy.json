@@ -1,0 +1,20 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Literacy rate over time",
+  "data": {"url": "https://api.worldbank.org/v2/country/all/indicator/SE.ENR.PRSC.FM.ZS?format=json",
+ "format":{"property": "[1]"}
+  },
+  "title": {
+    "text": "Literacy rate over time",
+  "subtitle": "World bank data"
+  },
+  "mark": "line",
+  "width":500,
+  "height":200,
+  "encoding": {
+    "x": {"field": "date", 
+        "type": "temporal",
+        "title": ""},
+    "y": {"field": "value", "type": "quantitative", "title": "Literacy rate"}
+  }
+}

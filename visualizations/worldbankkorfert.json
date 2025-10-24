@@ -1,0 +1,25 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "url": "https://api.worldbank.org/v2/country/kor/indicator/SP.DYN.TFRT.IN?format=json",
+    "format":{"property": "[1]"}
+    },
+  "mark": {
+    "type": "line",
+    "color": "tomato"
+  },
+  "width":500,
+  "height":350,
+  "title": {
+    "text": "South Korea's declining fertility",
+    "subtitle": "Fertility data from World Bank"
+  },
+  "encoding": {
+    "x": {
+      "field": "date", 
+      "type": "temporal"},
+    "y": {
+      "field": "value", 
+      "type": "quantitative"}
+  }
+}
