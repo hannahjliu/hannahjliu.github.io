@@ -1,0 +1,104 @@
+
+{
+"$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+      "data": {
+        "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/apprehensions_trump1.csv"
+      },
+
+      "layer": [
+        {
+          "mark": {
+            "type": "bar",
+            "color": "lightblue"},
+          "width": 600,
+          "height": 300,
+          "encoding": {
+            "x": {
+              "timeUnit": "yearmonth",
+              "type": "temporal",
+              "bin": false,
+              "field": "apprehension_date",
+              "title": "Month",
+              "axis": {
+                "labelAngle": -45
+              }
+
+            },
+            "y": {
+              "aggregate": "count",
+              "title": "Number of Arrests",
+              "scale": {
+                "domain": [0, 35000]
+              }
+            },
+            "tooltip": [
+              {
+                "timeUnit": "yearmonth",
+                "field": "apprehension_date",
+                "title": "Month",
+                "type": "temporal"
+              },
+              {
+                "aggregate": "count",
+                "title": "Arrests"
+              }
+            ]
+          }
+        },
+        {
+          "data": {
+            "values": [{"date": "2017-01-20"}]
+          },
+          "mark": {
+            "type": "rule",
+            "color": "red",
+            "strokeWidth": 2
+          },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "title": "Month"
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [{"date": "2017-01-20", "label": "Jan 20, 2017"}]
+          },
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 5,
+            "dy": -10,
+            "color": "red",
+            "fontSize": 11
+          },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal"
+            },
+            "y": {
+              "value": 10
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        }
+      ],
+      "title": {
+        "text": "ICE Arrests by Month from FY 2016 to July 2017",
+        "fontSize": 18,
+        "font": "sans-serif"
+      },
+      "width": "container",
+      "height": 400,
+      "config": {
+        "view": {
+          "stroke": "transparent"
+        }
+      }
+      
+}

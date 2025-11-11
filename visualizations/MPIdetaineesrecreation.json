@@ -1,0 +1,82 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 650,
+  "height": 300,
+  "data": {"url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/detainees1925.csv"},
+    "transform": [
+    {
+      "filter": "year(datum.Date) > 2024 || (year(datum.Date) == 2024 && month(datum.Date) >= 10)"
+    }
+  ],
+  "title": {
+    "text":"Population in ICE Detention, 2024-25",
+    "subtitle": ["Source:  TRAC, ICE Detainees."]},
+    "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "color": "teal"
+      },
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "type": "temporal",
+          "title": "",
+          "axis": {
+            "format": "%b %Y"
+          }
+        },
+        "y": {
+          "field": "Total",
+          "type": "quantitative",
+          "title": "Total Detainees"
+        }
+      }
+    },
+    {
+      "mark": {
+       "type": "rule",
+       "color": "green"
+      },
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "type": "temporal"
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover",
+            "value": 1,
+            "empty": false
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {
+            "field": "Date",
+            "type": "temporal",
+            "format": "%b %d, %Y",
+            "title": "Date"
+          },
+          {
+            "field": "Total",
+            "type": "quantitative",
+            "title": "Total"
+          }
+        ]
+      },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": ["Date"],
+            "nearest": true,
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ]
+    }
+  ]
+}

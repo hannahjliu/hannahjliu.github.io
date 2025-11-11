@@ -1,0 +1,20 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Horizontal bar chart of Active DACA Recipients by country.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/dacarecipients2024bycountry.csv"
+  },
+  "mark": "bar",
+  "width": 600,
+  "height": 400,
+  "encoding": {
+    "x": {"field": "count", "type": "quantitative", "title": "Number of Recipients"},
+    "y": {
+      "field": "country", 
+      "type": "nominal", 
+      "title": "Country",
+      "sort": "-x",
+      "axis": {"labelLimit": 200}
+    }
+  }
+}
