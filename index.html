@@ -1,18 +1,8 @@
 <!DOCTYPE html>
 <html> 
-    <!-- HTML is hierarchial: tags like this define elements on the page. 
-    Each tag does something different. For example:
-        - The <html> tag defines the whole document.
-        - The <h1> tag defines a large heading
-        - The <p> tag defines a paragraph
-        - Tags appear as an opening <div> and closing </div> pair
-    -->
 
 <head>    
     <!-- The head tag links to resources our page needs and defines information about it. Tags in the <head> aren't displayed on the page. -->
-
-    <!-- This is a link to a stylesheet which contains rules about how each element on the page should be defined-->
-    <!-- Try swapping example1.css to another, and take a look at example1.css to see if you understand it-->
     <link rel="stylesheet" type="text/css" href="index.css">
     <title>My Portfolio</title> <!-- The title displayed in the browser tab, not on the page itself -->
 
@@ -25,14 +15,12 @@
         #chartGrid {
             display: flex;
         }
-        
     </style>
 </head>
 
 <body> 
 <!-- The body tag contains the elements that visitors to our page will see. -->
-    <h1 class="big" style="margin-bottom: 0px;"> <!-- We have added a class to the header called "big" which we can use to style it in the CSS -->
-        <!-- This is a header, it is the largest text on the page -->
+    <h1 class="big" style="margin-bottom: 0px;"> 
         Hannah Liu
     </h1>
     <p style="margin-top: 0px; color: darkblue">
@@ -41,121 +29,180 @@
             href="https://github.com/hannahjliu">GitHub</a>
     </p>
     <h3 class="small"> <!-- We have added a class to the header called "small" which we can use to style it in the CSS -->
-        Hello world! Welcome to my PP434 project page.
+        Hello world! Welcome to my PP434 portfolio page. Here, I'm am building towards 10 coding challenges.
     </h3>
 
     <!-- We're organising the page into sections, with each section containing a chart, title and a description -->
     <section>
         <div class="chart-description">
-            <h2>Section 1: A basic chart</h2>
+            <h2>Challenge 1: Hosting and embedding charts.</h2>
             <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                We've organised the page into sections, with each section containing a chart, title and a description. Here, we can describe the chart and give some context.
-                As a first example, we're using a basic chart from our repo.
+               Here's one chart.
             </p>
         </div>
-        <figure id="Location1"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+        <figure id="Location3"></figure>
+        <p> 
+                Here's a second chart.
+        </p>
+         <figure id="Location2"></figure> 
+        <p>
+            Nothing fancy.
+        </p>
     </section>
 
     <section>
         <div class="chart-description">
-            <h2>Section 2: A cool chart</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                Here's a chart that I thought was cool.
+            <h2>Challenge 2: Building and creating my own visualisations.</h2>
+            <p> 
+            A chart of UK unemployment over time made with the Economic Observatory "Create" tool.
             </p>
+            <figure id="Location9"></figure> 
+            <p> 
+             A chart of UK debt over time made with the Economic Observatory "Create" tool.
+            </p>
+            <figure id="Location10"></figure> 
         </div>
-        <figure id="Location2"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+         
     </section>
 
     <section>
         <div class="chart-description">
-            <h2>Section 3: An even cooler chart</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                Here's a chart that I thought was even cooler.
+            <h2>Challenge 3: Debate. Use a visualization in policy commentary.</h2>
+            <p>
+                Are ICE arrests ramping up faster under the second Trump administration compared to the first? Here are two charts that I made with data from the <a href="https://deportationdata.org/data/ice.html" target="_blank">Deportation Data Project</a> obtained through Freedom of Information Act requests from the U.S. Immigration Customs and Enforcement (ICE) Agency. The first shows occurrences of ICE arrests by month from the beginnning of Fiscal Year 2016 to July 2017 and the second shows occurrences of ICE arrests Fiscal Year 2024 through July 2025. The red lines indicate the dates of the first and second inaugurations of President Trump, respectively.
             </p>
+            <figure id="Location8"></figure>   
+            <figure id="Location5"></figure>  
+            <p>
+                Looking at the histograms, the sheer number of arrests in the first few months of Trump 2.0 far surpass that of Trump 1.0. Not only that, but the difference between the period immediately before inauguration and after inauguration are much more distinct in Trump 2.0 compared to 1.0.
+            </p>
+            
         </div>
-        <figure id="Location3"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+
     </section>
     <section>
         <div class="chart-description">
-            <h2>Section 4: A cool chart that I made</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                I made this cool chart.
+            <h2>Challenge 4: Replication. Re-create, then improve someone else's chart.</h2>
+            <p>
+                This chart is located in an article from the Migration Policy Institute titled, <a href=https://www.migrationpolicy.org/article/trump-immigrant-detention>"U.S. Immigrant Detention Grows to Record Heights under Trump Administration"</a>. You're able to see a general trend in the chart, but it could be more clear.
             </p>
+            <img src="visualizations/MPI Chart.png" alt="MPI Chart">
+            <p>
+                I used the same data set from <a href="https://tracreports.org/immigration/detentionstats/pop_agen_table.html">TRAC Reports</a> to recreate the chart with grid lines to more clearly identify the x and y values on the line. I also included a y-axis label and a hover function to show more precisely the exact number of detentions on all given dates in the dataset. 
+            </p>
+            <figure id="Location11"></figure>   
         </div>
-        <figure id="Location4"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+
     </section>
 
-        <section>
+     <section>
         <div class="chart-description">
-            <h2>Section 5: A cool chart that I made with data I found</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                I made this cool chart with data I found.
+            <h2>Challenge 5: Accessing data. Scrapers and APIs.</h2>
+            <p>
+                Insert an API generated chart
+            </p>
+            <figure id="Location7"></figure>   
+            <p>
+                Insert a chart that uses scraped data
             </p>
         </div>
-        <figure id="Location5"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
     </section>
+
     <section>
         <div class="chart-description">
-            <h2>Section 6: An very econ-y chart I made with Altair</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                Learned how to use altair to make this cool chart.
+            <h2>Challenge 6: Loops. Build a dashboard.</h2>
+            <p>
+                Use a loop to download 6 different series as json files, use times series data and display as a grid
+            </p>
+            <p>
+                As above, but use a loop in your Javascript in order to embed the six charts
             </p>
         </div>
-        <figure id="Location6"></figure> 
     </section>
-      <section>
+
+    <section>
         <div class="chart-description">
-            <h2>Section 7: Using APIs</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                Learned how to pull data from the World Bank website.
+            <h2>Challenge 7: Maps. Base maps and chloropleths. </h2>
+            <p> 
+                Map loading...
             </p>
         </div>
-        <figure id="Location7"></figure> 
     </section>
 
 
-  
-    <!-- Do you want to add more sections? -->
-        <!-- Try copying pasting the section above -->
-        <!-- You'll need to change the id of the figure "<figure id="Location3"... -->
-        <!-- ... and add a new variable for the graph spec in the script at the bottom of the page -->
+    <section>
+        <div class="chart-description">
+            <h2> Chart Parking Lot </h2>
+            <p> 
+                Putting these here so I don't forget about them
+            </p>
 
+            <figure id="Location2"></figure>              
+            <figure id="Location3"></figure>   
+            <figure id="Location4"></figure>  
+            <figure id="Location5"></figure>              
+            <figure id="Location6"></figure>   
+            <figure id="Location7"></figure>  
+            <figure id="Location8"></figure>  
+        </div>
+    </section>
 
-    <!-- This is a script, it's a way to run JavaScript code on the page -->
     <script>
-        // This is a comment in JavaScript - it's a different language to HTML and CSS
+        let chart1 = "https://raw.githubusercontent.com/EconomicsObservatory/courses/main/2/s2_chart2.json";
+        let chart2 = "https://raw.githubusercontent.com/EconomicsObservatory/datavis/refs/heads/main/newsletters/2025-07-04-tennis-time/visualisation/fig1_strawberry_prices.json"; // We're storing the URL of the graph we want to display in a variable                                                                                               // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
+        let chart3 = "https://raw.githubusercontent.com/EconomicsObservatory/ECOvisualisations/refs/heads/main/articles/2021-05-12-what-is-the-future-of-commuting-to-work/visualisation/fig4_days_commuting.json"; // We're storing the URL of the graph we want to display in a variable                                                                                                       // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json
+        let chart4 = "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/MSlinegraph.vl.json";                                                                            // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
+        let chart5 = "visualizations/icearrestshistogram20232025.json"
+        let chart6 = "visualizations/shiller_pe_ratio_chart.json"
+        let chart7 = "visualizations/worldbankkorfert.json"
+        let chart8 = "visualizations/icearrestshist20162017.json"
+        let chart9 = "visualizations/ukunemptimeseries.json"
+        let chart10 = "visualizations/ukdebtts.json"
+        let chart11 = "visualizations/MPIdetaineesrecreation.json"
 
-        let figure_1_spec = "https://raw.githubusercontent.com/EconomicsObservatory/courses/main/2/s2_chart2.json"; // We're storing the URL of the graph we want to display in a variable
-                                                                                                                    // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
-
-        vegaEmbed('#Location1', figure_1_spec) // We're using the vegaEmbed function to put a graph in the element with id figure_1
-
-        // Do you want to add more graphs?
-        // try defining a new variable for figure_3_spec, adding VegaEmbed for Location3, and adding a new section in the HTML
-        // e.g. 
-        // let figure_3_spec = ...
-        // vegaEmbed('#Location3', figure_3_spec)
-        let figure_2_spec = "https://raw.githubusercontent.com/EconomicsObservatory/datavis/refs/heads/main/newsletters/2025-07-04-tennis-time/visualisation/fig1_strawberry_prices.json"; // We're storing the URL of the graph we want to display in a variable
-                                                                                                                    // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
-        vegaEmbed('#Location2', figure_2_spec)
-        let figure_3_spec = "https://raw.githubusercontent.com/EconomicsObservatory/ECOvisualisations/refs/heads/main/articles/2021-05-12-what-is-the-future-of-commuting-to-work/visualisation/fig4_days_commuting.json"; // We're storing the URL of the graph we want to display in a variable
-                                                                                                                    // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
-        vegaEmbed('#Location3', figure_3_spec)
-        let figure_4_spec = "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/MSlinegraph.vl.json"; // We're storing the URL of the graph we want to display in a variable                                                                                    // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
-        vegaEmbed('#Location4', figure_4_spec)
-        let figure_5_spec = "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICE%20arrests%20histogram.json"
-        vegaEmbed('#Location5', figure_5_spec)
-        let figure_6_spec = "visualizations/shiller_pe_ratio_chart.json"
-        vegaEmbed('#Location6', figure_6_spec)
-        let figure_7_spec = "visualizations/worldbankkorfert.json"
-        vegaEmbed('#Location7', figure_7_spec)
+        vegaEmbed('#Location1', chart1)
+        vegaEmbed('#Location2', chart2)
+        vegaEmbed('#Location3', chart3)
+        vegaEmbed('#Location4', chart4)
+        vegaEmbed('#Location5', chart5)
+        vegaEmbed('#Location6', chart6)
+        vegaEmbed('#Location7', chart7)
+        vegaEmbed('#Location8', chart8)
+        vegaEmbed('#Location9', chart9)
+        vegaEmbed('#Location10', chart10)
+        vegaEmbed('#Location11', chart11)
 
 
-          
+       // for (let i = 16; i < 24; i++){
+       //     console.log(i)
+      //  } use curly bracket for for loops and functions 
+
+      //square bracket for arrays
+
+        let cities = ["London", "Seattle", "Glasgow", "Barcelona", "New York", "Kuala Lumpur"]
+        console.log("The first city is " +cities[0])
+        for (let i = 0; i < 6; i++){
+            console.log(cities[i])
+        }
+
+
+        let chart_specs = [
+            "https://raw.githubusercontent.com/EconomicsObservatory/courses/main/2/s2_chart2.json",
+            "https://raw.githubusercontent.com/EconomicsObservatory/datavis/refs/heads/main/newsletters/2025-07-04-tennis-time/visualisation/fig1_strawberry_prices.json",
+         ]
+
+        let chart_destinations = [
+            "#Location1",
+            "#Location2",
+
+        ]
+
+        for (let i=0; i<2; i++){
+            console.log("Char spec at" +chart_specs[i])
+            console.log("Chart destination at: "+chart_destinations[i])
+            vegaEmbed(chart_destinations[i], chart_specs[i])
+        }
     </script>
-        
-
-        
 
 </body>
     
