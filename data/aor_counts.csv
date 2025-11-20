@@ -1,27 +1,27 @@
-aor_nam,count
-Atlanta,18449
-Baltimore,4177
-Boston,7666
-Buffalo,2558
-Chicago,19730
-Dallas,24928
-Denver,5185
-Detroit,6047
-El Paso,5117
-HQ,52
-Harlingen,12909
-Houston,23857
-Los Angeles,13678
-Miami,29133
-New Orleans,25541
-New York City,8992
-Newark,9319
-Philadelphia,7026
-Phoenix,9198
-Salt Lake City,8431
-San Antonio,16581
-San Diego,2784
-San Francisco,5885
-Seattle,3996
-St. Paul,6663
-Washington,7844
+aor_nam,count,id
+"Atlanta",18449,"ATL"
+"Baltimore",4177,"BAL"
+"Boston",7666,"BOS"
+"Buffalo",2558,"BUF"
+"Chicago",19730,"CHI"
+"Dallas",24928,"DAL"
+"Denver",5185,"DEN"
+"Detroit",6047,"DET"
+"El Paso",5117,"ELP"
+"HQ",52,"HQ"
+"Harlingen",12909,"HAR"
+"Houston",23857,"HOU"
+"Los Angeles",13678,"LOS"
+"Miami",29133,"MIA"
+"New Orleans",25541,"NEWO"
+"New York City",8992,"NYC"
+"Newark",9319,"NEW"
+"Philadelphia",7026,"PHI"
+"Phoenix",9198,"PHO"
+"Salt Lake City",8431,"SAL"
+"San Antonio",16581,"SANA"
+"San Diego",2784,"SAND"
+"San Francisco",5885,"SANF"
+"Seattle",3996,"SEA"
+"St Paul",6663,"STP"
+"Washington",7844,"WAS"
