@@ -98,12 +98,9 @@
      <section>
         <div class="chart-description">
             <h2>Challenge 5: Accessing data. Scrapers and APIs.</h2>
-            <p>
-                Insert an API generated chart
-            </p>
             <figure id="Location7"></figure>   
             <p>
-                Insert a chart that uses scraped data
+                That is, describe the base url, and then the elements that are needed to call data. Include the full final url that you used in your chart.
             </p>
         </div>
     </section>
@@ -124,8 +121,27 @@
         <div class="chart-description">
             <h2>Challenge 7: Maps. Base maps and chloropleths. </h2>
             <p> 
-                Map loading...
+                Here is my base map of Scotland by local authority.
             </p>
+            <figure id="Location13"></figure>              
+            <p> 
+               Here is a chloropleth map that uses data from the <a href= "https://www.ons.gov.uk/explore-local-statistics/indicators/cigarette-smokers">UK Office of National Statistics</a> that shows the percentage of cigarette smokers by local authority.
+            </p>
+            <figure id="Location12"></figure>  
+        </div>
+    </section>
+
+        <section>
+        <div class="chart-description">
+            <h2>Challenge 8: Big Data </h2>
+            <p> 
+                Here is my bean chart.
+            </p>
+            <figure id="Location15"></figure>              
+            <p> 
+               Here is my fish chart.
+            </p>
+            <figure id="Location16"></figure>       
         </div>
     </section>
 
@@ -134,16 +150,10 @@
         <div class="chart-description">
             <h2> Chart Parking Lot </h2>
             <p> 
-                Putting these here so I don't forget about them
+                <figure id="Location14"></figure>  
             </p>
 
-            <figure id="Location2"></figure>              
-            <figure id="Location3"></figure>   
-            <figure id="Location4"></figure>  
-            <figure id="Location5"></figure>              
-            <figure id="Location6"></figure>   
-            <figure id="Location7"></figure>  
-            <figure id="Location8"></figure>  
+
         </div>
     </section>
 
@@ -154,11 +164,16 @@
         let chart4 = "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/MSlinegraph.vl.json";                                                                            // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
         let chart5 = "visualizations/icearrestshistogram20232025.json"
         let chart6 = "visualizations/shiller_pe_ratio_chart.json"
-        let chart7 = "visualizations/worldbankkorfert.json"
+        let chart7 = "visualizations/wbkoreasfertcomp.json"
         let chart8 = "visualizations/icearrestshist20162017.json"
         let chart9 = "visualizations/ukunemptimeseries.json"
         let chart10 = "visualizations/ukdebtts.json"
         let chart11 = "visualizations/MPIdetaineesrecreation.json"
+        let chart12 = "visualizations/scotlandsmokers2023.json"
+        let chart13 = "visualizations/scotlandbasemap.json"
+        let chart14 = "visualizations/aormap.json"
+        let chart15 = "visualizations/beanprices.json"
+        let chart16 = "visualizations/fishprices.json"
 
         vegaEmbed('#Location1', chart1)
         vegaEmbed('#Location2', chart2)
@@ -171,6 +186,12 @@
         vegaEmbed('#Location9', chart9)
         vegaEmbed('#Location10', chart10)
         vegaEmbed('#Location11', chart11)
+        vegaEmbed('#Location12', chart12)
+        vegaEmbed('#Location13', chart13)
+        vegaEmbed('#Location14', chart14)
+        vegaEmbed('#Location15', chart15)
+        vegaEmbed('#Location16', chart16)
+
 
 
        // for (let i = 16; i < 24; i++){
