@@ -1,0 +1,31 @@
+{
+"$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/202325immcriminalrecord.csv"
+  },
+  "transform": [
+    {
+      "filter": {
+        "and": [
+          {"field": "apprehension_date", "gte": "2024-07-20"},
+          {"field": "apprehension_date", "lte": "2025-01-20"}
+        ]
+      }
+    }
+  ],
+  "mark": "bar",
+  "width": 600,
+  "height": 400,
+  "encoding": {
+    "x": {
+      "field": "apprehension_criminality",
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "aggregate": "count",
+      "scale": {"domain": [0, 55000]}
+    }
+  }
+}

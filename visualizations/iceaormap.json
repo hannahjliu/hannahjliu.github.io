@@ -1,0 +1,18 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "ICE AOR",
+  "width": 350,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/visualizations/ice-aor-shp.geojson"
+  },
+  "projection": {
+    "type": "albersUsa"
+  },
+  "mark": {
+    "type": "geoshape",
+    "fill": "white",
+    "stroke": "black",
+    "strokeWidth": 1
+  }
+}

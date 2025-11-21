@@ -1,0 +1,44 @@
+{
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/visualizations/ice-aor-shp.json",
+    "format": {"feature": "ice-aor-shp", "type": "topojson"}
+  },
+  "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
+  "encoding": {
+    "color": {
+      "field": "count",
+      "scale": {"scheme": "reds"},
+      "title": "Arrests",
+      "type": "quantitative"
+    },
+    "tooltip": [
+      {"field": "properties.aor_nam", "title": "Area of Responsibility", "type": "nominal"},
+      {"field": "count", "title": "Arrests", "type": "quantitative"}
+    ]
+  },
+  "height": 300,
+  "params": [
+    {
+      "name": "param_1",
+      "select": {"type": "interval", "encodings": ["x", "y"]},
+      "bind": "scales"
+    }
+  ],
+  "projection": {"type": "albersUsa"},
+  "title": {"text":"ICE Arrests by Area of Responsibility", "subtitle":"January to July 2025"
+    },
+  "transform": [
+    {
+      "lookup": "properties.aor_nam",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/aor_counts.csv"
+        },
+        "key": "aor_nam",
+        "fields": ["count"]
+      }
+    }
+  ],
+  "width": 600,
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json"
+}
