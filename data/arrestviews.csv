@@ -1,25 +1,25 @@
-view,characteristic,value,administration
-gender,female,7422,Trump 1.0
-gender,male,99462,Trump 1.0
-gender,female,21906,Trump 2.0
-gender,male,183022,Trump 2.0
-age group,0-17,1637,Trump 1.0
-age group,18-24,18195,Trump 1.0
-age group,25-34,40151,Trump 1.0
-age group,35-44,30984,Trump 1.0
-age group,45-54,12215,Trump 1.0
-age group,55-64,3173,Trump 1.0
-age group,65+,513,Trump 1.0
-age group,0-17,3719,Trump 2.0
-age group,18-24,36822,Trump 2.0
-age group,25-34,73210,Trump 2.0
-age group,35-44,55534,Trump 2.0
-age group,45-54,26870,Trump 2.0
-age group,55-64,7549,Trump 2.0
-age group,65+,1221,Trump 2.0
-criminality,Convicted,69277,Trump 1.0
-criminality,No Criminal Charges,12111,Trump 1.0
-criminality,Pending,25496,Trump 1.0
-criminality,Convicted,75862,Trump 2.0
-criminality,No Criminal Charges,67367,Trump 2.0
-criminality,Pending Charges,61699,Trump 2.0
+view,characteristic,value,percentage,administration
+gender,female,7422,6.943976647580555,Trump 1.0
+gender,male,99462,93.05602335241944,Trump 1.0
+gender,female,21906,10.689608057464085,Trump 2.0
+gender,male,183022,89.31039194253592,Trump 2.0
+age group,0-17,1637,1.531796234607179,Trump 1.0
+age group,18-24,18195,17.02567653553917,Trump 1.0
+age group,25-34,40151,37.570647902084815,Trump 1.0
+age group,35-44,30984,28.9927761350451,Trump 1.0
+age group,45-54,12215,11.42998839690085,Trump 1.0
+age group,55-64,3173,2.969083355167122,Trump 1.0
+age group,65+,513,0.48003144065576225,Trump 1.0
+age group,0-17,3719,1.8148102964499206,Trump 2.0
+age group,18-24,36822,17.968525070147614,Trump 2.0
+age group,25-34,73210,35.72526534097841,Trump 2.0
+age group,35-44,55534,27.099670611199215,Trump 2.0
+age group,45-54,26870,13.112114188117605,Trump 2.0
+age group,55-64,7549,3.683786751250458,Trump 2.0
+age group,65+,1221,0.5958277418567769,Trump 2.0
+criminality,Convicted,69277,64.81512667939074,Trump 1.0
+criminality,No Criminal Charges,12111,11.330975637139328,Trump 1.0
+criminality,Pending Charges,25496,23.85389768346993,Trump 1.0
+criminality,Convicted,75862,37.0188554028732,Trump 2.0
+criminality,No Criminal Charges,67367,32.87349703310431,Trump 2.0
+criminality,Pending Charges,61699,30.10764756402249,Trump 2.0
