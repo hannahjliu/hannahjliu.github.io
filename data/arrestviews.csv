@@ -1,0 +1,25 @@
+view,characteristic,value,administration
+gender,female,7422,Trump 1.0
+gender,male,99462,Trump 1.0
+gender,female,21906,Trump 2.0
+gender,male,183022,Trump 2.0
+age group,0-17,1637,Trump 1.0
+age group,18-24,18195,Trump 1.0
+age group,25-34,40151,Trump 1.0
+age group,35-44,30984,Trump 1.0
+age group,45-54,12215,Trump 1.0
+age group,55-64,3173,Trump 1.0
+age group,65+,513,Trump 1.0
+age group,0-17,3719,Trump 2.0
+age group,18-24,36822,Trump 2.0
+age group,25-34,73210,Trump 2.0
+age group,35-44,55534,Trump 2.0
+age group,45-54,26870,Trump 2.0
+age group,55-64,7549,Trump 2.0
+age group,65+,1221,Trump 2.0
+criminality,Convicted,69277,Trump 1.0
+criminality,No Criminal Charges,12111,Trump 1.0
+criminality,Pending,25496,Trump 1.0
+criminality,Convicted,75862,Trump 2.0
+criminality,No Criminal Charges,67367,Trump 2.0
+criminality,Pending Charges,61699,Trump 2.0
