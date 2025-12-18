@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html> 
+
+<head>    
+    <!-- The head tag links to resources our page needs and defines information about it. Tags in the <head> aren't displayed on the page. -->
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <title>My Portfolio</title> <!-- The title displayed in the browser tab, not on the page itself -->
+
+    <!-- This is a link to the vega-lite which we're using to make graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <style>
+        #chartGrid {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body> 
+<!-- The body tag contains the elements that visitors to our page will see. -->
+    <h1 class="big" style="margin-bottom: 0px;"> 
+        Hannah Liu
+    </h1>
+    <p style="margin-top: 0px; color: darkblue">
+        <!-- we're setting the margin to 0px so the header and authour name are close together -->
+        Hannah Liu | <a href="https://www.linkedin.com/in/hannahjliu/">LinkedIn</a> | <a
+            href="https://github.com/hannahjliu">GitHub</a>
+    </p>
+    <h3 class="small"> <!-- We have added a class to the header called "small" which we can use to style it in the CSS -->
+        Hello world! Welcome to my PP434 portfolio page. Here, I'm am building towards 10 coding challenges.
+    </h3>
+
+    <!-- We're organising the page into sections, with each section containing a chart, title and a description -->
+    <section>
+        <div class="chart-description">
+            <h2>Challenge 1: Hosting and embedding charts.</h2>
+            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
+               Here's one chart.
+            </p>
+        </div>
+        <figure id="Location3"></figure>
+        <p> 
+                Here's a second chart.
+        </p>
+         <figure id="Location2"></figure> 
+        <p>
+            Nothing fancy.
+        </p>
+    </section>
+
+    <section>
+        <div class="chart-description">
+            <h2>Challenge 2: Building and creating my own visualisations.</h2>
+            <p> 
+            A chart of UK unemployment over time made with the Economic Observatory "Create" tool.
+            </p>
+            <figure id="Location9"></figure> 
+            <p> 
+             A chart of UK debt over time made with the Economic Observatory "Create" tool.
+            </p>
+            <figure id="Location10"></figure> 
+        </div>
+         
+    </section>
+
+    <section>
+        <div class="chart-description">
+            <h2>Challenge 3: Debate. Use a visualization in policy commentary.</h2>
+            <p>
+                Are ICE arrests ramping up faster under the second Trump administration compared to the first? Here are two charts that I made with data from the <a href="https://deportationdata.org/data/ice.html" target="_blank">Deportation Data Project</a> obtained through Freedom of Information Act requests from the U.S. Immigration Customs and Enforcement (ICE) Agency. The first shows occurrences of ICE arrests by month from the beginnning of Fiscal Year 2016 to July 2017 and the second shows occurrences of ICE arrests Fiscal Year 2024 through July 2025. The red lines indicate the dates of the first and second inaugurations of President Trump, respectively.
+            </p>
+            <figure id="Location8"></figure>   
+            <figure id="Location5"></figure>  
+            <p>
+                Looking at the histograms, the sheer number of arrests in the first few months of Trump 2.0 far surpass that of Trump 1.0. Not only that, but the difference between the period immediately before inauguration and after inauguration are much more distinct in Trump 2.0 compared to 1.0.
+            </p>
+            
+        </div>
+
+    </section>
+    <section>
+        <div class="chart-description">
+            <h2>Challenge 4: Replication. Re-create, then improve someone else's chart.</h2>
+            <p>
+                This chart is located in an article from the Migration Policy Institute titled, <a href=https://www.migrationpolicy.org/article/trump-immigrant-detention>"U.S. Immigrant Detention Grows to Record Heights under Trump Administration"</a>. You're able to see a general trend in the chart, but it could be more clear.
+            </p>
+            <img src="visualizations/MPI Chart.png" alt="MPI Chart">
+            <p>
+                I used the same data set from <a href="https://tracreports.org/immigration/detentionstats/pop_agen_table.html">TRAC Reports</a> to recreate the chart with grid lines to more clearly identify the x and y values on the line. I also included a y-axis label and a hover function to show more precisely the exact number of detentions on all given dates in the dataset. 
+            </p>
+            <figure id="Location11"></figure>   
+        </div>
+
+    </section>
+
+     <section>
+        <div class="chart-description">
+            <h2>Challenge 5: Accessing data. Scrapers and APIs.</h2>
+            <figure id="Location7"></figure>   
+            <p>
+                That is, describe the base url, and then the elements that are needed to call data. Include the full final url that you used in your chart.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="chart-description">
+            <h2>Challenge 6: Loops. Build a dashboard.</h2>
+            <p>
+                Use a loop to download 6 different series as json files, use times series data and display as a grid
+            </p>
+            <p>
+                As above, but use a loop in your Javascript in order to embed the six charts
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="chart-description">
+            <h2>Challenge 7: Maps. Base maps and chloropleths. </h2>
+            <p> 
+                Here is my base map of Scotland by local authority.
+            </p>
+            <figure id="Location13"></figure>              
+            <p> 
+               Here is a chloropleth map that uses data from the <a href= "https://www.ons.gov.uk/explore-local-statistics/indicators/cigarette-smokers">UK Office of National Statistics</a> that shows the percentage of cigarette smokers by local authority.
+            </p>
+            <figure id="Location12"></figure>  
+        </div>
+    </section>
+
+        <section>
+        <div class="chart-description">
+            <h2>Challenge 8: Big Data </h2>
+            <p> 
+                Here is my bean chart.
+            </p>
+            <figure id="Location15"></figure>              
+            <p> 
+               Here is my fish chart.
+            </p>
+            <figure id="Location16"></figure>       
+        </div>
+    </section>
+
+            <section>
+        <div class="chart-description">
+            <h2>Challenge 9: _____ </h2>
+            <p> 
+                chart loading
+            </p>   
+        </div>
+    </section>
+
+            <section>
+        <div class="chart-description">
+            <h2>Challenge 10: _____ </h2>
+            <p> 
+                https://colab.research.google.com/drive/1YkPXEvAlgdL3otRUiFkEtLZ4Tf53E86E?usp=sharing 
+            </p>
+  
+        </div>
+    </section>
+
+
+    <section>
+        <div class="chart-description">
+            <h2> Chart Parking Lot </h2>
+            <p> 
+                <figure id="Location14"></figure>
+                <figure id="Location17"></figure>    
+            </p>
+
+
+        </div>
+    </section>
+
+    <script>
+        let chart1 = "https://raw.githubusercontent.com/EconomicsObservatory/courses/main/2/s2_chart2.json";
+        let chart2 = "https://raw.githubusercontent.com/EconomicsObservatory/datavis/refs/heads/main/newsletters/2025-07-04-tennis-time/visualisation/fig1_strawberry_prices.json"; // We're storing the URL of the graph we want to display in a variable                                                                                               // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
+        let chart3 = "https://raw.githubusercontent.com/EconomicsObservatory/ECOvisualisations/refs/heads/main/articles/2021-05-12-what-is-the-future-of-commuting-to-work/visualisation/fig4_days_commuting.json"; // We're storing the URL of the graph we want to display in a variable                                                                                                       // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json
+        let chart4 = "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/MSlinegraph.vl.json";                                                                            // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
+        let chart5 = "visualizations/icearrestshistogram20232025.json"
+        let chart6 = "visualizations/shiller_pe_ratio_chart.json"
+        let chart7 = "visualizations/wbkoreasfertcomp.json"
+        let chart8 = "visualizations/icearrestshist20162017.json"
+        let chart9 = "visualizations/ukunemptimeseries.json"
+        let chart10 = "visualizations/ukdebtts.json"
+        let chart11 = "visualizations/MPIdetaineesrecreation.json"
+        let chart12 = "visualizations/scotlandsmokers2023.json"
+        let chart13 = "visualizations/scotlandbasemap.json"
+        let chart14 = "visualizations/aormap.json"
+        let chart15 = "visualizations/beanprices.json"
+        let chart16 = "visualizations/fishprices.json"
+        let chart17 = "visualizations/arrestviewschartcombined.json"
+
+        vegaEmbed('#Location1', chart1)
+        vegaEmbed('#Location2', chart2)
+        vegaEmbed('#Location3', chart3)
+        vegaEmbed('#Location4', chart4)
+        vegaEmbed('#Location5', chart5)
+        vegaEmbed('#Location6', chart6)
+        vegaEmbed('#Location7', chart7)
+        vegaEmbed('#Location8', chart8)
+        vegaEmbed('#Location9', chart9)
+        vegaEmbed('#Location10', chart10)
+        vegaEmbed('#Location11', chart11)
+        vegaEmbed('#Location12', chart12)
+        vegaEmbed('#Location13', chart13)
+        vegaEmbed('#Location14', chart14)
+        vegaEmbed('#Location15', chart15)
+        vegaEmbed('#Location16', chart16)
+        vegaEmbed('#Location17', chart17)
+
+
+
+       // for (let i = 16; i < 24; i++){
+       //     console.log(i)
+      //  } use curly bracket for for loops and functions 
+
+      //square bracket for arrays
+
+        let cities = ["London", "Seattle", "Glasgow", "Barcelona", "New York", "Kuala Lumpur"]
+        console.log("The first city is " +cities[0])
+        for (let i = 0; i < 6; i++){
+            console.log(cities[i])
+        }
+
+
+        let chart_specs = [
+            "https://raw.githubusercontent.com/EconomicsObservatory/courses/main/2/s2_chart2.json",
+            "https://raw.githubusercontent.com/EconomicsObservatory/datavis/refs/heads/main/newsletters/2025-07-04-tennis-time/visualisation/fig1_strawberry_prices.json",
+         ]
+
+        let chart_destinations = [
+            "#Location1",
+            "#Location2",
+
+        ]
+
+        for (let i=0; i<2; i++){
+            console.log("Char spec at" +chart_specs[i])
+            console.log("Chart destination at: "+chart_destinations[i])
+            vegaEmbed(chart_destinations[i], chart_specs[i])
+        }
+    </script>
+
+</body>
+    
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html> 
+
+<head>    
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hannah Liu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Besley:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="custom1.css">
+    <title>Project</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body> 
+ <body>
+    <header>
+        <nav>
+            <div class="logo"><a href="https://hannahjliu.github.io/" style="color: var(--neutral-dark); text-decoration: none;">Hannah Liu</a></div>
+            <p>
+            <div class="nav-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Mass deportation under a new dawn of authoritarianism</h1>
+            <p>Comparing immigration policy between Trump 1.0 and Trump 2.0</p>
+        </div>
+    </div> 
+
+    <script>
+        let chart1 = "visualizations/arrestviewschartcombined.json"
+        vegaEmbed('#Location1', chart1)
+
+    </script>
+
+</body>
+    
+</html>
