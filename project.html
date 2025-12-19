@@ -30,16 +30,22 @@
         }
 
         .image-caption {
-            font-size: 12px;
+            font-size: 0.875rem;
             color: var(--neutral-gray);
             font-style: italic;
-            margin-top: 0.5rem;
-            line-height: 1.25;
+            margin-top: 0.75rem;
+            line-height: 1.5;
         }
     </style>
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading...</div>
+    </div>
+
     <header>
         <nav>
             <div class="logo"><a href="https://hannahjliu.github.io/"
@@ -59,7 +65,7 @@
         <div class="hero-image-container">
             <img src="https://dims.apnews.com/dims4/default/80fc9d7/2147483647/strip/true/crop/4902x3268+0+0/resize/1600x1066!/format/webp/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F26%2Fea%2F843bdcbda5be13fe7247e9d823ad%2F99bee98a07b94ceb81869f4a966ba315"
                 alt="ICE detention protest">
-            <p class="image-caption" style="font-size: 16px;">Law enforcement detains a protester near an Immigration
+            <p class="image-caption">Law enforcement detains a protester near an Immigration
                 and Customs Enforcement facility in Broadview, Ill., Friday, Oct. 3, 2025. (AP Photo/Erin Hooley)</p>
         </div>
     </div>
@@ -117,6 +123,8 @@
     </footer>
 
     <script>
+
+        // Embed charts
         let chart1 = "visualizations/arrestscomparisonchart.json"
         vegaEmbed('#Location1', chart1)
         let chart2 = "visualizations/aorcomparisonmap.json"
