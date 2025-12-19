@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project | Hannah Liu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Besley:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="custom1.css">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <style>
+        .hero-image-container {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            text-align: center;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-caption {
+            font-size: 12px;
+            color: var(--neutral-gray);
+            font-style: italic;
+            margin-top: 0.5rem;
+            line-height: 1.25;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="https://hannahjliu.github.io/"
+                    style="color: var(--neutral-dark); text-decoration: none;">Hannah Liu</a></div>
+            <div class="nav-links">
+                <a href="https://www.linkedin.com/in/hannahjliu/">LinkedIn</a>
+                <a href="https://github.com/hannahjliu">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Mass deportation under a new era of authoritarianism</h1>
+            <h3>Comparing immigration policy between Trump 1.0 and Trump 2.0</h3>
+        </div>
+        <div class="hero-image-container">
+            <img src="https://dims.apnews.com/dims4/default/80fc9d7/2147483647/strip/true/crop/4902x3268+0+0/resize/1600x1066!/format/webp/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F26%2Fea%2F843bdcbda5be13fe7247e9d823ad%2F99bee98a07b94ceb81869f4a966ba315"
+                alt="ICE detention protest">
+            <p class="image-caption" style="font-size: 16px;">Law enforcement detains a protester near an Immigration
+                and Customs Enforcement facility in Broadview, Ill., Friday, Oct. 3, 2025. (AP Photo/Erin Hooley)</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Daily arrests during Trump 2.0 far outpace the first term</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+            <figure id="Location1"></figure>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Arrests continue to be concentrated in the Southeast, but Florida emerges as a new target</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+            <figure id="Location2"></figure>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Arrest increase is primarily comprised of people who have no criminal record</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+            <figure id="Location3"></figure>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Hannah Liu</p>
+        </div>
+    </footer>
+
+    <script>
+        let chart1 = "visualizations/arrestscomparisonchart.json"
+        vegaEmbed('#Location1', chart1)
+        let chart2 = "visualizations/aorcomparisonmap.json"
+        vegaEmbed('#Location2', chart2)
+        let chart3 = "visualizations/arrestviewschartcombined.json"
+        vegaEmbed('#Location3', chart3)
+    </script>
+
+</body>
+
+</html>
