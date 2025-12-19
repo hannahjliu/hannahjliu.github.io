@@ -1,0 +1,95 @@
+{
+  "config": {"view": {"continuousWidth": 300, "continuousHeight": 300}},
+  "hconcat": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/arrestviews.csv"
+      },
+      "mark": {"type": "bar", "color": "lightcoral"},
+      "description": "A simple bar chart with embedded data.",
+      "encoding": {
+        "tooltip": [
+          {"field": "characteristic", "title": "Category", "type": "nominal"},
+          {"field": "value", "title": "Arrest Numbers", "type": "quantitative"},
+          {
+            "field": "percentage",
+            "format": ".1%",
+            "title": "Percentage of Total",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "axis": {"labelAngle": 0},
+          "field": "characteristic",
+          "title": null,
+          "type": "nominal"
+        },
+        "y": {"field": "value", "type": "quantitative"}
+      },
+      "transform": [
+        {
+          "filter": "datum.view == SelectParam && datum.administration == 'Trump 1.0'"
+        },
+        {
+          "joinaggregate": [
+            {"op": "sum", "field": "value", "as": "total_value"}
+          ],
+          "groupby": ["view", "administration"]
+        },
+        {"calculate": "datum.value / datum.total_value", "as": "percentage"}
+      ],
+      "width": 400
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/arrestviews.csv"
+      },
+      "mark": {"type": "bar", "color": "lightcoral"},
+      "description": "A simple bar chart with embedded data for Trump 2.0 administration.",
+      "encoding": {
+        "tooltip": [
+          {"field": "characteristic", "title": "Category", "type": "nominal"},
+          {"field": "value", "title": "Arrest Numbers", "type": "quantitative"},
+          {
+            "field": "percentage",
+            "format": ".1%",
+            "title": "Percentage of Total",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "axis": {"labelAngle": 0},
+          "field": "characteristic",
+          "title": null,
+          "type": "nominal"
+        },
+        "y": {"field": "value", "type": "quantitative"}
+      },
+      "transform": [
+        {
+          "filter": "datum.view == SelectParam && datum.administration == 'Trump 2.0'"
+        },
+        {
+          "joinaggregate": [
+            {"op": "sum", "field": "value", "as": "total_value"}
+          ],
+          "groupby": ["view", "administration"]
+        },
+        {"calculate": "datum.value / datum.total_value", "as": "percentage"}
+      ],
+      "width": 400
+    }
+  ],
+  "params": [
+    {
+      "name": "SelectParam",
+      "bind": {
+        "input": "select",
+        "options": ["gender", "age group", "criminality"],
+        "name": "Select view:"
+      },
+      "value": "gender"
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+}

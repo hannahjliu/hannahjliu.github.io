@@ -1,0 +1,172 @@
+{
+"title": {"text": "Arrests in the First 9 Months by Selected View", "subtitle": "Select view to compare by gender, age, and criminality"},
+  "hconcat": [
+    {
+      "data": {
+        "url": "data/arrestviews.csv"
+      },
+      "title":"Trump 1.0",
+      "mark": {"type": "bar", "color": "#155263"},
+      "description": "A simple bar chart with embedded data.",
+      "encoding": {
+        "tooltip": [
+          {"field": "characteristic", "title": "Category", "type": "nominal"},
+          {"field": "value", "title": "Arrest Numbers", "type": "quantitative"},
+          {
+            "field": "percentage",
+            "format": ".1%",
+            "title": "Percentage of Total",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "axis": {"labelAngle": 0},
+          "field": "characteristic",
+          "title": null,
+          "type": "nominal"
+        },
+        "y": {"field": "value", "type": "quantitative", "title":"arrests"}
+      },
+      "transform": [
+        {
+          "filter": "datum.view == SelectParam && datum.administration == 'Trump 1.0'"
+        }],
+    "height":400,
+      "width":300
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/arrestviews.csv"
+      },
+      "title":"Trump 2.0",
+      "mark": {"type": "bar", "color": "#ff6f3c"},
+      "description": "A simple bar chart with embedded data for Trump 2.0 administration.",
+      "encoding": {
+        "tooltip": [
+          {"field": "characteristic", "title": "Category", "type": "nominal"},
+          {"field": "value", "title": "Arrest Numbers", "type": "quantitative"},
+          {
+            "field": "percentage",
+            "format": ".1%",
+            "title": "Percentage of Total",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "axis": {"labelAngle": 0},
+          "field": "characteristic",
+          "title": null,
+          "type": "nominal"
+        },
+        "y": {"field": "value", "type": "quantitative", "title":"arrests"}
+      },
+      "transform": [
+        {
+          "filter": "datum.view == SelectParam && datum.administration == 'Trump 2.0'"
+        },
+        {
+          "joinaggregate": [
+            {"op": "sum", "field": "value", "as": "total_value"}
+          ],
+          "groupby": ["view", "administration"]
+        }
+      ],
+      "width": 300,
+      "height":400
+    }
+  ],
+  "params": [
+    {
+      "name": "SelectParam",
+      "bind": {
+        "input": "select",
+        "options": ["criminality","gender", "age group"],
+        "name": "Select view:"
+      },
+      "value": "criminality"
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json","config": {
+    "font": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "numberFormat": ".0f",
+    "view": {
+      "stroke": "transparent"
+    },
+    "background": "transparent",
+    "range": {
+      "category": ["#155263", "#ff6f3c", "#ff9a3c", "#ffc93c", "#0a0a0a", "#8b4513"]
+    },
+    "point": {
+      "filled": true,
+      "opacity": 0.95
+    },
+    "axis": {
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 11,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelOpacity": 1,
+      "tickColor": "#0a0a0a",
+      "tickOpacity": 0.6,
+      "domainColor": "#0a0a0a",
+      "domainOpacity": 0.6,
+      "gridColor": "#d0d0d0",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.8,
+      "title": null,
+      "titleColor": "#0a0a0a",
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleOpacity": 1,
+      "titleFontWeight": 500,
+      "tickSize": 5
+    },
+    "axisXDiscrete": {
+      "grid": false,
+      "labelAngle": 0,
+      "tickCount": 10,
+      "tickOpacity": 0.6,
+      "title": null
+    },
+    "axisYDiscrete": {
+      "ticks": false,
+      "labelPadding": 5
+    },
+    "axisXQuantitative": {
+      "grid": true
+    },
+    "axisYQuantitative": {
+      "gridColor": "#d0d0d0",
+      "gridDash": [1, 5],
+      "gridOpacity": 0.8,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 8,
+      "titleAngle": -90,
+      "titleAlign": "center",
+      "titleBaseline": "middle"
+    },
+    "legend": {
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleFontSize": 15,
+      "titleFontWeight": 500,
+      "titleColor": "#0a0a0a",
+      "title": null,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 12
+    },
+    "title": {
+      "font": "'Besley', 'Garamond', 'Georgia'",
+      "fontSize": 20,
+      "fontWeight": 500,
+      "color": "#0a0a0a",
+      "subtitleFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#0a0a0a",
+      "anchor": "start",
+      "offset": 10
+    },
+    "mark": {
+      "tooltip": true
+    }
+  }
+}
