@@ -12,7 +12,7 @@
     {"filter": "datum.days_since_jan20 > -250 && datum.days_since_jan20 < 268"}
   ],
   "height": 400,
-  "width": 600,
+  "width": 680,
   "layer": [
     {
       "mark": {"type": "rect", "fill": "#f4f4f4", "opacity": 0.5},

@@ -21,7 +21,7 @@
   "layer": [
     {
       "data": {
-        "url": "visualizations/ice-aor-shp.json",
+        "url": "data/ice-aor-shp1.json",
         "format": {"feature": "ice-aor-shp", "type": "topojson"}
       },
       "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.3},
@@ -33,12 +33,18 @@
       "data": {
         "url": "data/aordf.csv"
       },
+      "params": [
+        {
+          "name": "hover",
+          "select": {"type": "point", "on": "mouseover", "clear": "mouseout"}
+        }
+      ],
       "transform": [
         {
           "lookup": "aor_nam",
           "from": {
             "data": {
-              "url": "visualizations/ice-aor-shp.json",
+              "url": "data/ice-aor-shp1.json",
              "format":  {"feature": "ice-aor-shp", "type": "topojson"}
             },
             "key": "properties.aor_nam",
@@ -47,8 +53,16 @@
         },
         {"filter": "datum.administration == SelectParam"}
       ],
-      "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.5},
+      "mark": {"type": "geoshape", "stroke": "white", "cursor": "pointer"},
       "encoding": {
+        "strokeWidth": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": 1.5
+          },
+          "value": 0.75
+        },
         "color": {
           "field": "arrests",
           "type": "quantitative",
