@@ -1,0 +1,812 @@
+[
+    {
+        "page": 1,
+        "pages": 2,
+        "per_page": 50,
+        "total": 65,
+        "sourceid": "2",
+        "lastupdated": "2025-12-19"
+    },
+    [
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2024",
+            "value": 15.6862745098039,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2023",
+            "value": 16.2337662337662,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2022",
+            "value": 26.2672811059908,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2021",
+            "value": 26.2672811059908,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2020",
+            "value": 24.8847926267281,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2019",
+            "value": 22.5806451612903,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2018",
+            "value": 31.3364055299539,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2017",
+            "value": 31.3364055299539,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2016",
+            "value": 31.3364055299539,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2015",
+            "value": 31.3364055299539,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2014",
+            "value": 31.3364055299539,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2013",
+            "value": 26.7281105990783,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2012",
+            "value": 26.7281105990783,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2011",
+            "value": 26.7281105990783,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2010",
+            "value": 27.5700934579439,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2009",
+            "value": 27.5700934579439,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2008",
+            "value": 22.7513227513228,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2007",
+            "value": 22.7513227513228,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2006",
+            "value": 22.7513227513228,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2005",
+            "value": 22.7513227513228,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2004",
+            "value": 22.7513227513228,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2003",
+            "value": 11.5384615384615,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2002",
+            "value": 11.5384615384615,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2001",
+            "value": 11.5384615384615,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "2000",
+            "value": 11.5384615384615,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1999",
+            "value": 11.5384615384615,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1998",
+            "value": 7.36196319018405,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1997",
+            "value": 6.74846625766871,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1996",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1995",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1994",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1993",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1992",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1991",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1990",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1989",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1988",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1987",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1986",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1985",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1984",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1983",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1982",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1981",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1980",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1979",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1978",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1977",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1976",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        },
+        {
+            "indicator": {
+                "id": "SG.GEN.PARL.ZS",
+                "value": "Proportion of seats held by women in national parliaments (%)"
+            },
+            "country": {
+                "id": "TN",
+                "value": "Tunisia"
+            },
+            "countryiso3code": "TUN",
+            "date": "1975",
+            "value": null,
+            "unit": "",
+            "obs_status": "",
+            "decimal": 0
+        }
+    ]
+]
