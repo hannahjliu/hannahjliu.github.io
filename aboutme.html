@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Hannah Liu</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Besley:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --first-color: #155263;
+            --second-color: #ff6f3c;
+            --third-color: #ff9a3c;
+            --fourth-color: #ffc93c;
+            --neutral-dark: #0a0a0a;
+            --neutral-gray: #6b6b6b;
+            --neutral-light: #fafafa;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+            color: var(--neutral-dark);
+            background-color: #f8f8f8;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Besley', serif;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 500;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--neutral-gray);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--second-color);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        a:hover {
+            opacity: 0.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--neutral-dark);
+            font-family: 'Besley', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 1rem;
+        }
+
+        .hero {
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            display: block;
+            border: 4px solid var(--second-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        .hero h1 {
+            animation: slideUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .content {
+            padding: 2rem 0 4rem;
+            animation: slideUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .content-section {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            color: var(--neutral-dark);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fourth-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background-color: var(--fourth-color);
+            color: var(--neutral-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        footer {
+            padding: 2.5rem 0;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .container,
+            nav {
+                padding: 0 1.5rem;
+            }
+
+            .hero {
+                padding: 2rem 0 1.5rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="https://hannahjliu.github.io/" class="logo">Hannah Liu</a>
+            <div class="nav-links">
+                <a href="https://hannahjliu.github.io/about">About</a>
+                <a href="https://hannahjliu.github.io/portfolio">Portfolio</a>
+                <a href="https://hannahjliu.github.io/project">Project</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <img src="images/profile.png" alt="Hannah Liu" class="profile-photo">
+            <h1>About Me</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="content-section">
+                <h2>Hello!</h2>
+                <p>
+                    My name is Hannah Liu and I'm a Master of Public Administration student at the London School of
+                    Economics and Political Science.
+                    </br></br>
+                    Before London, I lived in Washington D.C. where I worked in federal policy research and advocacy to
+                    support immigrant communities.
+                    I served as the Manager of Immigration Advocacy at Asian Americans Advancing Justice | AAJC, a
+                    national Asian American civil rights organization. Prior to that, I was a Policy Analyst on the
+                    Immigration and Immigrant Families team at the Center for Law and Social Policy, an antipoverty
+                    nonprofit think tank.
+                    </br></br>
+                    I’m originally from Seattle, Washington, but I attended St. Olaf College in Minnesota where I
+                    majored in Political Science and Music. My many hobbies include fiber arts, pottery, reading, and most recently,
+                    cleaning and joining datasets at 3am.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2>Connect</h2>
+                <p>
+                    Feel free to reach out or connect with me on <a
+                        href="https://www.linkedin.com/in/hannahjliu/">LinkedIn</a> or check out my <a
+                        href="https://github.com/hannahjliu">GitHub</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Hannah Liu</p>
+        </div>
+    </footer>
+</body>
+
+</html>

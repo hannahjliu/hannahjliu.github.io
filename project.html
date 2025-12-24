@@ -30,7 +30,7 @@
         }
 
         .image-caption {
-            font-size: 0.875rem;
+            font-size: 0.6rem;
             color: var(--neutral-gray);
             font-style: italic;
             margin-top: 0.75rem;
@@ -59,35 +59,41 @@
 
     <div class="hero">
         <div class="container">
-            <h1>Mass deportation under a new era of authoritarianism</h1>
+            <h1>Examining new era of mass deportation</h1>
             <h3>Comparing immigration policy between Trump 1.0 and Trump 2.0</h3>
         </div>
         <div class="hero-image-container">
             <img src="https://dims.apnews.com/dims4/default/80fc9d7/2147483647/strip/true/crop/4902x3268+0+0/resize/1600x1066!/format/webp/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F26%2Fea%2F843bdcbda5be13fe7247e9d823ad%2F99bee98a07b94ceb81869f4a966ba315"
                 alt="ICE detention protest">
-            <p class="image-caption">Law enforcement detains a protester near an Immigration
+            <p class="image-caption" style="font-size: 1rem;">Law enforcement detains a protester near an Immigration
                 and Customs Enforcement facility in Broadview, Ill., Friday, Oct. 3, 2025. (AP Photo/Erin Hooley)</p>
         </div>
     </div>
 
     <div class="section">
         <div class="container">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
+            <p>From the outset of the second Trump, it has been clear that the administration has been operating by a
+                new playbook. On ____, ____, and immigration. But how different has it been? </br></br> I conducted an
+                exploratory analysis of individual-level administrative arrest and detention data from the
+                U.S. Immigration, Customs, and Enforcement Agency (ICE), as well as additional recent data obtained
+                through a Freedom of Information Act request by the Deportation Data Project. The analysis reveals that
+                Trump 2.0 differs from the first administration on a number of dimensions The sheer number of daily
+                arrests is up, the regions being targeted are different, and the nationalities that make up the arrests
+                have changed. Furthermore, the share of people without criminal records that ICE has picked up during
+                its raids has increased dramatically.
+            </p>
         </div>
     </div>
 
     <div class="section">
         <div class="container">
             <h2>Daily arrests during Trump 2.0 far outpace the first term</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
+            <p>The chart below maps seven-day rolling averages of arrests for the first and second Trump administrations
+                before and after inauguration. In both administrations, daily ICE arrests immediately increased
+                post-inauguration, but the change is much more dramatic in the second administration. Morever, whereas
+                daily arrests stayed relatively stable during the first months of Trump 1.0, daily arrests seem to trend
+                upwards in Trump 2.0. Spikes in the 2025 data correspond with major ICE operations conducted during
+                those times, namely in the Los Angeles, Washington D.C., and Chicago areas.</p>
             <figure id="Location1"></figure>
         </div>
     </div>
@@ -139,7 +145,7 @@
         // Embed charts
         let chart1 = "visualizations/arrestscomparisonchart.json"
         vegaEmbed('#Location1', chart1)
-        let chart2 = "visualizations/aorcomparisonmap.json"
+        let chart2 = "visualizations/aorcomparisonmap1.json"
         vegaEmbed('#Location2', chart2)
         let chart3 = "visualizations/arrestviewschartcombined.json"
         vegaEmbed('#Location3', chart3)

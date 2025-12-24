@@ -15,12 +15,14 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Besley:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Besley:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <!-- Loading Screen -->
-    <div class="loading-screen">
+    <div class="loading-screen" id="loadingScreen">
         <div class="loading-spinner"></div>
         <div class="loading-text">Loading...</div>
     </div>
@@ -28,7 +30,8 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="https://hannahjliu.github.io/" style="color: var(--neutral-dark); text-decoration: none;">Hannah Liu</a>
+                <a href="https://hannahjliu.github.io/"
+                    style="color: var(--neutral-dark); text-decoration: none;">Hannah Liu</a>
             </div>
             <div class="nav-links">
                 <a href="https://www.linkedin.com/in/hannahjliu/">LinkedIn</a>
@@ -47,158 +50,184 @@
     <div class="container">
         <!-- Challenge 1 -->
         <section class="section">
-            <div class="section-number">01</div>
-            <div class="chart-description">
-                <h2>Challenge 1: Hosting and embedding charts</h2>
-                <p>Here's one chart.</p>
+            <div class="challenge-container">
+                <div class="section-number">01</div>
+                <div class="chart-description">
+                    <h2>Challenge 1: Hosting and embedding charts</h2>
+                    <p>Here's one chart.</p>
+                </div>
+                <figure id="Location3"></figure>
+                <p>Here's a second chart.</p>
+                <figure id="Location2"></figure>
+                <p>Nothing fancy.</p>
             </div>
-            <figure id="Location3"></figure>
-            <p>Here's a second chart.</p>
-            <figure id="Location2"></figure>
-            <p>Nothing fancy.</p>
         </section>
 
         <!-- Challenge 2 -->
         <section class="section">
-            <div class="section-number">02</div>
-            <div class="chart-description">
-                <h2>Challenge 2: Building and creating my own visualizations</h2>
-                <p>A chart of UK unemployment over time made with the Economic Observatory "Create" tool.</p>
-                <figure id="Location9"></figure>
-                <p>A chart of UK debt over time made with the Economic Observatory "Create" tool.</p>
-                <figure id="Location10"></figure>
+            <div class="challenge-container">
+                <div class="section-number">02</div>
+                <div class="chart-description">
+                    <h2>Challenge 2: Building and creating my own visualizations</h2>
+                    <p>A chart of UK unemployment over time made with the Economic Observatory "Create" tool.</p>
+                    <figure id="Location9"></figure>
+                    <p>A chart of UK debt over time made with the Economic Observatory "Create" tool.</p>
+                    <figure id="Location10"></figure>
+                </div>
             </div>
         </section>
 
         <!-- Challenge 3 -->
         <section class="section">
-            <div class="section-number">03</div>
-            <div class="chart-description">
-                <h2>Challenge 3: Debate - Use a visualization in policy commentary</h2>
-                <p>
-                    Are ICE arrests ramping up faster under the second Trump administration compared to the first? Here
-                    are two charts that I made with data from the <a href="https://deportationdata.org/data/ice.html"
-                        target="_blank">Deportation Data Project</a> obtained through Freedom of Information Act
-                    requests from the U.S. Immigration Customs and Enforcement (ICE) Agency. The first shows occurrences
-                    of ICE arrests by month from the beginning of Fiscal Year 2016 to July 2017 and the second shows
-                    occurrences of ICE arrests Fiscal Year 2024 through July 2025. The red lines indicate the dates of
-                    the first and second inaugurations of President Trump, respectively.
-                </p>
-                <figure id="Location8"></figure>
-                <figure id="Location5"></figure>
+            <div class="challenge-container">
+                <div class="section-number">03</div>
                 <div class="chart-description">
+                    <h2>Challenge 3: Debate - Use a visualization in policy commentary</h2>
                     <p>
-                        Looking at the histograms, the sheer number of arrests in the first few months of Trump 2.0 far
-                        surpass that of Trump 1.0. Not only that, but the difference between the period immediately
-                        before inauguration and after inauguration are much more distinct in Trump 2.0 compared to 1.0.
+                        Are ICE arrests ramping up faster under the second Trump administration compared to the first?
+                        Here
+                        are two charts that I made with data from the <a
+                            href="https://deportationdata.org/data/ice.html" target="_blank">Deportation Data
+                            Project</a> obtained through Freedom of Information Act
+                        requests from the U.S. Immigration Customs and Enforcement (ICE) Agency. The first shows
+                        occurrences
+                        of ICE arrests by month from the beginning of Fiscal Year 2016 to July 2017 and the second shows
+                        occurrences of ICE arrests Fiscal Year 2024 through July 2025. The red lines indicate the dates
+                        of
+                        the first and second inaugurations of President Trump, respectively.
                     </p>
+                    <figure id="Location8"></figure>
+                    <figure id="Location5"></figure>
+                    <div class="accent-box">
+                        <p>
+                            Looking at the histograms, the sheer number of arrests in the first few months of Trump 2.0
+                            far
+                            surpass that of Trump 1.0. Not only that, but the difference between the period immediately
+                            before inauguration and after inauguration are much more distinct in Trump 2.0 compared to
+                            1.0.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Challenge 4 -->
         <section class="section">
-            <div class="section-number">04</div>
-            <div class="chart-description">
-                <h2>Challenge 4: Replication - Re-create, then improve someone else's chart</h2>
-                <p>
-                    This chart is located in an article from the Migration Policy Institute titled, <a
-                        href="https://www.migrationpolicy.org/article/trump-immigrant-detention">"U.S. Immigrant
-                        Detention Grows to Record Heights under Trump Administration"</a>. You're able to see a general
-                    trend in the chart, but it could be more clear.
-                </p>
-                <img src="visualizations/MPI Chart.png" alt="MPI Chart" style="max-width: 100%; height: auto; border-radius: 8px; margin: 1.5rem 0;">
-                <p>
-                    I used the same data set from <a
-                        href="https://tracreports.org/immigration/detentionstats/pop_agen_table.html">TRAC Reports</a>
-                    to recreate the chart with grid lines to more clearly identify the x and y values on the line. I
-                    also included a y-axis label and a hover function to show more precisely the exact number of
-                    detentions on all given dates in the dataset.
-                </p>
-                <figure id="Location11"></figure>
+            <div class="challenge-container">
+                <div class="section-number">04</div>
+                <div class="chart-description">
+                    <h2>Challenge 4: Replication - Re-create, then improve someone else's chart</h2>
+                    <p>
+                        This chart is located in an article from the Migration Policy Institute titled, <a
+                            href="https://www.migrationpolicy.org/article/trump-immigrant-detention">"U.S. Immigrant
+                            Detention Grows to Record Heights under Trump Administration"</a>. You're able to see a
+                        general
+                        trend in the chart, but it could be more clear.
+                    </p>
+                    <img src="visualizations/MPI Chart.png" alt="MPI Chart"
+                        style="max-width: 100%; height: auto; border-radius: 8px; margin: 1.5rem 0;">
+                    <p>
+                        I used the same data set from <a
+                            href="https://tracreports.org/immigration/detentionstats/pop_agen_table.html">TRAC
+                            Reports</a>
+                        to recreate the chart with grid lines to more clearly identify the x and y values on the line. I
+                        also included a y-axis label and a hover function to show more precisely the exact number of
+                        detentions on all given dates in the dataset.
+                    </p>
+                    <figure id="Location11"></figure>
+                </div>
             </div>
         </section>
 
         <!-- Challenge 5 -->
         <section class="section">
-            <div class="section-number">05</div>
-            <div class="chart-description">
-                <h2>Challenge 5: Accessing data - Scrapers and APIs</h2>
-                <figure id="Location7"></figure>
-                <p>
-                    That is, describe the base url, and then the elements that are needed to call data. Include the
-                    full final url that you used in your chart.
-                </p>
+            <div class="challenge-container">
+                <div class="section-number">05</div>
+                <div class="chart-description">
+                    <h2>Challenge 5: Accessing data - Scrapers and APIs</h2>
+                    <figure id="Location7"></figure>
+                    <p>
+                        That is, describe the base url, and then the elements that are needed to call data. Include the
+                        full final url that you used in your chart.
+                    </p>
+                </div>
             </div>
         </section>
 
         <!-- Challenge 6 -->
         <section class="section">
-            <div class="section-number">06</div>
-            <div class="chart-description">
-                <h2>Challenge 6: Loops - Build a dashboard</h2>
-                <p>Use a loop to download 6 different series as json files, use times series data and display as a grid</p>
-                <p>As above, but use a loop in your Javascript in order to embed the six charts</p>
+            <div class="challenge-container">
+                <div class="section-number">06</div>
+                <div class="chart-description">
+                    <h2>Challenge 6: Loops - Build a dashboard</h2>
+                    <p>Use a loop to download 6 different series as json files, use times series data and display as a
+                        grid
+                    </p>
+                    <p>As above, but use a loop in your Javascript in order to embed the six charts</p>
+                </div>
             </div>
         </section>
 
         <!-- Challenge 7 -->
         <section class="section">
-            <div class="section-number">07</div>
-            <div class="chart-description">
-                <h2>Challenge 7: Maps - Base maps and chloropleths</h2>
-                <p>Here is my base map of Scotland by local authority.</p>
-                <figure id="Location13"></figure>
-                <p>
-                    Here is a chloropleth map that uses data from the <a
-                        href="https://www.ons.gov.uk/explore-local-statistics/indicators/cigarette-smokers">UK Office of
-                        National Statistics</a> that shows the percentage of cigarette smokers by local authority.
-                </p>
-                <figure id="Location12"></figure>
+            <div class="challenge-container">
+                <div class="section-number">07</div>
+                <div class="chart-description">
+                    <h2>Challenge 7: Maps - Base maps and chloropleths</h2>
+                    <p>Here is my base map of Scotland by local authority.</p>
+                    <figure id="Location13"></figure>
+                    <p>
+                        Here is a chloropleth map that uses data from the <a
+                            href="https://www.ons.gov.uk/explore-local-statistics/indicators/cigarette-smokers">UK
+                            Office of
+                            National Statistics</a> that shows the percentage of cigarette smokers by local authority.
+                    </p>
+                    <figure id="Location12"></figure>
+                </div>
             </div>
         </section>
 
         <!-- Challenge 8 -->
         <section class="section">
-            <div class="section-number">08</div>
-            <div class="chart-description">
-                <h2>Challenge 8: Big Data</h2>
-                <p>Here is my bean chart.</p>
-                <figure id="Location15"></figure>
-                <p>Here is my fish chart.</p>
-                <figure id="Location16"></figure>
+            <div class="challenge-container">
+                <div class="section-number">08</div>
+                <div class="chart-description">
+                    <h2>Challenge 8: Big Data</h2>
+                    <p>Here is my bean chart.</p>
+                    <figure id="Location15"></figure>
+                    <p>Here is my fish chart.</p>
+                    <figure id="Location16"></figure>
+                </div>
             </div>
         </section>
 
         <!-- Challenge 9 -->
         <section class="section">
-            <div class="section-number">09</div>
-            <div class="chart-description">
-                <h2>Challenge 9: _____</h2>
-                <p>chart loading</p>
+            <div class="challenge-container">
+                <div class="section-number">09</div>
+                <div class="chart-description">
+                    <h2>Challenge 9: Interactive Charts</h2>
+                    <p>chart loading</p>
+                    <figure id="Location17"></figure>
+                    <figure id="Location18"></figure>
+                </div>
             </div>
         </section>
 
         <!-- Challenge 10 -->
         <section class="section">
-            <div class="section-number">10</div>
-            <div class="chart-description">
-                <h2>Challenge 10: _____</h2>
-                <p>
-                    <a href="https://colab.research.google.com/drive/1YkPXEvAlgdL3otRUiFkEtLZ4Tf53E86E?usp=sharing">View on Google Colab</a>
-                </p>
+            <div class="challenge-container">
+                <div class="section-number">10</div>
+                <div class="chart-description">
+                    <h2>Challenge 10: _____</h2>
+                    <p>
+                        <a href="https://colab.research.google.com/drive/1YkPXEvAlgdL3otRUiFkEtLZ4Tf53E86E?usp=sharing">View
+                            on Google Colab</a>
+                    </p>
+                </div>
             </div>
         </section>
 
-        <!-- Chart Parking Lot -->
-        <section class="section">
-            <div class="chart-description">
-                <h2>Chart Parking Lot</h2>
-                <figure id="Location14"></figure>
-                <figure id="Location17"></figure>
-            </div>
-            <figure id="Location18"></figure>
-        </section>
     </div>
 
     <footer>
@@ -208,6 +237,17 @@
     </footer>
 
     <script>
+        // Hide loading screen when page is fully loaded
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.style.opacity = '0';
+                setTimeout(function () {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 800);
+        });
+
         // Individual chart variables
         let chart1 = "https://raw.githubusercontent.com/EconomicsObservatory/courses/main/2/s2_chart2.json";
         let chart2 = "https://raw.githubusercontent.com/EconomicsObservatory/datavis/refs/heads/main/newsletters/2025-07-04-tennis-time/visualisation/fig1_strawberry_prices.json";
@@ -226,7 +266,7 @@
         let chart15 = "visualizations/beanprices.json";
         let chart16 = "visualizations/fishprices.json";
         let chart17 = "visualizations/arrestviewschartcombined.json";
-        let chart18 = "visualizations/areachartcrim.json";
+        let chart18 = "visualizations/areachartcrim1.json";
 
         // Embed all charts
         vegaEmbed('#Location1', chart1);
@@ -247,6 +287,44 @@
         vegaEmbed('#Location16', chart16);
         vegaEmbed('#Location17', chart17);
         vegaEmbed('#Location18', chart18);
+
+
+        //LOOP 
+        let baseSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "title": {
+                "text": "", // This is injected via code, added from the csv that we load above.
+                "subtitle": ["", ""], // Added from csv
+                "subtitleFontStyle": "italic",
+                "subtitleFontSize": 10,
+                "anchor": "start",
+                "color": "black"
+            },
+            "view": { "stroke": "transparent" }, // Make box around chart clear
+            "data": {
+                "url": "", // Added from loop
+                "format": {
+                    "type": "json",
+                    "property": "data"
+                }
+            },
+
+
+            "transform": [
+                { "calculate": "year(datum.date)", "as": "year" },
+                { "filter": "datum.year >= 2000" }
+            ],
+
+            "height": 200,
+            "width": 200,
+            "mark": { "type": "line", "color": "#58b3c7", "interpolate": "basis" },
+            "encoding": {
+                "x": { "field": "date", "type": "temporal", "title": null, "axis": { "grid": false, } },
+                "y": { "field": "value", "type": "quantitative", "title": null, "axis": { "grid": false } }
+            }
+        }
+
+
 
         // Example: Using loops with arrays
         let cities = ["London", "Seattle", "Glasgow", "Barcelona", "New York", "Kuala Lumpur"];
