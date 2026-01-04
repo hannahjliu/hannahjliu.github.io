@@ -1,0 +1,1388 @@
+Apprehension AOR,weeks_since_inauguration,arrests
+Atlanta,-15,121
+Atlanta,-14,110
+Atlanta,-13,125
+Atlanta,-12,143
+Atlanta,-11,138
+Atlanta,-10,110
+Atlanta,-9,146
+Atlanta,-8,131
+Atlanta,-7,100
+Atlanta,-6,125
+Atlanta,-5,136
+Atlanta,-4,117
+Atlanta,-3,63
+Atlanta,-2,79
+Atlanta,-1,104
+Atlanta,0,350
+Atlanta,1,306
+Atlanta,2,296
+Atlanta,3,343
+Atlanta,4,316
+Atlanta,5,360
+Atlanta,6,410
+Atlanta,7,400
+Atlanta,8,338
+Atlanta,9,315
+Atlanta,10,358
+Atlanta,11,303
+Atlanta,12,287
+Atlanta,13,365
+Atlanta,14,291
+Atlanta,15,293
+Atlanta,16,513
+Atlanta,17,406
+Atlanta,18,461
+Atlanta,19,554
+Atlanta,20,478
+Atlanta,21,419
+Atlanta,22,362
+Atlanta,23,393
+Atlanta,24,435
+Atlanta,25,420
+Atlanta,26,425
+Atlanta,27,377
+Atlanta,28,448
+Atlanta,29,379
+Atlanta,30,381
+Atlanta,31,449
+Atlanta,32,640
+Atlanta,33,500
+Atlanta,34,439
+Atlanta,35,446
+Atlanta,36,448
+Atlanta,37,405
+Atlanta,38,203
+Baltimore,-15,41
+Baltimore,-14,22
+Baltimore,-13,34
+Baltimore,-12,30
+Baltimore,-11,28
+Baltimore,-10,24
+Baltimore,-9,34
+Baltimore,-8,36
+Baltimore,-7,18
+Baltimore,-6,28
+Baltimore,-5,12
+Baltimore,-4,34
+Baltimore,-3,7
+Baltimore,-2,13
+Baltimore,-1,20
+Baltimore,0,100
+Baltimore,1,82
+Baltimore,2,74
+Baltimore,3,52
+Baltimore,4,74
+Baltimore,5,92
+Baltimore,6,62
+Baltimore,7,78
+Baltimore,8,99
+Baltimore,9,59
+Baltimore,10,57
+Baltimore,11,62
+Baltimore,12,43
+Baltimore,13,38
+Baltimore,14,65
+Baltimore,15,74
+Baltimore,16,73
+Baltimore,17,94
+Baltimore,18,130
+Baltimore,19,145
+Baltimore,20,118
+Baltimore,21,81
+Baltimore,22,99
+Baltimore,23,70
+Baltimore,24,120
+Baltimore,25,78
+Baltimore,26,103
+Baltimore,27,90
+Baltimore,28,125
+Baltimore,29,47
+Baltimore,30,44
+Baltimore,31,50
+Baltimore,32,98
+Baltimore,33,96
+Baltimore,34,95
+Baltimore,35,131
+Baltimore,36,102
+Baltimore,37,95
+Baltimore,38,31
+Boston,-15,23
+Boston,-14,37
+Boston,-13,42
+Boston,-12,33
+Boston,-11,48
+Boston,-10,29
+Boston,-9,51
+Boston,-8,52
+Boston,-7,28
+Boston,-6,49
+Boston,-5,49
+Boston,-4,44
+Boston,-3,26
+Boston,-2,29
+Boston,-1,44
+Boston,0,116
+Boston,1,121
+Boston,2,107
+Boston,3,109
+Boston,4,114
+Boston,5,117
+Boston,6,139
+Boston,7,117
+Boston,8,361
+Boston,9,75
+Boston,10,83
+Boston,11,89
+Boston,12,72
+Boston,13,71
+Boston,14,117
+Boston,15,334
+Boston,16,412
+Boston,17,367
+Boston,18,392
+Boston,19,187
+Boston,20,154
+Boston,21,137
+Boston,22,166
+Boston,23,108
+Boston,24,115
+Boston,25,117
+Boston,26,113
+Boston,27,136
+Boston,28,118
+Boston,29,153
+Boston,30,129
+Boston,31,110
+Boston,32,195
+Boston,33,499
+Boston,34,427
+Boston,35,345
+Boston,36,151
+Boston,37,149
+Boston,38,64
+Buffalo,-15,12
+Buffalo,-14,11
+Buffalo,-13,17
+Buffalo,-12,24
+Buffalo,-11,16
+Buffalo,-10,15
+Buffalo,-9,18
+Buffalo,-8,11
+Buffalo,-7,15
+Buffalo,-6,15
+Buffalo,-5,14
+Buffalo,-4,16
+Buffalo,-3,10
+Buffalo,-2,13
+Buffalo,-1,15
+Buffalo,0,44
+Buffalo,1,58
+Buffalo,2,48
+Buffalo,3,24
+Buffalo,4,43
+Buffalo,5,55
+Buffalo,6,28
+Buffalo,7,26
+Buffalo,8,21
+Buffalo,9,111
+Buffalo,10,28
+Buffalo,11,29
+Buffalo,12,29
+Buffalo,13,38
+Buffalo,14,57
+Buffalo,15,22
+Buffalo,16,35
+Buffalo,17,47
+Buffalo,18,37
+Buffalo,19,110
+Buffalo,20,74
+Buffalo,21,59
+Buffalo,22,62
+Buffalo,23,61
+Buffalo,24,77
+Buffalo,25,96
+Buffalo,26,89
+Buffalo,27,76
+Buffalo,28,97
+Buffalo,29,74
+Buffalo,30,76
+Buffalo,31,64
+Buffalo,32,58
+Buffalo,33,65
+Buffalo,34,93
+Buffalo,35,42
+Buffalo,36,57
+Buffalo,37,74
+Buffalo,38,49
+Chicago,-15,192
+Chicago,-14,186
+Chicago,-13,182
+Chicago,-12,157
+Chicago,-11,171
+Chicago,-10,110
+Chicago,-9,175
+Chicago,-8,174
+Chicago,-7,90
+Chicago,-6,155
+Chicago,-5,167
+Chicago,-4,133
+Chicago,-3,54
+Chicago,-2,75
+Chicago,-1,88
+Chicago,0,296
+Chicago,1,286
+Chicago,2,250
+Chicago,3,254
+Chicago,4,256
+Chicago,5,288
+Chicago,6,258
+Chicago,7,340
+Chicago,8,278
+Chicago,9,240
+Chicago,10,233
+Chicago,11,265
+Chicago,12,252
+Chicago,13,281
+Chicago,14,286
+Chicago,15,275
+Chicago,16,296
+Chicago,17,398
+Chicago,18,305
+Chicago,19,544
+Chicago,20,361
+Chicago,21,308
+Chicago,22,302
+Chicago,23,248
+Chicago,24,305
+Chicago,25,282
+Chicago,26,384
+Chicago,27,303
+Chicago,28,346
+Chicago,29,322
+Chicago,30,301
+Chicago,31,344
+Chicago,32,296
+Chicago,33,381
+Chicago,34,549
+Chicago,35,523
+Chicago,36,628
+Chicago,37,686
+Chicago,38,361
+Dallas,-15,190
+Dallas,-14,196
+Dallas,-13,197
+Dallas,-12,223
+Dallas,-11,196
+Dallas,-10,193
+Dallas,-9,204
+Dallas,-8,215
+Dallas,-7,128
+Dallas,-6,190
+Dallas,-5,206
+Dallas,-4,204
+Dallas,-3,113
+Dallas,-2,128
+Dallas,-1,118
+Dallas,0,478
+Dallas,1,443
+Dallas,2,355
+Dallas,3,388
+Dallas,4,350
+Dallas,5,442
+Dallas,6,409
+Dallas,7,394
+Dallas,8,391
+Dallas,9,414
+Dallas,10,405
+Dallas,11,470
+Dallas,12,401
+Dallas,13,290
+Dallas,14,337
+Dallas,15,404
+Dallas,16,400
+Dallas,17,503
+Dallas,18,430
+Dallas,19,465
+Dallas,20,499
+Dallas,21,420
+Dallas,22,460
+Dallas,23,418
+Dallas,24,377
+Dallas,25,334
+Dallas,26,410
+Dallas,27,427
+Dallas,28,407
+Dallas,29,451
+Dallas,30,480
+Dallas,31,440
+Dallas,32,563
+Dallas,33,605
+Dallas,34,612
+Dallas,35,559
+Dallas,36,533
+Dallas,37,695
+Dallas,38,362
+Denver,-15,28
+Denver,-14,23
+Denver,-13,33
+Denver,-12,23
+Denver,-11,25
+Denver,-10,22
+Denver,-9,41
+Denver,-8,25
+Denver,-7,20
+Denver,-6,34
+Denver,-5,34
+Denver,-4,66
+Denver,-3,24
+Denver,-2,28
+Denver,-1,27
+Denver,0,106
+Denver,1,137
+Denver,2,105
+Denver,3,60
+Denver,4,79
+Denver,5,75
+Denver,6,67
+Denver,7,79
+Denver,8,73
+Denver,9,87
+Denver,10,59
+Denver,11,67
+Denver,12,68
+Denver,13,213
+Denver,14,92
+Denver,15,65
+Denver,16,80
+Denver,17,110
+Denver,18,97
+Denver,19,148
+Denver,20,166
+Denver,21,130
+Denver,22,117
+Denver,23,92
+Denver,24,154
+Denver,25,209
+Denver,26,89
+Denver,27,98
+Denver,28,118
+Denver,29,100
+Denver,30,114
+Denver,31,118
+Denver,32,94
+Denver,33,137
+Denver,34,110
+Denver,35,96
+Denver,36,102
+Denver,37,120
+Denver,38,35
+Detroit,-15,52
+Detroit,-14,37
+Detroit,-13,42
+Detroit,-12,32
+Detroit,-11,43
+Detroit,-10,30
+Detroit,-9,39
+Detroit,-8,34
+Detroit,-7,25
+Detroit,-6,35
+Detroit,-5,33
+Detroit,-4,40
+Detroit,-3,11
+Detroit,-2,16
+Detroit,-1,35
+Detroit,0,94
+Detroit,1,89
+Detroit,2,85
+Detroit,3,84
+Detroit,4,77
+Detroit,5,93
+Detroit,6,98
+Detroit,7,98
+Detroit,8,104
+Detroit,9,92
+Detroit,10,105
+Detroit,11,105
+Detroit,12,111
+Detroit,13,115
+Detroit,14,134
+Detroit,15,70
+Detroit,16,109
+Detroit,17,101
+Detroit,18,145
+Detroit,19,233
+Detroit,20,149
+Detroit,21,155
+Detroit,22,169
+Detroit,23,130
+Detroit,24,150
+Detroit,25,159
+Detroit,26,163
+Detroit,27,154
+Detroit,28,155
+Detroit,29,141
+Detroit,30,161
+Detroit,31,142
+Detroit,32,159
+Detroit,33,146
+Detroit,34,169
+Detroit,35,177
+Detroit,36,214
+Detroit,37,190
+Detroit,38,81
+El Paso,-15,31
+El Paso,-14,24
+El Paso,-13,27
+El Paso,-12,18
+El Paso,-11,57
+El Paso,-10,41
+El Paso,-9,29
+El Paso,-8,38
+El Paso,-7,37
+El Paso,-6,33
+El Paso,-5,29
+El Paso,-4,83
+El Paso,-3,16
+El Paso,-2,33
+El Paso,-1,53
+El Paso,0,55
+El Paso,1,105
+El Paso,2,64
+El Paso,3,68
+El Paso,4,51
+El Paso,5,73
+El Paso,6,72
+El Paso,7,62
+El Paso,8,47
+El Paso,9,48
+El Paso,10,74
+El Paso,11,34
+El Paso,12,52
+El Paso,13,78
+El Paso,14,49
+El Paso,15,48
+El Paso,16,62
+El Paso,17,64
+El Paso,18,130
+El Paso,19,240
+El Paso,20,249
+El Paso,21,125
+El Paso,22,121
+El Paso,23,96
+El Paso,24,132
+El Paso,25,135
+El Paso,26,233
+El Paso,27,316
+El Paso,28,350
+El Paso,29,390
+El Paso,30,196
+El Paso,31,208
+El Paso,32,271
+El Paso,33,263
+El Paso,34,295
+El Paso,35,233
+El Paso,36,263
+El Paso,37,331
+El Paso,38,189
+HQ,-15,1
+HQ,-14,1
+HQ,-11,1
+HQ,-9,1
+HQ,-8,2
+HQ,-6,1
+HQ,0,1
+HQ,3,1
+HQ,4,1
+HQ,5,1
+HQ,7,1
+HQ,8,1
+HQ,9,3
+HQ,10,1
+HQ,11,1
+HQ,12,1
+HQ,16,3
+HQ,17,3
+HQ,18,1
+HQ,20,2
+HQ,21,2
+HQ,22,1
+HQ,23,1
+HQ,24,3
+HQ,25,6
+HQ,26,5
+HQ,27,7
+HQ,28,1
+HQ,29,6
+HQ,30,3
+HQ,31,7
+HQ,32,10
+HQ,33,3
+HQ,34,5
+HQ,35,8
+HQ,36,3
+HQ,37,1
+Harlingen,-15,118
+Harlingen,-14,100
+Harlingen,-13,89
+Harlingen,-12,107
+Harlingen,-11,93
+Harlingen,-10,87
+Harlingen,-9,88
+Harlingen,-8,97
+Harlingen,-7,37
+Harlingen,-6,124
+Harlingen,-5,128
+Harlingen,-4,97
+Harlingen,-3,44
+Harlingen,-2,31
+Harlingen,-1,75
+Harlingen,0,174
+Harlingen,1,196
+Harlingen,2,136
+Harlingen,3,143
+Harlingen,4,132
+Harlingen,5,143
+Harlingen,6,143
+Harlingen,7,98
+Harlingen,8,147
+Harlingen,9,113
+Harlingen,10,134
+Harlingen,11,120
+Harlingen,12,109
+Harlingen,13,114
+Harlingen,14,115
+Harlingen,15,106
+Harlingen,16,172
+Harlingen,17,138
+Harlingen,18,154
+Harlingen,19,230
+Harlingen,20,138
+Harlingen,21,155
+Harlingen,22,180
+Harlingen,23,130
+Harlingen,24,185
+Harlingen,25,165
+Harlingen,26,196
+Harlingen,27,203
+Harlingen,28,197
+Harlingen,29,205
+Harlingen,30,182
+Harlingen,31,227
+Harlingen,32,172
+Harlingen,33,208
+Harlingen,34,171
+Harlingen,35,226
+Harlingen,36,266
+Harlingen,37,191
+Harlingen,38,87
+Houston,-15,193
+Houston,-14,205
+Houston,-13,199
+Houston,-12,178
+Houston,-11,171
+Houston,-10,175
+Houston,-9,203
+Houston,-8,242
+Houston,-7,157
+Houston,-6,214
+Houston,-5,244
+Houston,-4,281
+Houston,-3,150
+Houston,-2,184
+Houston,-1,179
+Houston,0,419
+Houston,1,370
+Houston,2,307
+Houston,3,323
+Houston,4,289
+Houston,5,489
+Houston,6,386
+Houston,7,336
+Houston,8,365
+Houston,9,306
+Houston,10,375
+Houston,11,354
+Houston,12,325
+Houston,13,314
+Houston,14,308
+Houston,15,407
+Houston,16,327
+Houston,17,424
+Houston,18,345
+Houston,19,568
+Houston,20,487
+Houston,21,428
+Houston,22,526
+Houston,23,414
+Houston,24,467
+Houston,25,464
+Houston,26,461
+Houston,27,477
+Houston,28,568
+Houston,29,527
+Houston,30,695
+Houston,31,514
+Houston,32,500
+Houston,33,538
+Houston,34,604
+Houston,35,596
+Houston,36,638
+Houston,37,600
+Houston,38,194
+Los Angeles,-15,89
+Los Angeles,-14,76
+Los Angeles,-13,80
+Los Angeles,-12,95
+Los Angeles,-11,99
+Los Angeles,-10,68
+Los Angeles,-9,93
+Los Angeles,-8,90
+Los Angeles,-7,59
+Los Angeles,-6,101
+Los Angeles,-5,66
+Los Angeles,-4,71
+Los Angeles,-3,49
+Los Angeles,-2,57
+Los Angeles,-1,62
+Los Angeles,0,199
+Los Angeles,1,187
+Los Angeles,2,136
+Los Angeles,3,151
+Los Angeles,4,130
+Los Angeles,5,244
+Los Angeles,6,140
+Los Angeles,7,142
+Los Angeles,8,108
+Los Angeles,9,122
+Los Angeles,10,120
+Los Angeles,11,122
+Los Angeles,12,126
+Los Angeles,13,87
+Los Angeles,14,158
+Los Angeles,15,229
+Los Angeles,16,126
+Los Angeles,17,187
+Los Angeles,18,273
+Los Angeles,19,536
+Los Angeles,20,557
+Los Angeles,21,648
+Los Angeles,22,558
+Los Angeles,23,555
+Los Angeles,24,710
+Los Angeles,25,269
+Los Angeles,26,255
+Los Angeles,27,256
+Los Angeles,28,295
+Los Angeles,29,293
+Los Angeles,30,281
+Los Angeles,31,279
+Los Angeles,32,255
+Los Angeles,33,293
+Los Angeles,34,274
+Los Angeles,35,287
+Los Angeles,36,268
+Los Angeles,37,320
+Los Angeles,38,183
+Miami,-15,165
+Miami,-14,92
+Miami,-13,230
+Miami,-12,192
+Miami,-11,210
+Miami,-10,168
+Miami,-9,238
+Miami,-8,277
+Miami,-7,135
+Miami,-6,212
+Miami,-5,207
+Miami,-4,246
+Miami,-3,114
+Miami,-2,118
+Miami,-1,256
+Miami,0,529
+Miami,1,678
+Miami,2,491
+Miami,3,543
+Miami,4,532
+Miami,5,556
+Miami,6,536
+Miami,7,608
+Miami,8,474
+Miami,9,498
+Miami,10,479
+Miami,11,426
+Miami,12,460
+Miami,13,762
+Miami,14,455
+Miami,15,475
+Miami,16,566
+Miami,17,603
+Miami,18,742
+Miami,19,955
+Miami,20,799
+Miami,21,806
+Miami,22,582
+Miami,23,408
+Miami,24,597
+Miami,25,445
+Miami,26,552
+Miami,27,548
+Miami,28,524
+Miami,29,591
+Miami,30,765
+Miami,31,581
+Miami,32,593
+Miami,33,763
+Miami,34,804
+Miami,35,953
+Miami,36,779
+Miami,37,616
+Miami,38,307
+New Orleans,-15,233
+New Orleans,-14,211
+New Orleans,-13,235
+New Orleans,-12,222
+New Orleans,-11,224
+New Orleans,-10,206
+New Orleans,-9,192
+New Orleans,-8,243
+New Orleans,-7,164
+New Orleans,-6,221
+New Orleans,-5,214
+New Orleans,-4,256
+New Orleans,-3,114
+New Orleans,-2,156
+New Orleans,-1,192
+New Orleans,0,402
+New Orleans,1,405
+New Orleans,2,339
+New Orleans,3,407
+New Orleans,4,308
+New Orleans,5,430
+New Orleans,6,417
+New Orleans,7,440
+New Orleans,8,413
+New Orleans,9,423
+New Orleans,10,453
+New Orleans,11,421
+New Orleans,12,388
+New Orleans,13,466
+New Orleans,14,448
+New Orleans,15,447
+New Orleans,16,403
+New Orleans,17,460
+New Orleans,18,339
+New Orleans,19,527
+New Orleans,20,498
+New Orleans,21,467
+New Orleans,22,433
+New Orleans,23,394
+New Orleans,24,416
+New Orleans,25,451
+New Orleans,26,491
+New Orleans,27,432
+New Orleans,28,498
+New Orleans,29,483
+New Orleans,30,559
+New Orleans,31,510
+New Orleans,32,438
+New Orleans,33,553
+New Orleans,34,585
+New Orleans,35,564
+New Orleans,36,521
+New Orleans,37,571
+New Orleans,38,230
+New York City,-15,36
+New York City,-14,32
+New York City,-13,59
+New York City,-12,39
+New York City,-11,55
+New York City,-10,32
+New York City,-9,45
+New York City,-8,40
+New York City,-7,30
+New York City,-6,41
+New York City,-5,29
+New York City,-4,24
+New York City,-3,17
+New York City,-2,12
+New York City,-1,25
+New York City,0,60
+New York City,1,90
+New York City,2,70
+New York City,3,65
+New York City,4,65
+New York City,5,83
+New York City,6,47
+New York City,7,56
+New York City,8,55
+New York City,9,69
+New York City,10,67
+New York City,11,186
+New York City,12,49
+New York City,13,46
+New York City,14,58
+New York City,15,38
+New York City,16,61
+New York City,17,95
+New York City,18,214
+New York City,19,386
+New York City,20,159
+New York City,21,197
+New York City,22,233
+New York City,23,159
+New York City,24,185
+New York City,25,223
+New York City,26,227
+New York City,27,257
+New York City,28,230
+New York City,29,165
+New York City,30,144
+New York City,31,131
+New York City,32,165
+New York City,33,157
+New York City,34,137
+New York City,35,158
+New York City,36,107
+New York City,37,153
+New York City,38,96
+Newark,-15,73
+Newark,-14,77
+Newark,-13,87
+Newark,-12,77
+Newark,-11,82
+Newark,-10,76
+Newark,-9,79
+Newark,-8,75
+Newark,-7,63
+Newark,-6,76
+Newark,-5,86
+Newark,-4,88
+Newark,-3,48
+Newark,-2,65
+Newark,-1,81
+Newark,0,169
+Newark,1,124
+Newark,2,122
+Newark,3,137
+Newark,4,133
+Newark,5,140
+Newark,6,103
+Newark,7,115
+Newark,8,119
+Newark,9,119
+Newark,10,88
+Newark,11,111
+Newark,12,91
+Newark,13,95
+Newark,14,102
+Newark,15,99
+Newark,16,111
+Newark,17,142
+Newark,18,176
+Newark,19,291
+Newark,20,207
+Newark,21,165
+Newark,22,172
+Newark,23,132
+Newark,24,187
+Newark,25,177
+Newark,26,217
+Newark,27,215
+Newark,28,188
+Newark,29,182
+Newark,30,228
+Newark,31,169
+Newark,32,171
+Newark,33,189
+Newark,34,213
+Newark,35,179
+Newark,36,178
+Newark,37,191
+Newark,38,86
+Philadelphia,-15,30
+Philadelphia,-14,42
+Philadelphia,-13,46
+Philadelphia,-12,45
+Philadelphia,-11,56
+Philadelphia,-10,44
+Philadelphia,-9,42
+Philadelphia,-8,52
+Philadelphia,-7,32
+Philadelphia,-6,75
+Philadelphia,-5,63
+Philadelphia,-4,53
+Philadelphia,-3,16
+Philadelphia,-2,36
+Philadelphia,-1,51
+Philadelphia,0,152
+Philadelphia,1,150
+Philadelphia,2,156
+Philadelphia,3,113
+Philadelphia,4,116
+Philadelphia,5,109
+Philadelphia,6,128
+Philadelphia,7,162
+Philadelphia,8,104
+Philadelphia,9,162
+Philadelphia,10,80
+Philadelphia,11,93
+Philadelphia,12,102
+Philadelphia,13,152
+Philadelphia,14,88
+Philadelphia,15,104
+Philadelphia,16,120
+Philadelphia,17,157
+Philadelphia,18,150
+Philadelphia,19,282
+Philadelphia,20,222
+Philadelphia,21,199
+Philadelphia,22,170
+Philadelphia,23,180
+Philadelphia,24,182
+Philadelphia,25,166
+Philadelphia,26,178
+Philadelphia,27,190
+Philadelphia,28,149
+Philadelphia,29,146
+Philadelphia,30,148
+Philadelphia,31,167
+Philadelphia,32,194
+Philadelphia,33,252
+Philadelphia,34,205
+Philadelphia,35,234
+Philadelphia,36,208
+Philadelphia,37,239
+Philadelphia,38,125
+Phoenix,-15,68
+Phoenix,-14,70
+Phoenix,-13,73
+Phoenix,-12,71
+Phoenix,-11,56
+Phoenix,-10,70
+Phoenix,-9,78
+Phoenix,-8,73
+Phoenix,-7,85
+Phoenix,-6,71
+Phoenix,-5,79
+Phoenix,-4,79
+Phoenix,-3,67
+Phoenix,-2,62
+Phoenix,-1,85
+Phoenix,0,177
+Phoenix,1,160
+Phoenix,2,134
+Phoenix,3,136
+Phoenix,4,144
+Phoenix,5,152
+Phoenix,6,132
+Phoenix,7,131
+Phoenix,8,147
+Phoenix,9,143
+Phoenix,10,126
+Phoenix,11,115
+Phoenix,12,140
+Phoenix,13,133
+Phoenix,14,136
+Phoenix,15,141
+Phoenix,16,150
+Phoenix,17,201
+Phoenix,18,144
+Phoenix,19,229
+Phoenix,20,232
+Phoenix,21,227
+Phoenix,22,229
+Phoenix,23,188
+Phoenix,24,188
+Phoenix,25,165
+Phoenix,26,181
+Phoenix,27,225
+Phoenix,28,218
+Phoenix,29,230
+Phoenix,30,207
+Phoenix,31,245
+Phoenix,32,249
+Phoenix,33,238
+Phoenix,34,206
+Phoenix,35,246
+Phoenix,36,220
+Phoenix,37,208
+Phoenix,38,100
+Salt Lake City,-15,51
+Salt Lake City,-14,54
+Salt Lake City,-13,61
+Salt Lake City,-12,61
+Salt Lake City,-11,76
+Salt Lake City,-10,59
+Salt Lake City,-9,41
+Salt Lake City,-8,66
+Salt Lake City,-7,34
+Salt Lake City,-6,59
+Salt Lake City,-5,57
+Salt Lake City,-4,82
+Salt Lake City,-3,28
+Salt Lake City,-2,44
+Salt Lake City,-1,63
+Salt Lake City,0,186
+Salt Lake City,1,149
+Salt Lake City,2,148
+Salt Lake City,3,140
+Salt Lake City,4,161
+Salt Lake City,5,116
+Salt Lake City,6,132
+Salt Lake City,7,95
+Salt Lake City,8,130
+Salt Lake City,9,153
+Salt Lake City,10,154
+Salt Lake City,11,133
+Salt Lake City,12,152
+Salt Lake City,13,144
+Salt Lake City,14,117
+Salt Lake City,15,176
+Salt Lake City,16,153
+Salt Lake City,17,190
+Salt Lake City,18,189
+Salt Lake City,19,183
+Salt Lake City,20,198
+Salt Lake City,21,162
+Salt Lake City,22,202
+Salt Lake City,23,153
+Salt Lake City,24,180
+Salt Lake City,25,182
+Salt Lake City,26,167
+Salt Lake City,27,166
+Salt Lake City,28,166
+Salt Lake City,29,187
+Salt Lake City,30,211
+Salt Lake City,31,150
+Salt Lake City,32,163
+Salt Lake City,33,169
+Salt Lake City,34,168
+Salt Lake City,35,167
+Salt Lake City,36,201
+Salt Lake City,37,169
+Salt Lake City,38,67
+San Antonio,-15,136
+San Antonio,-14,101
+San Antonio,-13,123
+San Antonio,-12,110
+San Antonio,-11,100
+San Antonio,-10,98
+San Antonio,-9,142
+San Antonio,-8,98
+San Antonio,-7,79
+San Antonio,-6,121
+San Antonio,-5,104
+San Antonio,-4,146
+San Antonio,-3,63
+San Antonio,-2,85
+San Antonio,-1,107
+San Antonio,0,278
+San Antonio,1,215
+San Antonio,2,209
+San Antonio,3,180
+San Antonio,4,179
+San Antonio,5,224
+San Antonio,6,181
+San Antonio,7,177
+San Antonio,8,211
+San Antonio,9,209
+San Antonio,10,188
+San Antonio,11,180
+San Antonio,12,196
+San Antonio,13,173
+San Antonio,14,180
+San Antonio,15,189
+San Antonio,16,280
+San Antonio,17,400
+San Antonio,18,463
+San Antonio,19,536
+San Antonio,20,488
+San Antonio,21,467
+San Antonio,22,403
+San Antonio,23,293
+San Antonio,24,307
+San Antonio,25,319
+San Antonio,26,366
+San Antonio,27,412
+San Antonio,28,369
+San Antonio,29,341
+San Antonio,30,321
+San Antonio,31,311
+San Antonio,32,328
+San Antonio,33,436
+San Antonio,34,455
+San Antonio,35,502
+San Antonio,36,505
+San Antonio,37,350
+San Antonio,38,142
+San Diego,-15,12
+San Diego,-14,11
+San Diego,-13,15
+San Diego,-12,14
+San Diego,-11,10
+San Diego,-10,20
+San Diego,-9,13
+San Diego,-8,13
+San Diego,-7,5
+San Diego,-6,8
+San Diego,-5,14
+San Diego,-4,11
+San Diego,-3,2
+San Diego,-2,7
+San Diego,-1,31
+San Diego,0,55
+San Diego,1,77
+San Diego,2,28
+San Diego,3,18
+San Diego,4,21
+San Diego,5,24
+San Diego,6,30
+San Diego,7,19
+San Diego,8,41
+San Diego,9,19
+San Diego,10,13
+San Diego,11,22
+San Diego,12,24
+San Diego,13,25
+San Diego,14,18
+San Diego,15,17
+San Diego,16,41
+San Diego,17,119
+San Diego,18,125
+San Diego,19,211
+San Diego,20,147
+San Diego,21,118
+San Diego,22,133
+San Diego,23,124
+San Diego,24,173
+San Diego,25,156
+San Diego,26,125
+San Diego,27,177
+San Diego,28,150
+San Diego,29,139
+San Diego,30,262
+San Diego,31,264
+San Diego,32,317
+San Diego,33,326
+San Diego,34,362
+San Diego,35,320
+San Diego,36,303
+San Diego,37,310
+San Diego,38,106
+San Francisco,-15,31
+San Francisco,-14,38
+San Francisco,-13,50
+San Francisco,-12,58
+San Francisco,-11,47
+San Francisco,-10,26
+San Francisco,-9,43
+San Francisco,-8,38
+San Francisco,-7,22
+San Francisco,-6,41
+San Francisco,-5,40
+San Francisco,-4,58
+San Francisco,-3,30
+San Francisco,-2,23
+San Francisco,-1,29
+San Francisco,0,131
+San Francisco,1,110
+San Francisco,2,74
+San Francisco,3,79
+San Francisco,4,80
+San Francisco,5,89
+San Francisco,6,99
+San Francisco,7,92
+San Francisco,8,79
+San Francisco,9,91
+San Francisco,10,74
+San Francisco,11,78
+San Francisco,12,51
+San Francisco,13,50
+San Francisco,14,77
+San Francisco,15,89
+San Francisco,16,74
+San Francisco,17,100
+San Francisco,18,93
+San Francisco,19,205
+San Francisco,20,132
+San Francisco,21,112
+San Francisco,22,148
+San Francisco,23,109
+San Francisco,24,112
+San Francisco,25,129
+San Francisco,26,197
+San Francisco,27,157
+San Francisco,28,103
+San Francisco,29,130
+San Francisco,30,94
+San Francisco,31,156
+San Francisco,32,163
+San Francisco,33,164
+San Francisco,34,185
+San Francisco,35,197
+San Francisco,36,191
+San Francisco,37,159
+San Francisco,38,80
+Seattle,-15,14
+Seattle,-14,16
+Seattle,-13,18
+Seattle,-12,18
+Seattle,-11,25
+Seattle,-10,15
+Seattle,-9,24
+Seattle,-8,12
+Seattle,-7,13
+Seattle,-6,26
+Seattle,-5,14
+Seattle,-4,21
+Seattle,-3,7
+Seattle,-2,13
+Seattle,-1,18
+Seattle,0,75
+Seattle,1,90
+Seattle,2,49
+Seattle,3,34
+Seattle,4,42
+Seattle,5,64
+Seattle,6,34
+Seattle,7,34
+Seattle,8,39
+Seattle,9,42
+Seattle,10,45
+Seattle,11,24
+Seattle,12,36
+Seattle,13,36
+Seattle,14,35
+Seattle,15,30
+Seattle,16,41
+Seattle,17,91
+Seattle,18,61
+Seattle,19,168
+Seattle,20,132
+Seattle,21,67
+Seattle,22,68
+Seattle,23,51
+Seattle,24,68
+Seattle,25,77
+Seattle,26,89
+Seattle,27,131
+Seattle,28,89
+Seattle,29,114
+Seattle,30,101
+Seattle,31,65
+Seattle,32,102
+Seattle,33,106
+Seattle,34,123
+Seattle,35,87
+Seattle,36,119
+Seattle,37,135
+Seattle,38,91
+St. Paul,-15,56
+St. Paul,-14,41
+St. Paul,-13,45
+St. Paul,-12,48
+St. Paul,-11,51
+St. Paul,-10,33
+St. Paul,-9,38
+St. Paul,-8,49
+St. Paul,-7,28
+St. Paul,-6,37
+St. Paul,-5,43
+St. Paul,-4,43
+St. Paul,-3,28
+St. Paul,-2,27
+St. Paul,-1,32
+St. Paul,0,154
+St. Paul,1,131
+St. Paul,2,115
+St. Paul,3,94
+St. Paul,4,91
+St. Paul,5,131
+St. Paul,6,90
+St. Paul,7,92
+St. Paul,8,73
+St. Paul,9,87
+St. Paul,10,94
+St. Paul,11,84
+St. Paul,12,94
+St. Paul,13,96
+St. Paul,14,114
+St. Paul,15,97
+St. Paul,16,124
+St. Paul,17,141
+St. Paul,18,201
+St. Paul,19,211
+St. Paul,20,194
+St. Paul,21,144
+St. Paul,22,135
+St. Paul,23,98
+St. Paul,24,127
+St. Paul,25,138
+St. Paul,26,135
+St. Paul,27,130
+St. Paul,28,183
+St. Paul,29,125
+St. Paul,30,117
+St. Paul,31,154
+St. Paul,32,167
+St. Paul,33,161
+St. Paul,34,137
+St. Paul,35,143
+St. Paul,36,163
+St. Paul,37,135
+St. Paul,38,66
+Washington,-15,40
+Washington,-14,42
+Washington,-13,42
+Washington,-12,58
+Washington,-11,43
+Washington,-10,42
+Washington,-9,58
+Washington,-8,56
+Washington,-7,27
+Washington,-6,38
+Washington,-5,59
+Washington,-4,58
+Washington,-3,30
+Washington,-2,25
+Washington,-1,43
+Washington,0,123
+Washington,1,158
+Washington,2,272
+Washington,3,227
+Washington,4,181
+Washington,5,188
+Washington,6,196
+Washington,7,204
+Washington,8,168
+Washington,9,166
+Washington,10,122
+Washington,11,161
+Washington,12,137
+Washington,13,139
+Washington,14,158
+Washington,15,158
+Washington,16,132
+Washington,17,176
+Washington,18,183
+Washington,19,267
+Washington,20,223
+Washington,21,200
+Washington,22,241
+Washington,23,183
+Washington,24,220
+Washington,25,196
+Washington,26,179
+Washington,27,209
+Washington,28,220
+Washington,29,289
+Washington,30,427
+Washington,31,396
+Washington,32,336
+Washington,33,398
+Washington,34,301
+Washington,35,302
+Washington,36,342
+Washington,37,380
+Washington,38,167
