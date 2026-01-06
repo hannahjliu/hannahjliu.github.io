@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall of Shame | Hannah Liu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Besley:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="custom1.css">
+
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo a {
+            color: #e0e0e0 !important;
+        }
+
+        .nav-links a {
+            color: #ff6f3c;
+        }
+
+        .nav-links a:hover {
+            color: #ff9a3c;
+        }
+
+        .hero {
+            background-color: #1a1a1a;
+        }
+
+        .hero h1, .hero h3 {
+            color: #e0e0e0;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-card {
+            background-color: #2a2a2a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #333;
+        }
+
+        .chart-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            border-color: #ff6f3c;
+        }
+
+        .chart-image {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .chart-title {
+            font-family: 'Besley', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #e0e0e0;
+            text-align: center;
+        }
+
+        .intro-text {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            border-top: 1px solid #333;
+        }
+
+        footer p {
+            color: #e0e0e0;
+        }
+
+        .loading-screen {
+            background-color: #1a1a1a;
+        }
+
+        .loading-text {
+            color: #e0e0e0;
+        }
+
+        .loading-spinner {
+            border-top-color: #ff6f3c;
+        }
+
+        .section {
+            padding: 2rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading...</div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="https://hannahjliu.github.io/" style="color: #e0e0e0; text-decoration: none;">Hannah Liu</a>
+            </div>
+            <div class="nav-links">
+                <a href="https://hannahjliu.github.io/portfolio">Portfolio</a>
+                <a href="https://hannahjliu.github.io/project">Project</a>
+                <a href="https://hannahjliu.github.io/aboutme">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Hall of Shame</h1>
+            <h3> Welcome to my gallery of charts that did not go as planned.</h3>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <section class="section">
+            <div class="chart-grid">
+                <!-- Chart Card 1 -->
+                <div class="chart-card">
+                    <img src="images/bad charts/Screenshot 2025-12-20 at 3.38.54 PM.png" alt="Bad chart example" class="chart-image">
+                    <h3 class="chart-title">Calder-esque?</h3>
+                </div>
+
+                <!-- Chart Card 2 -->
+                <div class="chart-card">
+                    <img src="images/bad charts/Screenshot 2026-01-04 at 9.46.56 PM.png" alt="Bad chart example" class="chart-image">
+                    <h3 class="chart-title">Inspired by the Elizabeth line seat covers</h3>
+                </div>
+
+                <!-- Chart Card 3 -->
+                <div class="chart-card">
+                    <img src="images/bad charts/Screenshot 2026-01-05 at 12.38.37 PM.png" alt="Bad chart example" class="chart-image">
+                    <h3 class="chart-title">And for my next act, I'll make my map disappear!</h3>
+                </div>
+
+                <!-- Chart Card 4 -->
+                <div class="chart-card">
+                    <img src="images/bad charts/Screenshot 2026-01-04 at 10.03.16 PM.png" alt="Bad chart example" class="chart-image">
+                    <h3 class="chart-title">This one is kind of nice</h3>
+                </div>
+
+                <!-- Chart Card 5 -->
+                <div class="chart-card">
+                    <img src="path/to/chart5.png" alt="Bad chart example" class="chart-image">
+                    <h3 class="chart-title">Chart Title Here</h3>
+                </div>
+
+                <!-- Chart Card 6 -->
+                <div class="chart-card">
+                    <img src="images/bad charts/Screenshot 2026-01-05 at 12.36.40 PM.png" alt="Bad chart example" class="chart-image">
+                    <h3 class="chart-title">Lots more where this came from</h3>
+                </div>
+
+                <!-- Add more chart cards as needed -->
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Hannah Liu</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hide loading screen when page is fully loaded
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.style.opacity = '0';
+                setTimeout(function() {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 800);
+        });
+    </script>
+</body>
+
+</html>
