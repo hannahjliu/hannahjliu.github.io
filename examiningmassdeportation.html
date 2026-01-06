@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project | Hannah Liu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Besley:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="custom1.css">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <style>
+        .hero-image-container {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            text-align: center;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-caption {
+            font-size: 0.6rem;
+            color: var(--neutral-gray);
+            font-style: italic;
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .global-data-box {
+            background-color: #e8e8e8;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .global-data-box h3 {
+            font-family: 'Besley', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--neutral-dark);
+            margin-bottom: 1rem;
+        }
+
+        .global-data-box p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--neutral-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .data-notes {
+            background-color: #e8e8e8;
+            border-radius: 8px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+
+        .data-notes-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .data-notes-header:hover {
+            background-color: #d8d8d8;
+        }
+
+        .data-notes-title {
+            font-family: 'Besley', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--neutral-dark);
+            margin: 0;
+        }
+
+        .data-notes-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            color: var(--neutral-gray);
+        }
+
+        .data-notes-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .data-notes-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .data-notes-content.open {
+            max-height: 500px;
+        }
+
+        .data-notes-text {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: var(--neutral-dark);
+        }
+
+        .data-notes-text p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading...</div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo"><a href="https://hannahjliu.github.io/"
+                    style="color: var(--neutral-dark); text-decoration: none;">Hannah Liu</a></div>
+            <div class="nav-links">
+                <a href="https://hannahjliu.github.io/aboutme">About</a>
+                <a href="https://www.linkedin.com/in/hannahjliu/">LinkedIn</a>
+                <a href="https://github.com/hannahjliu">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Examining a new era of <br />mass deportation</h1>
+            <h3>Comparing immigration policy between Trump 1.0 and Trump 2.0</h3>
+        </div>
+        <div class="hero-image-container">
+            <img src="https://dims.apnews.com/dims4/default/80fc9d7/2147483647/strip/true/crop/4902x3268+0+0/resize/1600x1066!/format/webp/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F26%2Fea%2F843bdcbda5be13fe7247e9d823ad%2F99bee98a07b94ceb81869f4a966ba315"
+                alt="ICE detention protest">
+            <p class="image-caption" style="font-size: 12pt">Law enforcement detains a protester near an Immigration
+                and Customs Enforcement facility in Broadview, Ill., Friday, Oct. 3, 2025. (AP Photo/Erin Hooley)</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <p>From the outset of the second Trump administration, it has become apparent that the administration is
+                operating by a different playbook than its first time around. In the months since inauguration, news of
+                supercharged immigration raids, mass detentions, and indiscriminate enforcement have seemed to dominate
+                the media cycle. But how different has it actually been?
+                <br /><br />
+                I conducted an exploratory analysis of individual-level administrative arrest and detention data from
+                the U.S. Immigration, Customs, and Enforcement Agency (ICE), as well as recent data obtained through a
+                Freedom of Information Act request by the Deportation Data Project. This project analyzes
+                individual-level ICE arrest and detention data to quantify changes between Trump's first and second
+                administrations across four dimensions: volume of arrests, geographic targeting, demographic
+                composition, and criminal backgrounds of those arrested.
+            </p>
+
+            <div class="global-data-box">
+                <h3>The Data</h3>
+                <p>I used FY2017 and FY2018 ICE arrests data, and 2025 ICE arrests and detentions data obtained through
+                    the FOIA request. The 2025 data include administrative arrests from September 2023 through
+                    mid-October 2025. The raw data files are too large to be kept in the GitHub repository, but can be
+                    downloaded from the <a href="https://deportationdata.org/data/ice.html">website</a>.
+                    <br /><br />
+                    I used Python (pandas, numpy, BeautifulSoup) through Colab and VSCode and Vega-Lite to clean data and
+                    create the charts in this project. All my workbooks and .json files can be found in the <a
+                        href="https://github.com/hannahjliu/hannahjliu.github.io">repository</a>.
+                    <br /><br />
+                    I cleaned for duplicate entries by removing rows that had identical unique identifiers and dates. I also
+                    removed unknown/missing data for a number of the charts – notes for replication can be found under
+                    each section.
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Daily arrests during Trump 2.0 far outpace the first term</h2>
+            <p>The chart below maps seven-day rolling averages of arrests for the first and second Trump administrations
+                before and after inauguration. In both administrations, daily ICE arrests immediately increased
+                post-inauguration, but the change is much more dramatic in the second administration. Moreover, whereas
+                daily arrests stayed relatively stable during the first months of Trump 1.0, daily arrests seem to trend
+                upwards in Trump 2.0. Spikes in the 2025 data correspond with major ICE operations conducted during those times, namely in the Los Angeles, Washington D.C., and Chicago areas.</p>
+            <figure id="Location1"></figure>
+
+            <div class="data-notes">
+                <div class="data-notes-header" onclick="toggleNotes(1)">
+                    <h3 class="data-notes-title">Notes for replication</h3>
+                    <span class="data-notes-arrow" id="arrow1">▼</span>
+                </div>
+                <div class="data-notes-content" id="notes1">
+                    <div class="data-notes-text">
+                        <p>The Criminality field in the 2017 arrest data was created with the “Most Serious Criminal
+                            Charge Status” field, recoding “Turned Over to INS without Prosecution,” “Overturned,”
+                            “Dismissed,” and missing values as “No Criminal Charges.”
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Venezuela enters the top five nationalities of ICE arrests</h2>
+            <p>The top nationality of people arrested by ICE continues to be Mexico, but its share has decreased by 25%.
+                Absent from the top 20 in 2017, Venezuela now ranks in the top five. All four nationalities that had access to temporary protection and work authorization under the CHNV (Cuba, Haiti, Nicaragua, Venezuela) program, which Trump abruptly ended in 2025, are represented in the top 15. </p>
+            <figure id="Location5"></figure>
+            <figure id="Location6"></figure>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Arrests continue to be concentrated in the Southeast, but Florida emerges as a new target</h2>
+            <figure id="Location2"></figure>
+
+            <div class="data-notes">
+                <div class="data-notes-header" onclick="toggleNotes(2)">
+                    <h3 class="data-notes-title">Notes for replication</h3>
+                    <span class="data-notes-arrow" id="arrow2">▼</span>
+                </div>
+                <div class="data-notes-content" id="notes2">
+                    <div class="data-notes-text">
+                        <p>The shapefiles for the Area of Responsibility (AOR) map are from the
+                            <a href = "https://deportationdata.org/data/processed/ice-offices.html">Deportation Data Project</a>. I used <a href = "mapshaper.org">mapshaper</a> to simplify and convert them to TopoJSONs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Arrest increase is primarily comprised of people who have no criminal record</h2>
+            <figure id="Location3"></figure>
+<p>Although the distribution of arrests across age groups is similar between the two administrations, the Trump Administration has arrested more than double the number of children. The youngest child arrested in the first months of Trump 2.0 was less than a year old. </p>
+            <div class="data-notes">
+                <div class="data-notes-header" onclick="toggleNotes(3)">
+                    <h3 class="data-notes-title">Notes for replication</h3>
+                    <span class="data-notes-arrow" id="arrow3">▼</span>
+                </div>
+                <div class="data-notes-content" id="notes3">
+                    <div class="data-notes-text">
+                        <p>I removed entries that had “Unknown” listed for gender (~6000) and missing values for birth
+                            year (1). </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Detentions of people without criminal records spike during major ICE operations</h2>
+            <p>In the past, ICE typically has relied on criminal record data and partnerships with local law enforcement
+                to collect information like immigration status and physical addresses to make arrests. However, during
+                major operations, ICE is more likely to use indiscriminate methods of arrests - such as targeting
+                workplaces and public areas. For example, in the beginning of September, the share of arrests of people
+                with no criminal record in the Washington D.C. area rose to over 70%. </p>
+            <figure id="Location4"></figure>
+
+            <div class="data-notes">
+                <div class="data-notes-header" onclick="toggleNotes(4)">
+                    <h3 class="data-notes-title">Notes for replication</h3>
+                    <span class="data-notes-arrow" id="arrow4">▼</span>
+                </div>
+                <div class="data-notes-content" id="notes4">
+                    <div class="data-notes-text">
+                        <p>Fields on crime are missing from 2025 arrest data, while AOR is absent from 2025 detention
+                            data. I joined these files using shared unique identifiers. The 2017 datasets lacked a
+                            shared identifier but arrest data included crime fields. Some Trump 1.0 arrests shown may
+                            not have resulted in detentions.
+                            <br /><br />
+                            I <a href="https://drive.google.com/file/d/12ulQlhI0T2KWX9xT6vRgbmBE8jo9T_Q4/view?usp=sharing">scraped</a> the violent crime code manual from the <a href="https://www.ojp.gov/ncjrs/virtual-library/abstracts/national-crime-information-center-ncic-code-manual-second-edition">NCIC website</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <h2>Conclusion</h2>
+                <p>The analysis reveals that Trump 2.0 differs from the first administration on a number of dimensions:
+                    the sheer number of daily arrests is up, the nationalities that make up the arrests are different,
+                    and new U.S. regions are being targeted. Furthermore, the share of people without criminal records
+                    that ICE has picked up during its raids has increased dramatically.
+                    <br /><br />
+                    There are limitations to the conclusions that this project can make about the administration’s
+                    targeting of nationalities and regions, since the demographics of the immigrant population have
+                    changed between administrations. Further analyses should take these demographic changes into
+                    consideration.
+                    <br /><br />
+                    Despite these limitations, it is still abundantly clear from the analysis that the administration is
+                    a far cry from its claim of only arresting the "<a href ="https://x.com/DHSgov/status/1932146233079976301">worst of the worst.</a>" In fact, even though it has
+                    detained nearly twice as many people in its first months, it has arrested fewer people who have
+                    committed violent crimes compared to its first term. The project provides a replicable framework to
+                    monitor the administration as additional data become available and as the administration's policies
+                    continue to evolve.
+                </p>
+            </div>
+        </div>
+
+
+
+        <footer>
+            <div class="container">
+                <p>© 2025 Hannah Liu</p>
+            </div>
+        </footer>
+
+        <script>
+            // Hide loading screen when page is fully loaded
+            window.addEventListener('load', function () {
+                setTimeout(function () {
+                    const loadingScreen = document.getElementById('loadingScreen');
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(function () {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }, 800);
+            });
+
+            // Toggle data notes dropdown
+            function toggleNotes(id) {
+                const content = document.getElementById('notes' + id);
+                const arrow = document.getElementById('arrow' + id);
+
+                content.classList.toggle('open');
+                arrow.classList.toggle('open');
+            }
+
+            // Embed charts
+            let chart1 = "visualizations/arrestscomparisonchart.json"
+            vegaEmbed('#Location1', chart1)
+            let chart2 = "visualizations/aorcomparisonmap1.json"
+            vegaEmbed('#Location2', chart2)
+            let chart3 = "visualizations/arrestviewschartcombined.json"
+            vegaEmbed('#Location3', chart3)
+            let chart4 = "visualizations/areachartcrim1.json"
+            vegaEmbed('#Location4', chart4)
+            let chart5 = "visualizations/countriescomparisons2017.json"
+            vegaEmbed('#Location5', chart5)
+            let chart6 = "visualizations/countriescomparisons2025.json"
+            vegaEmbed('#Location6', chart6)
+        </script>
+
+</body>
+
+</html>
