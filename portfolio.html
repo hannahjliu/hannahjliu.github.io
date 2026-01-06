@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="custom1.css">
     <title>Hannah Liu | Portfolio</title>
-
+    <link rel="shortcut icon" type="image/png" href="images/duck.png">
     <!-- Vega-Lite for charts -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
@@ -44,7 +44,7 @@
     <div class="hero">
         <div class="container">
             <h1>PP434 Portfolio</h1>
-            <h3>Building towards 10 coding challenges in data visualization and public policy.</h3>
+            <h3>Ten coding challenges for PP434: Automated Data Visualization for Policymaking.</h3>
         </div>
     </div>
 
@@ -58,7 +58,7 @@
                     <p>Here's one chart.</p>
                 </div>
                 <figure id="Location3"></figure>
-                <p>Here's a second chart.</p>
+                <p>Here's a second chart. I thought this one was fun. </p>
                 <figure id="Location2"></figure>
                 <p>Nothing fancy.</p>
             </div>
@@ -147,11 +147,27 @@
                 <div class="section-number">05</div>
                 <div class="chart-description">
                     <h2>Challenge 5: Accessing data - Scrapers and APIs</h2>
+                    <h3>API</h3>
+
                     <figure id="Location7"></figure>
                     <p>
-                        That is, describe the base url, and then the elements that are needed to call data. Include the
-                        full final url that you used in your chart.
+                        <b>Base URL</b>: https://api.worldbank.org/v2/ <br />
+                        <b>Indicator for fertility rate</b>: indicator/SP.DYN.TFRT.IN <br />
+                        <b>JSON format</b>: ?format=json<br />
+                        <b>Date range</b>: &date=1960:2025<br />
+                        <b>Getting data in one call</b>: &per_page=160<br /><br />
+                        <b>Final URL</b>:
+                        https://api.worldbank.org/v2/country/kor;prk/indicator/SP.DYN.TFRT.IN?format=json&date=1960:2025&per_page=160
                     </p>
+                    <h3>Scraper</h3>
+                    <p>
+                        I scraped roll call data from the House of Representatives on a bill called the Laken Riley Act
+                        and created a bar chart that illustrates votes by party. <br />
+                        <a href="https://colab.research.google.com/drive/1SWMEpjG2TVHlxpo4_XZd4nHd6EXLb1Gi?usp=sharing">View
+                            on Google Colab</a>
+                    </p>
+                    <figure id="Location25"></figure>
+
                 </div>
             </div>
         </section>
@@ -187,8 +203,12 @@
                 <div class="section-number">07</div>
                 <div class="chart-description">
                     <h2>Challenge 7: Maps - Base maps and chloropleths</h2>
-                    <p>Here is my base map of Scotland by local authority.</p>
-                    <figure id="Location13"></figure>
+                    <h3>Coordinate</h3>
+                    <p>Here is my coordinate map of authorised landfills in Wales. Locations were in UTM, so I <a
+                            href="https://drive.google.com/file/d/1gansbSO-4QHnF7hnFzr_MaaUTpZtxzdJ/view?usp=sharing">converted</a>
+                        each point to Longitude/Latitude.</p>
+                    <figure id="Location26"></figure>
+                    <h3>Chloropleth</h3>
                     <p>
                         Here is a chloropleth map that uses data from the <a
                             href="https://www.ons.gov.uk/explore-local-statistics/indicators/cigarette-smokers">UK
@@ -206,7 +226,10 @@
                 <div class="section-number">08</div>
                 <div class="chart-description">
                     <h2>Challenge 8: Big Data</h2>
-                    <p>Here is my bean chart.</p>
+                    <p>I used AutoCPI time series data to map prices of products over time. In the first chart, I mapped
+                        the mean and median price of can of beans. In the second chart, I compare the prices of a kilo
+                        of canned tuna with a kilo of fresh fish over time.<br /><br />
+                        Here is my bean chart.</p>
                     <figure id="Location15"></figure>
                     <p>Here is my fish chart.</p>
                     <figure id="Location16"></figure>
@@ -220,8 +243,9 @@
                 <div class="section-number">09</div>
                 <div class="chart-description">
                     <h2>Challenge 9: Interactive Charts</h2>
-                    <p>chart loading</p>
+                    <p>Here are some interactive charts that are also in my project!</p>
                     <figure id="Location17"></figure>
+                    <br /><br />
                     <figure id="Location18"></figure>
                 </div>
             </div>
@@ -233,8 +257,21 @@
                 <div class="section-number">10</div>
                 <div class="chart-description">
                     <h2>Challenge 10: Advanced Analysis and Machine Learning</h2>
+                    <h3>Advanced Chart</h3>
+                    <figure id="Location27"></figure>
+                    <h3>Machine Learning</h3>
                     <p>
-                        <a href="https://colab.research.google.com/drive/1YkPXEvAlgdL3otRUiFkEtLZ4Tf53E86E?usp=sharing">View
+                        <ul><b>Cluster 0</b>: Higher share of people from Ecuador and Dominican Republic, and who do not have no criminal record</ul>
+                        <ul><b>Cluster 1</b>: Higher share of people from Mexico, and who have criminal charges, either pending or convicted</ul>
+                        <ul><b>Cluster 2</b>: Higher share of people from Mexico, and who do not have no criminal record</ul>
+                        <ul><b>Cluster 3</b>: Higher share of people from El Salvador and Guatemala, and who do not have no criminal record</ul>
+                        
+                    </p>
+                    <figure id="Location28"></figure>
+                    <p>
+                        I used K-means clustering to find out which regions had ICE arrests with similar characteristics (age, gender, nationality, and criminal record). I found that there was one cluster that included the central and Southern parts of the United States that was defined by high shares of people arrested who have criminal records. The rest of the clusters had lower rates of people arrested with criminal records, but varied with higher shares of different nationalities. 
+                        <br/>
+                        <a href="https://drive.google.com/file/d/1bt9eZDyea3-tDwnNMcHa1TxujaQS6Pmr/view?usp=sharing">View
                             on Google Colab</a>
                     </p>
                 </div>
@@ -262,9 +299,9 @@
         });
 
         // Individual chart variables
-        let chart1 = "https://raw.githubusercontent.com/EconomicsObservatory/courses/main/2/s2_chart2.json";
-        let chart2 = "https://raw.githubusercontent.com/EconomicsObservatory/datavis/refs/heads/main/newsletters/2025-07-04-tennis-time/visualisation/fig1_strawberry_prices.json";
-        let chart3 = "https://raw.githubusercontent.com/EconomicsObservatory/ECOvisualisations/refs/heads/main/articles/2021-05-12-what-is-the-future-of-commuting-to-work/visualisation/fig4_days_commuting.json";
+        let chart1 = "https://raw.githubusercontent.com/RDeconomist/RDeconomist.github.io/refs/heads/main/charts/housePrices/hp8_map2London.json";
+        let chart2 = "https://raw.githubusercontent.com/RDeconomist/RDeconomist.github.io/refs/heads/main/charts/colour/chartColour3.json";
+        let chart3 = "https://raw.githubusercontent.com/RDeconomist/RDeconomist.github.io/refs/heads/main/charts/classes/oliveOil_London.json";
         let chart4 = "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/MSlinegraph.vl.json";
         let chart5 = "visualizations/icearrestshistogram20232025.json";
         let chart6 = "visualizations/shiller_pe_ratio_chart.json";
@@ -280,6 +317,10 @@
         let chart16 = "visualizations/fishprices.json";
         let chart17 = "visualizations/arrestviewschartcombined.json";
         let chart18 = "visualizations/areachartcrim1.json";
+        let chart25 = "visualizations/lrvotesbarchart.json";
+        let chart26 = "visualizations/waleslandfillmap.json"
+        let chart27 = "visualizations/aorheatmap.json"
+        let chart28 = "visualizations/arrestclusteraormap.json"
 
         // Embed all charts
         vegaEmbed('#Location1', chart1);
@@ -300,6 +341,10 @@
         vegaEmbed('#Location16', chart16);
         vegaEmbed('#Location17', chart17);
         vegaEmbed('#Location18', chart18);
+        vegaEmbed('#Location25', chart25);
+        vegaEmbed('#Location26', chart26);
+        vegaEmbed('#Location27', chart27);
+        vegaEmbed('#Location28', chart28);
 
 
         //LOOP 
