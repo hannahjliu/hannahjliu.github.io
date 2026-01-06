@@ -6,7 +6,7 @@
   "hconcat": [
     {
       "data": {
-        "url": "data/arrestviews.csv"
+        "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/arrestviews.csv"
       },
       "title": "Trump 1.0",
       "mark": {
@@ -141,7 +141,9 @@
   "config": {
     "font": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     "numberFormat": ".0f",
-    "view": {"stroke": "transparent"},
+    "view": {
+      "stroke": "transparent"
+    },
     "background": "transparent",
     "range": {
       "category": [
@@ -153,9 +155,12 @@
         "#8b4513"
       ]
     },
-    "point": {"filled": true, "opacity": 0.95},
+    "point": {
+      "filled": true,
+      "opacity": 0.95
+    },
     "axis": {
-      "labelColor": "#0a0a0a",
+      "labelColor": "#474040",
       "labelFontSize": 11,
       "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       "labelOpacity": 1,
@@ -163,8 +168,11 @@
       "tickOpacity": 0.6,
       "domainColor": "#0a0a0a",
       "domainOpacity": 0.6,
-      "gridColor": "#8a8a8a",
-      "gridDash": [2, 2],
+      "gridColor": "#757575",
+      "gridDash": [
+        2,
+        2
+      ],
       "gridOpacity": 1,
       "title": null,
       "titleColor": "#0a0a0a",
@@ -180,11 +188,19 @@
       "tickOpacity": 0.6,
       "title": null
     },
-    "axisYDiscrete": {"ticks": false, "labelPadding": 5},
-    "axisXQuantitative": {"grid": true},
+    "axisYDiscrete": {
+      "ticks": false,
+      "labelPadding": 5
+    },
+    "axisXQuantitative": {
+      "grid": true
+    },
     "axisYQuantitative": {
       "gridColor": "#a0a0a0",
-      "gridDash": [1, 5],
+      "gridDash": [
+        1,
+        5
+      ],
       "gridOpacity": 1,
       "ticks": false,
       "labelPadding": 5,
@@ -214,6 +230,8 @@
       "anchor": "start",
       "offset": 10
     },
-    "mark": {"tooltip": true}
+    "mark": {
+      "tooltip": true
+    }
   }
 }

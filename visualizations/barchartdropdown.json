@@ -1,0 +1,34 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A simple bar chart with embedded data.",
+  "width": 400,
+  "data": {
+    "values": [
+      {"view": "gender", "series": "male", "value": 1000},
+      {"view": "gender", "series": "female", "value": 2000},
+      {"view": "age group", "series": "Under 18", "value": 1000},
+      {"view": "age group", "series": "18-50", "value": 3000},{"view": "age group", "series": "50+", "value": 2000}
+    ]
+  },
+  "mark": {"type": "bar", "color": "lightcoral"},
+  "encoding": {
+    "x": {"field": "series", "type": "nominal", "axis": {"labelAngle": 0}, "title": null},
+    "y": {"field": "value", "type": "quantitative"}
+  },
+  "params": [
+    {
+      "name": "SelectParam",
+      "value": "gender",
+      "bind": {
+        "input": "select",
+        "options": ["gender", "age group"],
+        "name": "Select category:"
+      }
+    }
+  ],
+  "transform": [
+    {
+    "filter": "datum.view == SelectParam"
+  }
+  ]
+}

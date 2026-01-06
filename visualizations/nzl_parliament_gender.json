@@ -1,0 +1,71 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://api.worldbank.org/v2/country/nzl/indicator/SG.GEN.PARL.ZS?format=json",
+    "format": {
+      "type": "json",
+      "property": "1"
+    }
+  },
+  "title": {
+    "text": "Percent of female members of national parliaments",
+    "subtitle": "NZL",
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10,
+    "anchor": "start",
+    "color": "black"
+  },
+  "width": 200,
+  "height": 300,
+  "description": "This is a line chart showing gender equality in government",
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "color": "tomato",
+        "strokeWidth": 2,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "timeUnit": "year",
+          "scale": {
+            "domain": [
+              "1995",
+              "2025"
+            ]
+          }
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "% of seats held by women",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "gray",
+        "strokeDash": [
+          4,
+          4
+        ]
+      },
+      "encoding": {
+        "y": {
+          "datum": 50
+        }
+      }
+    }
+  ]
+}

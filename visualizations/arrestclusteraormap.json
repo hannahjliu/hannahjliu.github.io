@@ -1,0 +1,172 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 600,
+  "height": 300,
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/visualizations/ice-aor-shp.json",
+    "format": {
+      "type": "topojson",
+      "feature": "ice-aor-shp"
+    }
+  },
+
+  "transform": [
+    {
+      "lookup": "properties.aor_nam",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/aor_map_color_groups.csv",
+          "format": { "type": "csv" }
+        },
+        "key": "AOR",
+        "fields": ["Cluster", "Total_Arrests"]
+      }
+    },
+    {
+      "calculate": "toNumber(datum.Cluster)",
+      "as": "Cluster"
+    }
+  ],
+
+  "projection": {
+    "type": "albersUsa"
+  },
+
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+
+  "encoding": {
+    "color": {
+      "condition": {
+        "test": "datum.Cluster != null",
+        "field": "Cluster",
+        "type": "ordinal",
+        "scale": {
+          "domain": [0, 1, 2, 3],
+          "range": [
+            "#ff6f3c",
+            "#155263",
+            "#ff9a3c",
+            "#ffc93c"
+          ]
+        },
+        "legend": {
+          "title": "Cluster",
+          "orient": "right",
+          "direction": "vertical"
+        }
+      },
+      "value": "#e0e0e0"
+    },
+    "tooltip": [
+      {
+        "field": "properties.aor_nam",
+        "type": "nominal",
+        "title": "Area of Responsibility"
+      },
+      {
+        "field": "Cluster",
+        "type": "ordinal",
+        "title": "Cluster"
+      },
+      {
+        "field": "Total_Arrests",
+        "type": "quantitative",
+        "title": "Total Arrests",
+        "format": ","
+      }
+    ]
+  },
+
+  "title": {
+    "text": "ICE Arrest Characteristic Clusters",
+    "subtitle": "January to October 2025"
+  },
+
+  "config": {
+    "font": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "numberFormat": ".0f",
+    "view": {
+      "stroke": "transparent"
+    },
+    "background": "transparent",
+    "range": {
+      "category": ["#155263", "#ff6f3c", "#ff9a3c", "#ffc93c", "#0a0a0a", "#8b4513"]
+    },
+    "point": {
+      "filled": true,
+      "opacity": 0.95
+    },
+    "axis": {
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 11,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelOpacity": 1,
+      "tickColor": "#0a0a0a",
+      "tickOpacity": 0.6,
+      "domainColor": "#0a0a0a",
+      "domainOpacity": 0.6,
+      "gridColor": "#a0a0a0",
+      "gridDash": [2, 2],
+      "gridOpacity": 1,
+      "title": null,
+      "titleColor": "#0a0a0a",
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleOpacity": 1,
+      "titleFontWeight": 500,
+      "tickSize": 5
+    },
+    "axisXDiscrete": {
+      "grid": false,
+      "labelAngle": 0,
+      "tickCount": 10,
+      "tickOpacity": 0.6,
+      "title": null
+    },
+    "axisYDiscrete": {
+      "ticks": false,
+      "labelPadding": 5
+    },
+    "axisXQuantitative": {
+      "grid": true
+    },
+    "axisYQuantitative": {
+      "gridColor": "#a0a0a0",
+      "gridDash": [1, 5],
+      "gridOpacity": 1,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 8,
+      "titleAngle": -90,
+      "titleAlign": "center",
+      "titleBaseline": "middle"
+    },
+    "legend": {
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleFontSize": 15,
+      "titleFontWeight": 500,
+      "titleColor": "#0a0a0a",
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 12
+    },
+    "title": {
+      "font": "'Besley', 'Garamond', 'Georgia'",
+      "fontSize": 20,
+      "fontWeight": 500,
+      "color": "#0a0a0a",
+      "subtitleFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#0a0a0a",
+      "anchor": "start",
+      "offset": 10
+    },
+    "mark": {
+      "tooltip": true
+    }
+  }
+}

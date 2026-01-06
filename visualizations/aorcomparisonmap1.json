@@ -21,7 +21,7 @@
   "layer": [
     {
       "data": {
-        "url": "data/ice-aor-shp1.json",
+        "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/ice-aor-shp1.json",
         "format": {"feature": "ice-aor-shp", "type": "topojson"}
       },
       "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.3},
@@ -31,7 +31,7 @@
     },
     {
       "data": {
-        "url": "data/aordf.csv"
+        "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/aordf.csv"
       },
       "params": [
         {
@@ -44,7 +44,7 @@
           "lookup": "aor_nam",
           "from": {
             "data": {
-              "url": "data/ice-aor-shp1.json",
+              "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/ice-aor-shp1.json",
              "format":  {"feature": "ice-aor-shp", "type": "topojson"}
             },
             "key": "properties.aor_nam",
@@ -61,7 +61,7 @@
             "empty": false,
             "value": 1.5
           },
-          "value": 0.75
+          "value": 0.5
         },
         "color": {
           "field": "arrests",

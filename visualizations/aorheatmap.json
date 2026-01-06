@@ -1,0 +1,74 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 500,
+    "title": {
+        "text": "ICE Arrests by Area of Responsibility and Weeks Since Inauguration",
+        "fontSize": 16,
+        "fontWeight": "bold"
+    },
+    "data": {
+        "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/arrests_heatmap_data.csv"
+    },
+    "config": {
+        "view": {
+            "strokeWidth": 0,
+            "step": 20
+        },
+        "axis": {
+            "domain": false
+        }
+    },
+    "mark": {
+        "type": "rect",
+        "tooltip": true
+    },
+    "encoding": {
+        "x": {
+            "field": "weeks_since_inauguration",
+            "type": "ordinal",
+            "title": "Weeks Since Inauguration",
+            "axis": {
+                "labelAngle": 0,
+                "labelFontSize": 11
+            }
+        },
+        "y": {
+            "field": "Apprehension AOR",
+            "type": "nominal",
+            "title": "Area of Responsibility",
+            "sort": "-color",
+            "axis": {
+                "labelFontSize": 11
+            }
+        },
+        "color": {
+            "field": "arrests",
+            "type": "quantitative",
+            "scale": {
+                "scheme": "blues"
+            },
+            "legend": {
+                "title": "Number of Arrests",
+                "orient": "right"
+            }
+        },
+        "tooltip": [
+            {
+                "field": "Apprehension AOR",
+                "type": "nominal",
+                "title": "AOR"
+            },
+            {
+                "field": "weeks_since_inauguration",
+                "type": "ordinal",
+                "title": "Week"
+            },
+            {
+                "field": "arrests",
+                "type": "quantitative",
+                "title": "Arrests"
+            }
+        ]
+    }
+}

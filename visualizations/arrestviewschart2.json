@@ -3,7 +3,7 @@
   "description": "A simple bar chart with embedded data.",
   "width": 400,
   "data": {
-    "url": "data/arrestviews.csv"
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/arrestviews.csv"
   },
   "mark": {"type": "bar", "color": "tomato"},
   "encoding": {

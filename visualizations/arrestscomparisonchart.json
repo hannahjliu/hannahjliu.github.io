@@ -6,7 +6,7 @@
     "subtitle": "The chart shows the seven-day rolling average of the number of daily ICE administrative arrests."
   },
   "data": {
-    "url": "data/dailyarrestscombined.csv"
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/dailyarrestscombined.csv"
   },
   "transform": [
     {"filter": "datum.days_since_jan20 > -250 && datum.days_since_jan20 < 268"}
