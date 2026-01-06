@@ -1,0 +1,45 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/RDeconomist/RDeconomist.github.io/main/charts/colour/dataKlein.csv"
+  },
+  "title": {
+    "text": "Ed Ruscha",
+    "subtitle": "OOF (1963)",
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10,
+    "anchor": "start",
+    "color": "black"
+  },
+  "config": {"background": "#FAFAFA"},
+  "height": 300,
+  "width": 300,
+  "layer": [
+    {
+      "mark": {"type": "rect", "fill": "#05265B", "opacity": 1},
+      "encoding": {
+        "x": {"datum": 0, "type": "quantitative", "axis": null},
+        "x2": {"datum": 300},
+        "y": {"datum": 0, "type": "quantitative", "axis": null},
+        "y2": {"datum": 300}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "text": "OOF",
+        "fontSize": 100,
+        "color": "#EFDB3D",
+        "opacity": 1,
+        "font":"Futura",
+       "fontWeight": 900
+      },
+      "encoding": {
+        "x": {"value": 150},
+        "y": {"value": 150}
+      }
+    }
+  ]
+}
