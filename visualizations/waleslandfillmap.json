@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Layered map combining UK regional boundaries as background with airport points sized by aircraft movements.",
+  "title": {"text":"Wales Authorised Landfill Site Points", "subtitle":"Data from DataMapWales"},
+  "width": 350,
+  "height": 400,
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jhellingsdata/RADataHub/refs/heads/main/MappingWorkshop/geo_data/wales.topojson",
+        "format": {"type": "topojson", "feature": "data"}
+      },
+      "projection": {"type": "mercator"},
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "white",
+        "strokeWidth": 0.1
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/mapdatawithcoordinates.csv"
+      },
+      "projection": {"type": "mercator"},
+      "mark": {
+        "type": "circle",
+        "size": 100,
+        "opacity": 0.8
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "color": {
+          "field": "operational_status",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Operational", "Closed"],
+            "range": ["#27AE60", "#E74C3C"]
+          },
+          "legend": {"title": "Status"}
+        },
+        "size": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": 300
+          },
+          "value": 100
+        },
+        "tooltip": [
+          {"field": "operational_status", "title": "Status"},
+          {"field": "site_postcode", "title": "Postcode"}
+        ]
+      },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ]
+    }
+  ]
+}
