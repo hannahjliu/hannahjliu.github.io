@@ -4,8 +4,8 @@
     "url": "https://raw.githubusercontent.com/RDeconomist/RDeconomist.github.io/main/charts/colour/dataKlein.csv"
   },
   "title": {
-    "text": "Ed Ruscha",
-    "subtitle": "OOF (1963)",
+    "text": "Kazimir Malevich",
+    "subtitle": "Black Square (1915)",
     "subtitleFontStyle": "italic",
     "subtitleFontSize": 10,
     "anchor": "start",
@@ -16,7 +16,7 @@
   "width": 300,
   "layer": [
     {
-      "mark": {"type": "rect", "fill": "#05265B", "opacity": 1},
+      "mark": {"type": "rect", "fill": "#D7E1D6", "opacity": 1},
       "encoding": {
         "x": {"datum": 0, "type": "quantitative", "axis": null},
         "x2": {"datum": 300},
@@ -25,20 +25,12 @@
       }
     },
     {
-      "mark": {
-        "type": "text",
-        "align": "center",
-        "baseline": "middle",
-        "text": "OOF",
-        "fontSize": 100,
-        "color": "#EFDB3D",
-        "opacity": 1,
-        "font":"Futura",
-       "fontWeight": 900
-      },
+      "mark": {"type": "rect", "fill": "#0C1415", "opacity": 1},
       "encoding": {
-        "x": {"value": 150},
-        "y": {"value": 150}
+        "x": {"datum": 50, "type": "quantitative", "axis": null},
+        "x2": {"datum": 250},
+        "y": {"datum": 50, "type": "quantitative", "axis": null},
+        "y2": {"datum": 250}
       }
     }
   ]

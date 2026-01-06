@@ -1,0 +1,53 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/RDeconomist/RDeconomist.github.io/main/charts/colour/dataKlein.csv"
+  },
+
+  "title": {
+    "text": "Barnett Newman",
+    "subtitle": "Eighth Station (1964)",
+    "subtitleFontStyle":"italic",
+    "subtitleFontSize":10,
+    "anchor": "start",
+    "color": "black"
+  },
+
+  "config":{
+    "background": "#FAFAFA"
+  },
+
+  "height": 400,
+  "width": 300,
+  
+  "layer":[
+    {
+      "mark": {"type": "rect", "fill": "#F7EDD4", "opacity": 1},
+      "encoding": {
+        "x": {"datum": 0, "type": "quantitative", "axis": null},
+        "x2": {"datum": 300},
+        "y": {"datum": 0, "type": "quantitative", "axis": null},
+        "y2": {"datum": 300}
+      }
+    },
+    {
+      "mark": {"type": "rect", "fill": "#010201", "opacity": 1},
+      "encoding": {
+        "x": {"datum": 0, "type": "quantitative", "axis": null},
+        "x2": {"datum": 28},
+        "y": {"datum": 0, "type": "quantitative", "axis": null},
+        "y2": {"datum": 300}
+      }
+    },
+    {
+      "mark": {"type": "rect", "fill": "#010201", "opacity": 1},
+      "encoding": {
+        "x": {"datum": 245, "type": "quantitative", "axis": null},
+        "x2": {"datum": 217},
+        "y": {"datum": 0, "type": "quantitative", "axis": null},
+        "y2": {"datum": 300}
+      }
+    }
+  ]
+}

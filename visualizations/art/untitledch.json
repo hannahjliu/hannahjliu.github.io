@@ -1,0 +1,56 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Carmen Herrera",
+    "subtitle": "Untitled (2013)",
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10,
+    "anchor": "start",
+    "color": "black"
+  },
+  "config": {"background": "#FAFAFA"},
+  "height": 600,
+  "width": 300,
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {"x": 0, "y": 0, "order": 1},
+          {"x": 300, "y": 0, "order": 2},
+          {"x": 150, "y": 250, "order": 3}
+        ]
+      },
+      "mark": {
+        "type": "line",
+        "fill": "#01B73C",
+        "stroke": null,
+        "closed": true
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "axis": null},
+        "y": {"field": "y", "type": "quantitative", "axis": null},
+        "order": {"field": "order", "type": "quantitative"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"x": 0, "y": 500, "order": 1},
+          {"x": 300, "y": 500, "order": 2},
+          {"x": 150, "y": 250, "order": 3}
+        ]
+      },
+      "mark": {
+        "type": "line",
+        "fill": "#01B73C",
+        "stroke": null,
+        "closed": true
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "axis": null},
+        "y": {"field": "y", "type": "quantitative", "axis": null},
+        "order": {"field": "order", "type": "quantitative"}
+      }
+    }
+  ]
+}

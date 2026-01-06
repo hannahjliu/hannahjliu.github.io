@@ -1,0 +1,46 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/RDeconomist/RDeconomist.github.io/main/charts/colour/dataKlein.csv"
+  },
+  "title": {
+    "text": "Ellsworth Kelly",
+    "subtitle": "Red, Yellow, Blue (1963)",
+    "subtitleFontStyle": "italic",
+    "subtitleFontSize": 10,
+    "anchor": "start",
+    "color": "black"
+  },
+  "config": {"background": "#FAFAFA"},
+  "height": 300,
+  "width": 300,
+  "layer": [
+    {
+      "mark": {"type": "rect", "fill": "#004EB3", "opacity": 1},
+      "encoding": {
+        "x": {"datum": 0, "type": "quantitative", "axis": null},
+        "x2": {"datum": 300},
+        "y": {"datum": 0, "type": "quantitative", "axis": null},
+        "y2": {"datum": 300}
+      }
+    },
+    {
+      "mark": {"type": "rect", "fill": "#F8E44F", "opacity": 1},
+      "encoding": {
+        "x": {"datum": 0, "type": "quantitative", "axis": null},
+        "x2": {"datum": 200},
+        "y": {"datum": 0, "type": "quantitative", "axis": null},
+        "y2": {"datum": 200}
+      }
+    },
+    {
+      "mark": {"type": "rect", "fill": "#CA2428", "opacity": 1},
+      "encoding": {
+        "x": {"datum": 0, "type": "quantitative", "axis": null},
+        "x2": {"datum": 100},
+        "y": {"datum": 0, "type": "quantitative", "axis": null},
+        "y2": {"datum": 100}
+      }
+    }
+  ]
+}
