@@ -15,11 +15,11 @@
   },
 
   "config":{
-    "background": "#FAFAFA"
+    "background": "rgba(0,0,0,0)"
   },
 
-  "height": 400,
-  "width": 300,
+  "height": 300,
+  "width": 225,
   
   "layer":[
     {
@@ -32,7 +32,7 @@
       }
     },
     {
-      "mark": {"type": "rect", "fill": "#010201", "opacity": 1},
+      "mark": {"type": "rect", "fill": "#262626", "opacity": 1},
       "encoding": {
         "x": {"datum": 0, "type": "quantitative", "axis": null},
         "x2": {"datum": 28},
@@ -41,7 +41,7 @@
       }
     },
     {
-      "mark": {"type": "rect", "fill": "#010201", "opacity": 1},
+      "mark": {"type": "rect", "fill": "#262626", "opacity": 1},
       "encoding": {
         "x": {"datum": 245, "type": "quantitative", "axis": null},
         "x2": {"datum": 217},

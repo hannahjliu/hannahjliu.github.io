@@ -8,36 +8,45 @@
     "anchor": "start",
     "color": "black"
   },
-  "config": {"background": "#FAFAFA"},
-  "height": 600,
-  "width": 300,
+  "width": 150,
+  "height": 300,
+  "config": {
+    "background": "transparent"
+  },
   "layer": [
     {
       "data": {
         "values": [
-          {"x": 0, "y": 0, "order": 1},
-          {"x": 300, "y": 0, "order": 2},
-          {"x": 150, "y": 250, "order": 3}
+          { "x": 0, "y": 0 }
         ]
       },
       "mark": {
-        "type": "line",
-        "fill": "#01B73C",
-        "stroke": null,
-        "closed": true
+        "type": "rect",
+        "fill": "#F6F6F6"
       },
       "encoding": {
-        "x": {"field": "x", "type": "quantitative", "axis": null},
-        "y": {"field": "y", "type": "quantitative", "axis": null},
-        "order": {"field": "order", "type": "quantitative"}
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": { "domain": [0, 150] },
+          "axis": null
+        },
+        "x2": { "value": 150 },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": { "domain": [300, 0] },
+          "axis": null
+        },
+        "y2": { "value": 300 }
       }
     },
     {
       "data": {
         "values": [
-          {"x": 0, "y": 500, "order": 1},
-          {"x": 300, "y": 500, "order": 2},
-          {"x": 150, "y": 250, "order": 3}
+          { "x": 0,   "y": 0,   "order": 1 },
+          { "x": 150, "y": 0,   "order": 2 },
+          { "x": 75,  "y": 150, "order": 3 }
         ]
       },
       "mark": {
@@ -47,9 +56,55 @@
         "closed": true
       },
       "encoding": {
-        "x": {"field": "x", "type": "quantitative", "axis": null},
-        "y": {"field": "y", "type": "quantitative", "axis": null},
-        "order": {"field": "order", "type": "quantitative"}
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": { "domain": [0, 150] },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": { "domain": [300, 0] },
+          "axis": null
+        },
+        "order": {
+          "field": "order",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          { "x": 0,   "y": 300, "order": 1 },
+          { "x": 150, "y": 300, "order": 2 },
+          { "x": 75,  "y": 150, "order": 3 }
+        ]
+      },
+      "mark": {
+        "type": "line",
+        "fill": "#01B73C",
+        "stroke": null,
+        "closed": true
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": { "domain": [0, 150] },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": { "domain": [300, 0] },
+          "axis": null
+        },
+        "order": {
+          "field": "order",
+          "type": "quantitative"
+        }
       }
     }
   ]

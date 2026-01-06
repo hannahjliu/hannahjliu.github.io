@@ -11,7 +11,7 @@
     "anchor": "start",
     "color": "black"
   },
-  "config": {"background": "#FAFAFA"},
+  "config": {"background": "rgba(0,0,0,0)"},
   "height": 300,
   "width": 300,
   "layer": [
