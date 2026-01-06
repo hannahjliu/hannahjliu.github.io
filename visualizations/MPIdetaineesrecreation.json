@@ -2,20 +2,27 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "width": 650,
   "height": 300,
-  "data": {"url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/detainees1925.csv"},
-    "transform": [
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/detainees1925.csv"
+  },
+  "background": "#D2CCD9",
+  "transform": [
     {
       "filter": "year(datum.Date) > 2024 || (year(datum.Date) == 2024 && month(datum.Date) >= 10)"
     }
   ],
   "title": {
-    "text":"Population in ICE Detention, 2024-25",
-    "subtitle": ["Source:  TRAC, ICE Detainees."]},
-    "layer": [
+    "text": "Population in ICE Detention, 2024-25",
+    "subtitle": [
+      "Source:  TRAC, ICE Detainees."
+    ],
+    "anchor": "start"
+  },
+  "layer": [
     {
       "mark": {
         "type": "line",
-        "color": "teal"
+        "color": "#4BABC5"
       },
       "encoding": {
         "x": {
@@ -23,20 +30,24 @@
           "type": "temporal",
           "title": "",
           "axis": {
-            "format": "%b %Y"
+            "format": "%b %Y",
+            "gridColor": "#c1c1c1"
           }
         },
         "y": {
           "field": "Total",
           "type": "quantitative",
-          "title": "Total Detainees"
+          "title": "Total Detainees",
+          "axis": {
+            "gridColor": "#c1c1c1"
+          }
         }
       }
     },
     {
       "mark": {
-       "type": "rule",
-       "color": "green"
+        "type": "rule",
+        "color": "green"
       },
       "encoding": {
         "x": {
@@ -61,7 +72,7 @@
           {
             "field": "Total",
             "type": "quantitative",
-            "title": "Total"
+            "title": "Detainees"
           }
         ]
       },
@@ -70,7 +81,9 @@
           "name": "hover",
           "select": {
             "type": "point",
-            "fields": ["Date"],
+            "fields": [
+              "Date"
+            ],
             "nearest": true,
             "on": "mouseover",
             "clear": "mouseout"
