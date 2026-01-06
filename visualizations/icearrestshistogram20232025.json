@@ -5,12 +5,17 @@
   },
   "width": 600,
   "height": 250,
+  "transform": [
+    {
+      "filter": "year(datum.apprehension_date) > 2023 || (year(datum.apprehension_date) == 2023 && month(datum.apprehension_date) >= 9)"
+    },
+    {
+      "filter": "year(datum.apprehension_date) < 2025 || (year(datum.apprehension_date) == 2025 && month(datum.apprehension_date) <= 6)"
+    }
+  ],
   "layer": [
     {
-      "mark": {
-        "type": "bar",
-        "color": "slateblue"
-      },
+      "mark": {"type": "bar", "color": "slateblue"},
       "encoding": {
         "x": {
           "timeUnit": "yearmonth",
@@ -18,14 +23,9 @@
           "bin": false,
           "field": "apprehension_date",
           "title": "Month",
-          "axis": {
-            "labelAngle": -45
-          }
+          "axis": {"labelAngle": -45}
         },
-        "y": {
-          "aggregate": "count",
-          "title": "Number of Arrests"
-        },
+        "y": {"aggregate": "count", "title": "Number of Arrests"},
         "tooltip": [
           {
             "timeUnit": "yearmonth",
@@ -33,43 +33,17 @@
             "title": "Month",
             "type": "temporal"
           },
-          {
-            "aggregate": "count",
-            "title": "Arrests"
-          }
+          {"aggregate": "count", "title": "Arrests"}
         ]
       }
     },
     {
-      "data": {
-        "values": [
-          {
-            "date": "2025-01-20"
-          }
-        ]
-      },
-      "mark": {
-        "type": "rule",
-        "color": "red",
-        "strokeWidth": 2
-      },
-      "encoding": {
-        "x": {
-          "field": "date",
-          "type": "temporal",
-          "title": "Month"
-        }
-      }
+      "data": {"values": [{"date": "2025-01-20"}]},
+      "mark": {"type": "rule", "color": "red", "strokeWidth": 2},
+      "encoding": {"x": {"field": "date", "type": "temporal", "title": "Month"}}
     },
     {
-      "data": {
-        "values": [
-          {
-            "date": "2025-01-20",
-            "label": "Jan 20, 2025"
-          }
-        ]
-      },
+      "data": {"values": [{"date": "2025-01-20", "label": "Jan 20, 2025"}]},
       "mark": {
         "type": "text",
         "align": "left",
@@ -79,27 +53,16 @@
         "fontSize": 11
       },
       "encoding": {
-        "x": {
-          "field": "date",
-          "type": "temporal"
-        },
-        "y": {
-          "value": 10
-        },
-        "text": {
-          "field": "label"
-        }
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"value": 10},
+        "text": {"field": "label"}
       }
     }
   ],
   "title": {
-    "text": "ICE Arrests by Month from FY 2024 to July 2025",
+    "text": "ICE Arrests by Month from October 2024 to July 2025",
     "fontSize": 18,
     "font": "sans-serif"
   },
-  "config": {
-    "view": {
-      "stroke": "transparent"
-    }
-  }
+  "config": {"view": {"stroke": "transparent"}}
 }
