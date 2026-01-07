@@ -38,7 +38,10 @@
     "x": {
       "field": "Arrests",
       "type": "quantitative",
-      "title": "Number of Arrests"
+      "title": "Number of Arrests",
+      "scale": {
+        "domain": [0, 90000]
+      }
     },
     "tooltip": [
       {
