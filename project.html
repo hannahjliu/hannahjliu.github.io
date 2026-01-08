@@ -143,7 +143,7 @@
 
     <div class="hero">
         <div class="container">
-            <h1>Examining a new era of mass deportation</h1>
+            <h1>Examining a new era of <br />mass deportation</h1>
             <h3>Comparing immigration policy between Trump 1.0 and Trump 2.0</h3>
         </div>
         <div class="hero-image-container">
@@ -163,8 +163,7 @@
                 <br /><br />
                 I conducted an exploratory analysis of individual-level administrative arrest and detention data from
                 the U.S. Immigration, Customs, and Enforcement Agency (ICE), as well as recent data obtained through a
-                Freedom of Information Act request by the Deportation Data Project. This project analyzes
-                individual-level ICE arrest and detention data to quantify changes between Trump's first and second
+                Freedom of Information Act request by the Deportation Data Project. This project aims to quantify changes between Trump's first and second
                 administrations across four dimensions: volume of arrests, geographic targeting, demographic
                 composition, and criminal backgrounds of those arrested.
             </p>
@@ -177,7 +176,7 @@
                     downloaded from the <a href="https://deportationdata.org/data/ice.html">website</a>.
                     <br /><br />
                     I used Python (pandas, numpy, BeautifulSoup) through Colab and VSCode and Vega-Lite to clean data and
-                    create the charts in this project. All my Jupyter notebooks and .json files can be found in the <a
+                    create the charts in this project. All my workbooks and .json files can be found in the <a
                         href="https://github.com/hannahjliu/hannahjliu.github.io">repository</a>.
                     <br /><br />
                     I cleaned for duplicate entries by removing rows that had identical unique identifiers and dates. I also
@@ -189,7 +188,7 @@
                 <h3>Challenges</h3>
                 <p>A lot of the challenges I faced with the charts had to do with the massive sizes of the datasets,
                     which all had different fields and formats between years and several of which had random errors. I
-                    had to do a lot of cleaning, transforming, and checking in order to make sure all of the data behind the charts was
+                    had to do a lot of cleaning and checking in order to make sure all of the data behind the charts was
                     working. I also had trouble getting maps to render using geoJSONs in Vega-Lite, but switching to
                     topoJSONs worked.
                 </p>
