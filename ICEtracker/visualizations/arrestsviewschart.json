@@ -1,0 +1,141 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "A simple bar chart with embedded data.",
+  "title": {
+    "text": "Arrests in the First 9 Months by Selected View",
+    "subtitle": "Select view to compare by gender, age, and criminality"
+  },
+  "width": 500,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/arrestviews.csv"
+  },
+  "mark": {"type": "bar", "color": "#ff9a3c"},
+  "encoding": {
+    "x": {
+      "field": "characteristic",
+      "type": "nominal",
+      "axis": {"labelAngle": 0},
+      "title": null
+    },
+    "y": {"field": "value", "type": "quantitative", "title": "Arrests"},
+    "tooltip": [
+      {"field": "characteristic", "type": "nominal", "title": "Category"},
+      {"field": "value", "type": "quantitative", "title": "Arrest Numbers"},
+      {"field": "percentage", "type": "quantitative", "format": ".1%", "title": "Percentage of Total"}
+    ]
+  },
+  "params": [
+    {
+      "name": "SelectParam",
+      "value": "criminality",
+      "bind": {
+        "input": "select",
+        "options": ["gender", "age group", "criminality"],
+        "name": "Select category:"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.view == SelectParam && datum.administration == 'Trump 2.0'"
+    }
+  ],
+  "config": {
+    "font": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "numberFormat": ".0f",
+    "view": {
+      "stroke": "transparent"
+    },
+    "background": "transparent",
+    "range": {
+      "category": [
+        "#155263",
+        "#ff6f3c",
+        "#ff9a3c",
+        "#ffc93c",
+        "#0a0a0a",
+        "#8b4513"
+      ]
+    },
+    "point": {
+      "filled": true,
+      "opacity": 0.95
+    },
+    "axis": {
+      "labelColor": "#474040",
+      "labelFontSize": 11,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelOpacity": 1,
+      "tickColor": "#0a0a0a",
+      "tickOpacity": 0.6,
+      "domainColor": "#0a0a0a",
+      "domainOpacity": 0.6,
+      "gridColor": "#757575",
+      "gridDash": [
+        2,
+        2
+      ],
+      "gridOpacity": 1,
+      "title": null,
+      "titleColor": "#0a0a0a",
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleOpacity": 1,
+      "titleFontWeight": 500,
+      "tickSize": 5
+    },
+    "axisXDiscrete": {
+      "grid": false,
+      "labelAngle": 0,
+      "tickCount": 10,
+      "tickOpacity": 0.6,
+      "title": null
+    },
+    "axisYDiscrete": {
+      "ticks": false,
+      "labelPadding": 5
+    },
+    "axisXQuantitative": {
+      "grid": true
+    },
+    "axisYQuantitative": {
+      "gridColor": "#a0a0a0",
+      "gridDash": [
+        1,
+        5
+      ],
+      "gridOpacity": 1,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 8,
+      "titleAngle": -90,
+      "titleAlign": "center",
+      "titleBaseline": "middle"
+    },
+    "legend": {
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleFontSize": 15,
+      "titleFontWeight": 500,
+      "titleColor": "#0a0a0a",
+      "title": null,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 12
+    },
+    "title": {
+      "font": "'Besley', 'Garamond', 'Georgia'",
+      "fontSize": 20,
+      "fontWeight": 500,
+      "color": "#0a0a0a",
+      "subtitleFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#0a0a0a",
+      "anchor": "start",
+      "offset": 10
+    },
+    "mark": {
+      "tooltip": true
+    }
+  }
+
+}
