@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICE Tracker</title>
+
+    <link rel="shortcut icon" type="image/png" href="images/duck.png">
+    <link rel="stylesheet" type="text/css" href="custom1.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <style>
+        /* ===== COLORS & FONTS ===== */
+        :root {
+            --first-color: #155263;
+            --second-color: #ff6f3c;
+            --neutral-dark: #0a0a0a;
+            --neutral-gray: #6b6b6b;
+            --neutral-light: #fafafa;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            background-color: #f8f8f8;
+            color: var(--neutral-dark);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background-color: #f8f8f8;
+        }
+
+        .hero h1 {
+            font-family: 'Besley', serif;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h3 {
+            font-size: 1.25rem;
+            color: var(--neutral-gray);
+        }
+
+        /* ===== PAGE LAYOUT ===== */
+        .layout {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 220px;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            /* vertical list */
+            gap: 0.75rem;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            /* ensures vertical stacking */
+            text-decoration: none;
+            color: var(--neutral-dark);
+            border-left: 2px solid transparent;
+            padding-left: 0.25rem;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a:hover {
+            border-left-color: var(--second-color);
+            padding-left: 0.75rem;
+        }
+
+        .sidebar-nav a.active {
+            border-left-color: var(--second-color);
+            font-weight: 600;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .content {
+            flex: 1;
+        }
+
+        .section {
+            padding: 3rem 0;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .section:nth-of-type(even) {
+            background-color: #f7f7f7;
+        }
+
+        .section-title {
+            font-family: 'Besley', serif;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        figure {
+            margin: 2rem 0;
+        }
+
+        /* ===== DATA NOTES ===== */
+        .data-notes {
+            background-color: #e8e8e8;
+            border-radius: 8px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+
+        .data-notes-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .data-notes-header:hover {
+            background-color: #d8d8d8;
+        }
+
+        .data-notes-title {
+            font-family: 'Besley', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--neutral-dark);
+            margin: 0;
+        }
+
+        .data-notes-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            color: var(--neutral-gray);
+        }
+
+        .data-notes-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .data-notes-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .data-notes-content.open {
+            max-height: 500px;
+        }
+
+        .data-notes-text {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: var(--neutral-dark);
+        }
+
+        .data-notes-text p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 2.5rem 1rem;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--neutral-gray);
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 900px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                border-bottom: 1px solid #e5e5e5;
+                padding-bottom: 1rem;
+                top: auto;
+            }
+
+            .content {
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="https://hannahjliu.github.io/"
+                    style="color: var(--neutral-dark); text-decoration: none;">Hannah Liu</a>
+            </div>
+            <div class="nav-links">
+                <a href="https://hannahjliu.github.io/aboutme">About</a>
+                <a href="https://www.linkedin.com/in/hannahjliu/">LinkedIn</a>
+                <a href="https://github.com/hannahjliu">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Tracking ICE Under Trump 2.0</h1>
+            <h3>A data tool to track Immigration and Customs Enforcement (ICE) under the second Trump Administration. Data available through mid-October 2025.</h3>
+        </div>
+    </div>
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav" id="sidebarNav">
+                <a href="#arrests-over-time">Over Time</a>
+                <a href="#aor-map">By Region</a>
+                <a href="#by-crim-record">By Criminal Record</a>
+                <a href="#nationalities">Top Nationalities</a>
+                <a href="#demographics">By Demographic</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="section" id="arrests-over-time">
+                <figure id="arrestsovertime"></figure>
+            </div>
+
+            <div class="section" id="aor-map">
+                <figure id="aormap"></figure>
+               <div class="data-notes">
+                <div class="data-notes-header" onclick="toggleNotes(2)">
+                    <h3 class="data-notes-title">Notes for replication</h3>
+                    <span class="data-notes-arrow" id="arrow2">▼</span>
+                </div>
+                <div class="data-notes-content" id="notes2">
+                    <div class="data-notes-text">
+                        <p>The shapefiles for the Area of Responsibility (AOR) map are from the
+                            <a href="https://deportationdata.org/data/processed/ice-offices.html">Deportation Data
+                                Project</a>. I used <a href="mapshaper.org">mapshaper</a> to simplify and convert them
+                            to TopoJSONs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="section" id="by-crim-record">
+                <figure id="areachart"></figure>
+
+                 <div class="data-notes">
+                <div class="data-notes-header" onclick="toggleNotes(4)">
+                    <h3 class="data-notes-title">Notes for replication</h3>
+                    <span class="data-notes-arrow" id="arrow4">▼</span>
+                </div>
+                <div class="data-notes-content" id="notes4">
+                    <div class="data-notes-text">
+                        <p>Fields on crime are missing from 2025 arrest data, while AOR is absent from 2025 detention
+                            data. I joined these files using shared unique identifiers. The 2017 datasets lacked a
+                            shared identifier but arrest data included crime fields. Some Trump 1.0 arrests shown may
+                            not have resulted in detentions.
+                            <br /><br />
+                            I <a
+                                href="https://drive.google.com/file/d/12ulQlhI0T2KWX9xT6vRgbmBE8jo9T_Q4/view?usp=sharing">scraped</a>
+                            the violent crime code manual from the <a
+                                href="https://www.ojp.gov/ncjrs/virtual-library/abstracts/national-crime-information-center-ncic-code-manual-second-edition">NCIC
+                                website</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="section" id="nationalities">
+                <figure id="nationalities"></figure>
+            </div>
+
+            <div class="section" id="demographics">
+                <figure id="arrestviews"></figure>
+            </div>
+             <div class="data-notes">
+                <div class="data-notes-header" onclick="toggleNotes(3)">
+                    <h3 class="data-notes-title">Notes for replication</h3>
+                    <span class="data-notes-arrow" id="arrow3">▼</span>
+                </div>
+                <div class="data-notes-content" id="notes3">
+                    <div class="data-notes-text">
+                        <p>I removed entries that had “Unknown” listed for gender (~6000) and missing values for birth
+                            year (1). </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="data">
+                <div class="global-data-box">
+                    <h3>About the Data</h3>
+                    <p> The ICE arrest and detention data were obtained through
+                    a Freedom of Information Act (FOIA) request by the Deportation Data Project. The 2025 data include administrative arrests from September 2023 through
+                    mid-October 2025. The raw data files are too large to be kept in the GitHub repository, but can be
+                    downloaded from the <a href="https://deportationdata.org/data/ice.html">website</a>.
+                    <br /><br />
+                    I used Python (pandas, numpy, BeautifulSoup) to clean data and Vega-Lite to
+                    create the charts in this project. All my workbooks and .json files can be found in the <a
+                        href="https://github.com/hannahjliu/hannahjliu.github.io">repository</a>.
+                    <br /><br />
+                    I cleaned for duplicate entries with the duplicate_likely field in the data (notes on this can be found in the <a href ="https://deportationdata.org/docs/ice/codebook.html">codebook</a>). I also
+                    removed unknown/missing data for a number of the charts – notes for replication can be found under
+                    each section.
+</p>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <footer>
+        © 2025 Hannah Liu
+    </footer>
+
+    <script>
+        function toggleNotes(id) {
+            const content = document.getElementById('notes' + id);
+            const arrow = document.getElementById('arrow' + id);
+            content.classList.toggle('open');
+            arrow.classList.toggle('open');
+        }
+
+        /* ===== SCROLLSPY ===== */
+        const sections = document.querySelectorAll('.section');
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        /* ===== EMBED CHARTS ===== */
+        vegaEmbed('#arrestsovertime', 'ICEtracker/visualizations/arrestsovertime.json');
+        vegaEmbed('#aormap', 'ICEtracker/visualizations/aormap.json');
+        vegaEmbed('#areachart', 'ICEtracker/visualizations/arrestsovertimecrim.json');
+        vegaEmbed('#nationalities', 'ICEtracker/visualizations/topnationalities.json');
+        vegaEmbed('#arrestviews', 'ICEtracker/visualizations/arrestsviewschart.json');
+    </script>
+
+</body>
+
+</html>
