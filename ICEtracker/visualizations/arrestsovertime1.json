@@ -6,7 +6,7 @@
     "subtitle": "The chart shows the seven-day rolling average of the number of daily ICE administrative arrests."
   },
   "data": {
-    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICEtracker/data/dailyarrests2025aor.csv"
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICEtracker/data/dailyarrests2025.csv"
   },
   "params": [
     {
@@ -28,46 +28,9 @@
         "min": "2023-10-01",
         "max": "2025-10-15"
       }
-    },
-    {
-      "name": "AORParam",
-      "value": "National",
-      "bind": {
-        "input": "select",
-        "options": [
-          "National",
-          "Atlanta",
-          "Baltimore",
-          "Boston",
-          "Buffalo",
-          "Chicago",
-          "Dallas",
-          "Denver",
-          "Detroit",
-          "El Paso",
-          "HQ",
-          "Houston",
-          "Los Angeles",
-          "Miami",
-          "New Orleans",
-          "New York City",
-          "Newark",
-          "Philadelphia",
-          "Phoenix",
-          "Salt Lake City",
-          "San Antonio",
-          "San Diego",
-          "San Francisco",
-          "Seattle",
-          "St. Paul",
-          "Washington"
-        ],
-        "name": "Select area:"
-      }
     }
   ],
   "transform": [
-    {"filter": "datum['aor_nam'] == AORParam"},
     {
       "filter": "datum['Apprehension Date'] >= datetime(year(startDate), month(startDate), date(startDate)) && datum['Apprehension Date'] <= datetime(year(endDate), month(endDate), date(endDate))"
     }
@@ -94,7 +57,7 @@
         ]
       },
       "layer": [
-        {"mark": {"type": "line", "strokeWidth": 2.5, "color": "#155263", "interpolate":"basis"}},
+        {"mark": {"type": "line", "strokeWidth": 2.5, "color": "#155263"}},
         {
           "transform": [{"filter": {"param": "hover", "empty": false}}],
           "mark": {"type": "point", "size": 100, "filled": true}
