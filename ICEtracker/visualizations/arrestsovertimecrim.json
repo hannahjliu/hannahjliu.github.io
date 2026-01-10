@@ -1,0 +1,295 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 750,
+  "height": 250,
+  "title": {"text": "Daily ICE Arrests over time by criminal record", "subtitle":["This chart shows a seven-day rolling average of the number of daily ICE administrative arrests.", "Categorization of violent crimes is from the National Crime Information Center (NCIC)"]},
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICEtracker/data/areachart2025.csv"
+  },
+  "params": [
+    {
+      "name": "startDate",
+      "value": "2024-10-01",
+      "bind": {
+        "input": "date",
+        "name": "Start Date:",
+        "min": "2024-10-01",
+        "max": "2025-10-15"
+      }
+    },
+    {
+      "name": "endDate",
+      "value": "2025-10-15",
+      "bind": {
+        "input": "date",
+        "name": "End Date:",
+        "min": "2024-10-01",
+        "max": "2025-10-15"
+      }
+    },
+    {
+      "name": "TypeParam",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All",
+          "No Criminal Charges",
+          "Convicted - Non-violent",
+          "Convicted - Violent crime",
+          "Pending Charges"
+        ],
+        "name": "Select type:"
+      }
+    },
+    {
+      "name": "AORParam",
+      "value": "National",
+      "bind": {
+        "input": "select",
+        "options": [
+          "National",
+          "Atlanta",
+          "Baltimore",
+          "Boston",
+          "Buffalo",
+          "Chicago",
+          "Dallas",
+          "Denver",
+          "Detroit",
+          "El Paso",
+          "HQ",
+          "Houston",
+          "Los Angeles",
+          "Miami",
+          "New Orleans",
+          "New York City",
+          "Newark",
+          "Philadelphia",
+          "Phoenix",
+          "Salt Lake City",
+          "San Antonio",
+          "San Diego",
+          "San Francisco",
+          "Seattle",
+          "St. Paul",
+          "Washington"
+        ],
+        "name": "Select area:"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum['Apprehension Date'] >= datetime(year(startDate), month(startDate), date(startDate)) && datum['Apprehension Date'] <= datetime(year(endDate), month(endDate), date(endDate))"
+    },
+    {"filter": "datum['Apprehension AOR'] == AORParam"},
+    {"filter": "TypeParam == 'All' || datum.Type == TypeParam"},
+    {
+      "calculate": "datum.Type == 'No Criminal Charges' ? 1 : datum.Type == 'Convicted - Non-violent' ? 2 : datum.Type == 'Convicted - Violent crime' ? 3 : 4",
+      "as": "TypeOrder"
+    },{
+      "calculate": "datum.Type == 'No Criminal Charges' ? 1 : datum.Type == 'Convicted - Non-violent' ? 2 : datum.Type == 'Convicted - Violent crime' ? 3 : 4",
+      "as": "TypeOrder"
+    },
+    {
+      "joinaggregate": [
+        {"op": "sum", "field": "Week Rolling Average", "as": "TotalPerDay"}
+      ],
+      "groupby": ["Apprehension Date"]
+    },
+    {
+      "calculate": "(datum['Week Rolling Average'] / datum.TotalPerDay) * 100",
+      "as": "Percentage"
+    },
+    {
+      "calculate": "datum.Type == 'No Criminal Charges' ? datum.Percentage : null",
+      "as": "NoCrimChargesValue"
+    },
+    {
+      "calculate": "datum.Type == 'Convicted - Non-violent' ? datum.Percentage : null",
+      "as": "ConvictedNonViolentValue"
+    },
+    {
+      "calculate": "datum.Type == 'Convicted - Violent crime' ? datum.Percentage : null",
+      "as": "ConvictedViolentValue"
+    },
+    {
+      "calculate": "datum.Type == 'Pending Charges' ? datum.Percentage : null",
+      "as": "PendingChargesValue"
+    },
+    {
+      "joinaggregate": [
+        {"op": "max", "field": "NoCrimChargesValue", "as": "NoCriminalChargesShare"},
+        {"op": "max", "field": "ConvictedNonViolentValue", "as": "ConvictedNonViolentShare"},
+        {"op": "max", "field": "ConvictedViolentValue", "as": "ConvictedViolentShare"},
+        {"op": "max", "field": "PendingChargesValue", "as": "PendingChargesShare"}
+      ],
+      "groupby": ["Apprehension Date"]
+    },
+    {
+      "joinaggregate": [
+        {"op": "sum", "field": "Week Rolling Average", "as": "TotalPerDay"}
+      ],
+      "groupby": ["Apprehension Date"]
+    },
+    {
+      "calculate": "(datum['Week Rolling Average'] / datum.TotalPerDay) * 100",
+      "as": "Percentage"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "Percentage",
+          "as": "NoCriminalChargesPercentage"
+        }
+      ],
+      "groupby": ["Apprehension Date", "Type"]
+    },
+    {
+      "calculate": "datum.Type == 'No Criminal Charges' ? datum.NoCriminalChargesPercentage : null",
+      "as": "NoCrimChargesValue"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "NoCrimChargesValue",
+          "as": "NoCriminalChargesShare"
+        }
+      ],
+      "groupby": ["Apprehension Date"]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "area", "fillOpacity": 0.8},
+      "encoding": {
+        "x": {"field": "Apprehension Date", "type": "temporal"},
+        "y": {"field": "Week Rolling Average", "type": "quantitative"},
+        "color": {
+          "field": "Type",
+          "type": "nominal",
+          "scale": {
+            "scheme": "tableau20"
+          },
+          "legend": {"orient": "bottom"}
+        },
+        "order": {
+          "field": "TypeOrder",
+          "type": "quantitative",
+          "sort": "descending"
+        }
+      }
+    },
+    {
+      "mark": {"type": "rule"},
+      "encoding": {
+        "x": {"field": "Apprehension Date", "type": "temporal"},
+        "opacity": {
+          "condition": {"value": 0.7, "param": "hover", "empty": false},
+          "value": 0
+        },
+        "color": {"value": "gray"},
+        "strokeWidth": {"value": 1},
+        "tooltip": [
+          {"field": "Apprehension Date", "type": "temporal", "title": "Date", "format": "%b %d, %Y"},
+          {"field": "NoCriminalChargesShare", "type": "quantitative", "title": "No Criminal Charges %", "format": ".1f"},
+          {"field": "ConvictedNonViolentShare", "type": "quantitative", "title": "Convicted - Non-violent %", "format": ".1f"},
+          {"field": "ConvictedViolentShare", "type": "quantitative", "title": "Convicted - Violent crime %", "format": ".1f"},
+          {"field": "PendingChargesShare", "type": "quantitative", "title": "Pending Charges %", "format": ".1f"}
+        ]
+      },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": ["Apprehension Date"],
+            "nearest": true,
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "font": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "numberFormat": ".0f",
+    "view": {"stroke": "transparent"},
+    "background": "transparent",
+    "range": {
+      "category": [
+        "#155263",
+        "#ff6f3c",
+        "#ff9a3c",
+        "#ffc93c",
+        "#0a0a0a",
+        "#8b4513"
+      ]
+    },
+    "point": {"filled": true, "opacity": 0.95},
+    "axis": {
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 11,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelOpacity": 1,
+      "tickColor": "#0a0a0a",
+      "tickOpacity": 0.6,
+      "domainColor": "#0a0a0a",
+      "domainOpacity": 0.6,
+      "gridColor": "#d0d0d0",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.8,
+      "title": null,
+      "titleColor": "#0a0a0a",
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleOpacity": 1,
+      "titleFontWeight": 500,
+      "tickSize": 5
+    },
+    "axisXDiscrete": {
+      "grid": false,
+      "labelAngle": 0,
+      "tickCount": 10,
+      "tickOpacity": 0.6,
+      "title": null
+    },
+    "axisYDiscrete": {"ticks": false, "labelPadding": 5},
+    "axisXQuantitative": {"grid": true},
+    "axisYQuantitative": {
+      "gridColor": "#d0d0d0",
+      "gridDash": [1, 5],
+      "gridOpacity": 0.8,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 8,
+      "titleAngle": -90,
+      "titleAlign": "center",
+      "titleBaseline": "middle"
+    },
+    "legend": {
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleFontSize": 15,
+      "titleFontWeight": 500,
+      "titleColor": "#0a0a0a",
+      "title": null,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 12
+    },
+    "title": {
+      "font": "'Besley', 'Garamond', 'Georgia'",
+      "fontSize": 20,
+      "fontWeight": 500,
+      "color": "#0a0a0a",
+      "subtitleFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#0a0a0a",
+      "anchor": "start",
+      "offset": 10
+    }
+  }
+}

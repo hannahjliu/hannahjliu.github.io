@@ -10,7 +10,7 @@
   "data": {
     "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/arrestviews.csv"
   },
-  "mark": {"type": "bar", "color": "#ff9a3c"},
+  "mark": {"type": "bar", "color": "#155263"},
   "encoding": {
     "x": {
       "field": "characteristic",
