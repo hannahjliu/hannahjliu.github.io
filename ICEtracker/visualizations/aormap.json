@@ -48,7 +48,7 @@
       "lookup": "aor_nam",
       "from": {
         "data": {
-          "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/visualizations/ice-aor-shp.json",
+          "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/visualizations/ice-aor-shp1.json",
           "format": {"feature": "ice-aor-shp", "type": "topojson"}
         },
         "key": "properties.aor_nam"
@@ -57,7 +57,7 @@
     }
   ],
   "projection": {"type": "albersUsa"},
-  "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
+  "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.6},
   "encoding": {
     "shape": {"field": "geo", "type": "geojson"},
     "color": {

@@ -2,7 +2,9 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Comparing Daily Arrest Averages of Trump 1.0 and 2.0",
   "title": {
-    "text": "Daily ICE Arrest Averages",
+    "text": {"expr": "'Daily ICE Arrest Averages (' + AORParam +')'"},
+
+    
     "subtitle": "The chart shows the seven-day rolling average of the number of daily ICE administrative arrests."
   },
   "data": {

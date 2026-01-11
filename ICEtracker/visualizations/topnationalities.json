@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Top countries by arrests in 2025",
+  "description": "Top countries by arrests under Trump 2.0",
   "data": {
     "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICEtracker/data/topcountryarrests2025.csv"
   },
