@@ -4,41 +4,44 @@
   "height": 300,
   "title": {
     "text": "ICE Arrests by Area of Responsibility",
-    "subtitle": {"expr": "'From ' + timeFormat(datetime(year(startDate), month(startDate)), '%B %Y') + ' to ' + timeFormat(datetime(year(endDate), month(endDate)), '%B %Y')"}
+    "subtitle": {
+      "expr": "'From ' + timeFormat(datetime(year(startDate), month(startDate), date(startDate)), '%b %d, %Y') + ' to ' + timeFormat(datetime(year(endDate), month(endDate), date(endDate)), '%b %d, %Y')"
+    }
   },
   "params": [
     {
       "name": "startDate",
-      "value": "2025-02",
+      "value": "2025-01-20",
       "bind": {
-        "input": "month",
-        "name": "Start Month:"
+        "input": "date",
+        "name": "Start Date:",
+        "min": "2023-09-01",
+        "max": "2025-10-16"
       }
     },
     {
       "name": "endDate",
-      "value": "2025-10",
+      "value": "2025-10-15",
       "bind": {
-        "input": "month",
-        "name": "End Month:"
+        "input": "date",
+        "name": "End Date:",
+        "min": "2023-09-01",
+        "max": "2025-10-16"
       }
     }
   ],
   "data": {
-    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICEtracker/data/aor_2025_months.csv",
-    "format": {"type": "csv"}
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICEtracker/data/dailyarrests2025aor.csv",
+    "format": {"type": "csv", "parse": {"Apprehension Date": "date"}}
   },
   "transform": [
     {
       "calculate": "datum.aor_nam == 'St. Paul' ? 'St Paul' : datum.aor_nam",
       "as": "aor_nam"
     },
+    {"calculate": "toNumber(datum.arrests)", "as": "arrestsNum"},
     {
-      "calculate": "toNumber(datum.arrests)",
-      "as": "arrestsNum"
-    },
-    {
-      "filter": "datum['Apprehension MonthYear'] >= startDate && datum['Apprehension MonthYear'] <= endDate"
+      "filter": "datum['Apprehension Date'] >= datetime(year(startDate), month(startDate), date(startDate)) && datum['Apprehension Date'] <= datetime(year(endDate), month(endDate), date(endDate))"
     },
     {
       "aggregate": [{"op": "sum", "field": "arrestsNum", "as": "totalArrests"}],
@@ -67,8 +70,17 @@
       "title": "Arrests"
     },
     "tooltip": [
-      {"field": "aor_nam", "title": "Area of Responsibility", "type": "nominal"},
-      {"field": "totalArrests", "title": "Arrests", "type": "quantitative", "format": ","}
+      {
+        "field": "aor_nam",
+        "title": "Area of Responsibility",
+        "type": "nominal"
+      },
+      {
+        "field": "totalArrests",
+        "title": "Arrests",
+        "type": "quantitative",
+        "format": ","
+      }
     ]
   },
   "config": {
