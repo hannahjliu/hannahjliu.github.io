@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
-
+    <meta property="og:image" content="images/trackermeta.png" />
     <style>
         /* ===== COLORS & FONTS ===== */
         :root {
@@ -352,7 +352,8 @@
     <div class="by-the-numbers">
         <div class="numbers-header">
             <h2>By the Numbers</h2>
-            <p style="color: rgba(255,255,255,0.9); margin: 0;">Select a region and date range to view ICE enforcement statistics
+            <p style="color: rgba(255,255,255,0.9); margin: 0;">Select a region and date range to view ICE enforcement
+                statistics
             </p>
         </div>
 
@@ -481,7 +482,8 @@
                             <p>Fields on crime are missing from 2025 arrest data, while AOR is absent from 2025
                                 detention data. I joined these files using shared unique identifiers.
                                 <br /><br />
-                                I scraped the National Crime Information Center (NCIC) violent crime code manual from <a href="https://secure.ssa.gov/poms.nsf/lnx/0202613900#a1">here</a>.
+                                I scraped the National Crime Information Center (NCIC) violent crime code manual from <a
+                                    href="https://secure.ssa.gov/poms.nsf/lnx/0202613900#a1">here</a>.
                             </p>
                         </div>
                     </div>
@@ -495,21 +497,23 @@
             <div class="section" id="demographics">
                 <figure id="arrestviews"></figure>
             </div>
-    
+
 
             <div class="section" id="data">
                 <div class="global-data-box">
                     <h3>About the Data</h3>
                     <p> The ICE arrest and detention data were obtained through
-                        a Freedom of Information Act (FOIA) request by the <a href ="https://deportationdata.org">Deportation Data Project</a>. The 2025 data
+                        a Freedom of Information Act (FOIA) request by the <a
+                            href="https://deportationdata.org">Deportation Data Project</a>. The 2025 data
                         include administrative arrests from September 2023 through
                         mid-October 2025. The raw data files are too large to be kept in the GitHub repository, but can
                         be
                         downloaded from the <a href="https://deportationdata.org/data/ice.html">website</a>.
                         <br /><br />
                         I used Python (pandas, BeautifulSoup) to clean data and Vega-Lite to
-                        create the charts in this project. All my workbooks and .json files can be found in the 
-                        <a href ="https://github.com/hannahjliu/hannahjliu.github.io/tree/main/ICEtracker">repository</a>.
+                        create the charts in this project. All my workbooks and .json files can be found in the
+                        <a
+                            href="https://github.com/hannahjliu/hannahjliu.github.io/tree/main/ICEtracker">repository</a>.
 
                     </p>
                 </div>
@@ -523,20 +527,20 @@
         © 2025 Hannah Liu
     </footer>
 
-<script>
+    <script>
         // Global variable to store the full dataset
         let arrestData = [];
 
         // Load CSV data on page load
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             Papa.parse('ICEtracker/data/individualdatatrump2.csv', {
                 download: true,
                 header: true,
-                complete: function(results) {
+                complete: function (results) {
                     arrestData = results.data;
                     updateStats();
                 },
-                error: function(error) {
+                error: function (error) {
                     console.error('Error loading data:', error);
                     document.getElementById('totalArrests').textContent = 'Error';
                     document.getElementById('noCriminal').textContent = 'Error';
