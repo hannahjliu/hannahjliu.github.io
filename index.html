@@ -247,6 +247,14 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             animation: slideUp 0.8s ease-out 0.5s backwards;
+            cursor: pointer;
+            text-decoration: none !important;
+            color: inherit;
+            display: block;
+        }
+        
+        .preview-card:hover {
+            text-decoration: none !important;
         }
 
         .preview-card:nth-child(2) {
@@ -260,31 +268,19 @@
 
         .preview-card h2 {
             margin-bottom: 1rem;
-            text-align: center
+            text-align: center;
+            color: var(--neutral-dark);
         }
 
         .preview-card p {
             margin-bottom: 1.5rem;
+            color: var(--neutral-gray);
         }
 
-        .card-link {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--second-color);
-            color: var(--white);
+        .preview-card img {
+            width: 100%;
             border-radius: 8px;
-            font-weight: 500;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .card-link:hover {
-            opacity: 1;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.3);
-        }
-
-        .preview-card:nth-child(2) .card-link {
-            background-color: var(--third-color);
+            margin-bottom: 0;
         }
 
         footer {
@@ -297,8 +293,6 @@
         footer p {
             font-size: 0.875rem;
         }
-
-
 
         @media (max-width: 768px) {
             h1 {
@@ -321,7 +315,6 @@
                 grid-template-columns: 1fr;
                 padding: 2rem 0;
             }
-
 
             .preview-card {
                 padding: 2rem;
@@ -352,42 +345,32 @@
 
     <div class="container">
         <div class="cards-grid">
-            <div class="preview-card">
+            <a href="https://hannahjliu.github.io/ICEtracker" class="preview-card">
                 <h2>Tracking ICE Under Trump 2.0</h2>
                 <p>
                     Interactive tools to track Immigration and Customs Enforcement (ICE) under the second Trump
                     Administration.
                 </p>
-                <img src="images/datatool.png" alt="Data Tool Preview"
-                    style="width:100%; border-radius:8px; margin-bottom:1rem;">
-                <a href="https://hannahjliu.github.io/ICEtracker" class="card-link"> View Data Tool →</a>
-            </div>
-            <div class="preview-card">
+                <img src="images/datatool.png" alt="Data Tool Preview">
+            </a>
+            <a href="https://hannahjliu.github.io/examiningmassdeportation" class="preview-card">
                 <h2>Examining a new era of mass deportation</h2>
                 <p>
                     How different is immigration policy in Trump 2.0? I did an exploratory analysis of individual-level
                     ICE data to evaluate changes in volume of arrests, geographic
                     targeting, demographic composition, and criminal backgrounds of those arrested.
                 </p>
-                <img src="images/projectpreview.png" alt="Project Preview"
-                    style="width:100%; border-radius:8px; margin-bottom:1rem;">
-                <a href="https://hannahjliu.github.io/examiningmassdeportation" class="card-link">View Project →</a>
-            </div>
-            <div class="preview-card">
+                <img src="images/projectpreview.png" alt="Project Preview">
+            </a>
+            <a href="https://hannahjliu.github.io/portfolio" class="preview-card">
                 <h2>PP434: Automated Data Visualization for Policymaking Portfolio</h2>
-                <img src="images/portfoliopreview.png" alt="Portfolio Preview"
-                    style="width:100%; border-radius:8px; margin-bottom:1rem;">
-                <a href="https://hannahjliu.github.io/portfolio" class="card-link">View Portfolio →</a>
-            </div>
-            <div class="preview-card">
+                <img src="images/portfoliopreview.png" alt="Portfolio Preview">
+            </a>
+            <a href="https://hannahjliu.github.io/MoMoC" class="preview-card">
                 <h2>The Museum of Modern Chart</h2>
                 <p>Welcome to the MoMoC, a gallery of modern art recreated in Vega-Lite. Admission is free.</p>
-                <img src="images/momocpreview.png" alt="MoMoC Preview"
-                    style="width:100%; border-radius:8px; margin-bottom:1rem;">
-                <a href="https://hannahjliu.github.io/MoMoC" class="card-link">Enter Gallery →</a>
-            </div>
-
-
+                <img src="images/momocpreview.png" alt="MoMoC Preview">
+            </a>
         </div>
     </div>
 
