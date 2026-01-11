@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
 
     <style>
         /* ===== COLORS & FONTS ===== */
@@ -49,6 +50,102 @@
             color: var(--neutral-gray);
         }
 
+        /* ===== BY THE NUMBERS ===== */
+        .by-the-numbers {
+            background: linear-gradient(135deg, #6ac3ed 0%, #ff6f3c 100%);
+            padding: 2.5rem 2rem;
+            margin: 0 auto 2rem;
+            max-width: 1200px;
+            border-radius: 0px;
+        }
+
+        .numbers-header {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .numbers-header h2 {
+            font-family: 'Besley', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .date-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .date-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .date-input-group label {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .date-input-group select {
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .update-btn {
+            padding: 0.6rem 1.5rem;
+            background-color: #ffc93c;
+            color: var(--neutral-dark);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: auto;
+            transition: transform 0.2s ease;
+        }
+
+        .update-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--neutral-gray);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-family: 'Besley', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--first-color);
+        }
+
         /* ===== PAGE LAYOUT ===== */
         .layout {
             display: flex;
@@ -69,13 +166,11 @@
         .sidebar-nav {
             display: flex;
             flex-direction: column;
-            /* vertical list */
             gap: 0.75rem
         }
 
         .sidebar-nav a {
             display: block;
-            /* ensures vertical stacking */
             text-decoration: none;
             color: var(--neutral-dark);
             border-left: 2px solid transparent;
@@ -106,12 +201,6 @@
 
         .section:nth-of-type(even) {
             background-color: #f7f7f7;
-        }
-
-        .section-title {
-            font-family: 'Besley', serif;
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
         }
 
         figure {
@@ -212,6 +301,25 @@
             .hero h3 {
                 font-size: 1rem;
             }
+
+            .date-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -235,7 +343,90 @@
     <div class="hero">
         <div class="container">
             <h1>Tracking ICE Under Trump 2.0</h1>
-            <h3>A data tool to track Immigration and Customs Enforcement (ICE) under the second Trump Administration. Data available through mid-October 2025.</h3>
+            <h3>A data tool to track Immigration and Customs Enforcement (ICE) under the second Trump Administration.
+                Data available through mid-October 2025.</h3>
+        </div>
+    </div>
+
+    <!-- BY THE NUMBERS SECTION -->
+    <div class="by-the-numbers">
+        <div class="numbers-header">
+            <h2>By the Numbers</h2>
+            <p style="color: rgba(255,255,255,0.9); margin: 0;">Select a date range to view ICE enforcement statistics
+            </p>
+        </div>
+
+        <div class="date-controls">
+
+            <div class="date-input-group">
+                <label for="aorFilter">Area of Responsibility</label>
+                <select id="aorFilter">
+                    <option value="all">All Regions</option>
+                    <option value="Atlanta">Atlanta</option>
+                    <option value="Baltimore">Baltimore</option>
+                    <option value="Boston">Boston</option>
+                    <option value="Buffalo">Buffalo</option>
+                    <option value="Chicago">Chicago</option>
+                    <option value="Dallas">Dallas</option>
+                    <option value="Denver">Denver</option>
+                    <option value="Detroit">Detroit</option>
+                    <option value="El Paso">El Paso</option>
+                    <option value="HQ">HQ</option>
+                    <option value="Houston">Houston</option>
+                    <option value="Los Angeles">Los Angeles</option>
+                    <option value="Miami">Miami</option>
+                    <option value="New Orleans">New Orleans</option>
+                    <option value="New York City">New York City</option>
+                    <option value="Newark">Newark</option>
+                    <option value="Philadelphia">Philadelphia</option>
+                    <option value="Phoenix">Phoenix</option>
+                    <option value="Salt Lake City">Salt Lake City</option>
+                    <option value="San Antonio">San Antonio</option>
+                    <option value="San Diego">San Diego</option>
+                    <option value="San Francisco">San Francisco</option>
+                    <option value="Seattle">Seattle</option>
+                    <option value="St. Paul">St. Paul</option>
+                    <option value="Washington">Washington</option>
+                </select>
+            </div>
+            <div class="date-input-group">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" value="2025-01-20" min="2025-01-20" max="2025-10-15">
+
+            </div>
+            <div class="date-input-group">
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" value="2025-10-15" min="2025-01-20" max="2025-10-15">
+            </div>
+            
+            <button class="update-btn" onclick="updateStats()">Update</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Arrests</div>
+                <div class="stat-value" id="totalArrests">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Percent with No Criminal Record</div>
+                <div class="stat-value" id="noCriminal">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Average Daily Rate of Arrests</div>
+                <div class="stat-value" id="dailyRate">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Children Under 18 Arrested</div>
+                <div class="stat-value" id="childrenCount">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Age of Youngest Arrested</div>
+                <div class="stat-value" id="youngestAge">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Age of Oldest Arrested</div>
+                <div class="stat-value" id="oldestAge">Loading...</div>
+            </div>
         </div>
     </div>
 
@@ -260,45 +451,42 @@
 
             <div class="section" id="aor-map">
                 <figure id="aormap"></figure>
-               <div class="data-notes">
-                <div class="data-notes-header" onclick="toggleNotes(2)">
-                    <h3 class="data-notes-title">Notes for replication</h3>
-                    <span class="data-notes-arrow" id="arrow2">▼</span>
-                </div>
-                <div class="data-notes-content" id="notes2">
-                    <div class="data-notes-text">
-                        <p>The shapefiles for the Area of Responsibility (AOR) map are from the
-                            <a href="https://deportationdata.org/data/processed/ice-offices.html">Deportation Data
-                                Project</a>. I used <a href="mapshaper.org">mapshaper</a> to simplify and convert them
-                            to TopoJSONs.
-                        </p>
+                <div class="data-notes">
+                    <div class="data-notes-header" onclick="toggleNotes(2)">
+                        <h3 class="data-notes-title">Notes for replication</h3>
+                        <span class="data-notes-arrow" id="arrow2">▼</span>
+                    </div>
+                    <div class="data-notes-content" id="notes2">
+                        <div class="data-notes-text">
+                            <p>The shapefiles for the Area of Responsibility (AOR) map are from the
+                                <a href="https://deportationdata.org/data/processed/ice-offices.html">Deportation Data
+                                    Project</a>. I used <a href="mapshaper.org">mapshaper</a> to simplify and convert
+                                them
+                                to TopoJSONs.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
 
             <div class="section" id="by-crim-record">
                 <figure id="areachart"></figure>
 
-                 <div class="data-notes">
-                <div class="data-notes-header" onclick="toggleNotes(4)">
-                    <h3 class="data-notes-title">Notes for replication</h3>
-                    <span class="data-notes-arrow" id="arrow4">▼</span>
-                </div>
-                <div class="data-notes-content" id="notes4">
-                    <div class="data-notes-text">
-                        <p>Fields on crime are missing from 2025 arrest data, while AOR is absent from 2025 detention
-                            data. I joined these files using shared unique identifiers.
-                            <br /><br />
-                            I <a
-                                href="https://drive.google.com/file/d/12ulQlhI0T2KWX9xT6vRgbmBE8jo9T_Q4/view?usp=sharing">scraped</a>
-                            the violent crime code manual from the <a
-                                href="https://www.ojp.gov/ncjrs/virtual-library/abstracts/national-crime-information-center-ncic-code-manual-second-edition">NCIC
-                                website</a>.
-                        </p>
+                <div class="data-notes">
+                    <div class="data-notes-header" onclick="toggleNotes(4)">
+                        <h3 class="data-notes-title">Notes for replication</h3>
+                        <span class="data-notes-arrow" id="arrow4">▼</span>
+                    </div>
+                    <div class="data-notes-content" id="notes4">
+                        <div class="data-notes-text">
+                            <p>Fields on crime are missing from 2025 arrest data, while AOR is absent from 2025
+                                detention data. I joined these files using shared unique identifiers.
+                                <br /><br />
+                                I scraped the violent crime code manual from the NCIC website.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
 
             <div class="section" id="nationalities">
@@ -308,14 +496,14 @@
             <div class="section" id="demographics">
                 <figure id="arrestviews"></figure>
             </div>
-             <div class="data-notes">
+            <div class="data-notes">
                 <div class="data-notes-header" onclick="toggleNotes(3)">
                     <h3 class="data-notes-title">Notes for replication</h3>
                     <span class="data-notes-arrow" id="arrow3">▼</span>
                 </div>
                 <div class="data-notes-content" id="notes3">
                     <div class="data-notes-text">
-                        <p>I removed entries that had “Unknown” listed for gender (~6000) and missing values for birth
+                        <p>I removed entries that had "Unknown" listed for gender (~6000) and missing values for birth
                             year (1). </p>
                     </div>
                 </div>
@@ -325,15 +513,17 @@
                 <div class="global-data-box">
                     <h3>About the Data</h3>
                     <p> The ICE arrest and detention data were obtained through
-                    a Freedom of Information Act (FOIA) request by the Deportation Data Project. The 2025 data include administrative arrests from September 2023 through
-                    mid-October 2025. The raw data files are too large to be kept in the GitHub repository, but can be
-                    downloaded from the <a href="https://deportationdata.org/data/ice.html">website</a>.
-                    <br /><br />
-                    I used Python (pandas, numpy, BeautifulSoup) to clean data and Vega-Lite to
-                    create the charts in this project. All my workbooks and .json files can be found in the <a
-                        href="https://github.com/hannahjliu/hannahjliu.github.io">repository</a>.
-                   
-</p>
+                        a Freedom of Information Act (FOIA) request by the Deportation Data Project. The 2025 data
+                        include administrative arrests from September 2023 through
+                        mid-October 2025. The raw data files are too large to be kept in the GitHub repository, but can
+                        be
+                        downloaded from the <a href="https://deportationdata.org/data/ice.html">website</a>.
+                        <br /><br />
+                        I used Python (pandas, numpy, BeautifulSoup) to clean data and Vega-Lite to
+                        create the charts in this project. All my workbooks and .json files can be found in the
+                        repository.
+
+                    </p>
                 </div>
             </div>
 
@@ -346,6 +536,105 @@
     </footer>
 
     <script>
+        // Global variable to store the full dataset
+        let arrestData = [];
+
+        // Load CSV data on page load
+        window.addEventListener('load', function () {
+            Papa.parse('ICEtracker/data/individualdatatrump2.csv', {
+                download: true,
+                header: true,
+                complete: function (results) {
+                    console.log('CSV loaded successfully');
+                    console.log('Total rows:', results.data.length);
+                    console.log('First row sample:', results.data[0]);
+                    console.log('Column names:', Object.keys(results.data[0] || {}));
+                    arrestData = results.data;
+                    updateStats(); // Initial stats calculation
+                },
+                error: function (error) {
+                    console.error('Error loading data:', error);
+                    document.getElementById('totalArrests').textContent = 'Error';
+                    document.getElementById('noCriminal').textContent = 'Error';
+                    document.getElementById('dailyRate').textContent = 'Error';
+                    document.getElementById('childrenCount').textContent = 'Error';
+                    document.getElementById('youngestAge').textContent = 'Error';
+                    document.getElementById('oldestAge').textContent = 'Error';
+                }
+            });
+        });
+
+        function updateStats() {
+            console.log('updateStats called, data length:', arrestData.length);
+
+            if (arrestData.length === 0) {
+                console.log('Data not loaded yet');
+                return;
+            }
+
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            const selectedAOR = document.getElementById('aorFilter').value;
+
+            console.log('Date range:', startDate, 'to', endDate);
+            console.log('Selected AOR:', selectedAOR);
+            console.log('First row aor_nam value:', arrestData[0]['aor_nam']);
+            console.log('Sample of unique AOR values:', [...new Set(arrestData.slice(0, 1000).map(r => r['aor_nam']))].slice(0, 10));
+
+            // Filter data by date range and AOR
+            const filteredData = arrestData.filter(row => {
+                const arrestDate = new Date(row['Apprehension Date']);
+                const dateMatch = arrestDate >= startDate && arrestDate <= endDate;
+                const aorMatch = selectedAOR === 'all' || row['aor_nam'] === selectedAOR;
+                return dateMatch && aorMatch;
+            });
+
+            console.log('Filtered data length:', filteredData.length);
+            console.log('Sample AOR values from first 5 rows:', filteredData.slice(0, 5).map(r => r['aor_nam']));
+
+            // Calculate statistics
+            const totalArrests = filteredData.length;
+            const noCriminal = filteredData.filter(row =>
+                row['Apprehension Criminality'] === 'No Criminal Charges'
+            ).length;
+            const noCriminalPercent = totalArrests > 0 ? Math.round((noCriminal / totalArrests) * 100) : 0;
+
+            const daysDiff = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+            const dailyRate = Math.round(totalArrests / daysDiff);
+
+            // Calculate ages
+            const currentYear = endDate.getFullYear();
+            let youngestAge = Infinity;
+            let oldestAge = -Infinity;
+            let childrenCount = 0;
+
+            filteredData.forEach(row => {
+                const birthYear = parseInt(row['Birth Year']);
+                if (birthYear) {
+                    const age = currentYear - birthYear;
+                    if (age >= 0 && age <= 120) {
+                        if (age < youngestAge) youngestAge = age;
+                        if (age > oldestAge) oldestAge = age;
+                        if (age < 18) childrenCount++;
+                    }
+                }
+            });
+
+            // Handle case where no valid ages were found
+            if (youngestAge === Infinity) youngestAge = 'N/A';
+            if (oldestAge === -Infinity) oldestAge = 'N/A';
+
+            console.log('Stats calculated:', { totalArrests, noCriminalPercent, dailyRate, childrenCount, youngestAge, oldestAge });
+
+            // Update display
+            document.getElementById('totalArrests').textContent = totalArrests.toLocaleString();
+            document.getElementById('noCriminal').textContent = noCriminalPercent + '%';
+            document.getElementById('dailyRate').textContent = dailyRate.toLocaleString();
+            document.getElementById('childrenCount').textContent = childrenCount.toLocaleString();
+            document.getElementById('youngestAge').textContent = youngestAge;
+            document.getElementById('oldestAge').textContent = oldestAge;
+        }
+
         function toggleNotes(id) {
             const content = document.getElementById('notes' + id);
             const arrow = document.getElementById('arrow' + id);
