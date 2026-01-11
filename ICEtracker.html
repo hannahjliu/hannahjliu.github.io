@@ -495,18 +495,7 @@
             <div class="section" id="demographics">
                 <figure id="arrestviews"></figure>
             </div>
-            <div class="data-notes">
-                <div class="data-notes-header" onclick="toggleNotes(3)">
-                    <h3 class="data-notes-title">Notes for replication</h3>
-                    <span class="data-notes-arrow" id="arrow3">▼</span>
-                </div>
-                <div class="data-notes-content" id="notes3">
-                    <div class="data-notes-text">
-                        <p>I removed entries that had "Unknown" listed for gender (~6000) and missing values for birth
-                            year (1). </p>
-                    </div>
-                </div>
-            </div>
+    
 
             <div class="section" id="data">
                 <div class="global-data-box">
@@ -518,7 +507,7 @@
                         be
                         downloaded from the <a href="https://deportationdata.org/data/ice.html">website</a>.
                         <br /><br />
-                        I used Python (pandas, numpy, BeautifulSoup) to clean data and Vega-Lite to
+                        I used Python (pandas, BeautifulSoup) to clean data and Vega-Lite to
                         create the charts in this project. All my workbooks and .json files can be found in the 
                         <a href ="https://github.com/hannahjliu/hannahjliu.github.io/tree/main/ICEtracker"></a>repository</a>.
 
@@ -534,24 +523,20 @@
         © 2025 Hannah Liu
     </footer>
 
-    <script>
+<script>
         // Global variable to store the full dataset
         let arrestData = [];
 
         // Load CSV data on page load
-        window.addEventListener('load', function () {
+        window.addEventListener('load', function() {
             Papa.parse('ICEtracker/data/individualdatatrump2.csv', {
                 download: true,
                 header: true,
-                complete: function (results) {
-                    console.log('CSV loaded successfully');
-                    console.log('Total rows:', results.data.length);
-                    console.log('First row sample:', results.data[0]);
-                    console.log('Column names:', Object.keys(results.data[0] || {}));
+                complete: function(results) {
                     arrestData = results.data;
-                    updateStats(); // Initial stats calculation
+                    updateStats();
                 },
-                error: function (error) {
+                error: function(error) {
                     console.error('Error loading data:', error);
                     document.getElementById('totalArrests').textContent = 'Error';
                     document.getElementById('noCriminal').textContent = 'Error';
@@ -564,20 +549,13 @@
         });
 
         function updateStats() {
-            console.log('updateStats called, data length:', arrestData.length);
-
             if (arrestData.length === 0) {
-                console.log('Data not loaded yet');
                 return;
             }
-            document.getElementById('startDate').addEventListener('change', updateStats);
-            document.getElementById('endDate').addEventListener('change', updateStats);
-            document.getElementById('aorFilter').addEventListener('change', updateStats);
 
             const startDate = new Date(document.getElementById('startDate').value);
             const endDate = new Date(document.getElementById('endDate').value);
             const selectedAOR = document.getElementById('aorFilter').value;
-
 
             // Filter data by date range and AOR
             const filteredData = arrestData.filter(row => {
@@ -586,9 +564,6 @@
                 const aorMatch = selectedAOR === 'all' || row['aor_nam'] === selectedAOR;
                 return dateMatch && aorMatch;
             });
-
-            console.log('Filtered data length:', filteredData.length);
-            console.log('Sample AOR values from first 5 rows:', filteredData.slice(0, 5).map(r => r['aor_nam']));
 
             // Calculate statistics
             const totalArrests = filteredData.length;
@@ -600,21 +575,17 @@
             const daysDiff = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
             const dailyRate = Math.round(totalArrests / daysDiff);
 
-            // Calculate ages
-            const currentYear = endDate.getFullYear();
+            // Calculate ages using the Age column directly
             let youngestAge = Infinity;
             let oldestAge = -Infinity;
             let childrenCount = 0;
 
             filteredData.forEach(row => {
-                const birthYear = parseInt(row['Birth Year']);
-                if (birthYear) {
-                    const age = currentYear - birthYear;
-                    if (age >= 0 && age <= 120) {
-                        if (age < youngestAge) youngestAge = age;
-                        if (age > oldestAge) oldestAge = age;
-                        if (age < 18) childrenCount++;
-                    }
+                const age = parseFloat(row['Age']);
+                if (!isNaN(age) && age >= 0 && age <= 120) {
+                    if (age < youngestAge) youngestAge = age;
+                    if (age > oldestAge) oldestAge = age;
+                    if (age < 18) childrenCount++;
                 }
             });
 
@@ -630,6 +601,11 @@
             document.getElementById('youngestAge').textContent = youngestAge;
             document.getElementById('oldestAge').textContent = oldestAge;
         }
+
+        // Auto-update when any filter changes
+        document.getElementById('startDate').addEventListener('change', updateStats);
+        document.getElementById('endDate').addEventListener('change', updateStats);
+        document.getElementById('aorFilter').addEventListener('change', updateStats);
 
         function toggleNotes(id) {
             const content = document.getElementById('notes' + id);
