@@ -14,6 +14,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
     <meta property="og:image" content="images/trackermeta.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ICE Tracker" />
+    <meta name="twitter:image" content="images/trackermeta.png" />
     <style>
         /* ===== COLORS & FONTS ===== */
         :root {
@@ -508,7 +512,8 @@
                         include administrative arrests from September 2023 through
                         mid-October 2025. The raw data files are too large to be kept in the GitHub repository, but can
                         be
-                        downloaded from the <a href="https://deportationdata.org/data/ice.html">website</a>.
+                        downloaded from the <a href="https://deportationdata.org/data/ice.html">website</a>. I cleaned
+                        for duplicates on the 'duplicate_likely' field in the processed data.
                         <br /><br />
                         I used Python (pandas, BeautifulSoup) to clean data and Vega-Lite to
                         create the charts in this project. All my workbooks and .json files can be found in the
