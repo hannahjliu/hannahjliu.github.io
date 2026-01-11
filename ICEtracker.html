@@ -352,7 +352,7 @@
     <div class="by-the-numbers">
         <div class="numbers-header">
             <h2>By the Numbers</h2>
-            <p style="color: rgba(255,255,255,0.9); margin: 0;">Select a date range to view ICE enforcement statistics
+            <p style="color: rgba(255,255,255,0.9); margin: 0;">Select a region and date range to view ICE enforcement statistics
             </p>
         </div>
 
@@ -398,8 +398,7 @@
                 <label for="endDate">End Date</label>
                 <input type="date" id="endDate" value="2025-10-15" min="2025-01-20" max="2025-10-15">
             </div>
-            
-            <button class="update-btn" onclick="updateStats()">Update</button>
+
         </div>
 
         <div class="stats-grid">
@@ -571,15 +570,14 @@
                 console.log('Data not loaded yet');
                 return;
             }
+            document.getElementById('startDate').addEventListener('change', updateStats);
+            document.getElementById('endDate').addEventListener('change', updateStats);
+            document.getElementById('aorFilter').addEventListener('change', updateStats);
 
             const startDate = new Date(document.getElementById('startDate').value);
             const endDate = new Date(document.getElementById('endDate').value);
             const selectedAOR = document.getElementById('aorFilter').value;
 
-            console.log('Date range:', startDate, 'to', endDate);
-            console.log('Selected AOR:', selectedAOR);
-            console.log('First row aor_nam value:', arrestData[0]['aor_nam']);
-            console.log('Sample of unique AOR values:', [...new Set(arrestData.slice(0, 1000).map(r => r['aor_nam']))].slice(0, 10));
 
             // Filter data by date range and AOR
             const filteredData = arrestData.filter(row => {
@@ -623,8 +621,6 @@
             // Handle case where no valid ages were found
             if (youngestAge === Infinity) youngestAge = 'N/A';
             if (oldestAge === -Infinity) oldestAge = 'N/A';
-
-            console.log('Stats calculated:', { totalArrests, noCriminalPercent, dailyRate, childrenCount, youngestAge, oldestAge });
 
             // Update display
             document.getElementById('totalArrests').textContent = totalArrests.toLocaleString();
