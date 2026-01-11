@@ -14,12 +14,14 @@
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link rel="shortcut icon" type="image/png" href="images/duck.png">
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Examining a New Era of Mass Deportation" />
     <meta property="og:description" content="Comparing immigration policy between Trump 1.0 and Trump 2.0" />
     <meta property="og:url" content="https://hannahjliu.github.io/examiningmassdeportation" />
-    <meta property="og:image" content="https://dims.apnews.com/dims4/default/80fc9d7/2147483647/strip/true/crop/4902x3268+0+0/resize/1600x1066!/format/webp/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F26%2Fea%2F843bdcbda5be13fe7247e9d823ad%2F99bee98a07b94ceb81869f4a966ba315" />
+    <meta property="og:image"
+        content="https://dims.apnews.com/dims4/default/80fc9d7/2147483647/strip/true/crop/4902x3268+0+0/resize/1600x1066!/format/webp/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F26%2Fea%2F843bdcbda5be13fe7247e9d823ad%2F99bee98a07b94ceb81869f4a966ba315" />
     <style>
         .hero-image-container {
             max-width: 800px;
@@ -164,7 +166,8 @@
                 <br /><br />
                 I conducted an exploratory analysis of individual-level administrative arrest and detention data from
                 the U.S. Immigration, Customs, and Enforcement Agency (ICE), as well as recent data obtained through a
-                Freedom of Information Act request by the Deportation Data Project. This project aims to evaluate changes between Trump's first and second
+                Freedom of Information Act request by the Deportation Data Project. This project aims to evaluate
+                changes between Trump's first and second
                 administrations across four dimensions: volume of arrests, geographic targeting, demographic
                 composition, and criminal backgrounds of those arrested.
             </p>
@@ -176,11 +179,13 @@
                     mid-October 2025. The raw data files are too large to be kept in the GitHub repository, but can be
                     downloaded from the <a href="https://deportationdata.org/data/ice.html">website</a>.
                     <br /><br />
-                    I used Python (pandas, numpy, BeautifulSoup) through Colab and VSCode and Vega-Lite to clean data and
+                    I used Python (pandas, numpy, BeautifulSoup) through Colab and VSCode and Vega-Lite to clean data
+                    and
                     create the charts in this project. All my workbooks and .json files can be found in the <a
                         href="https://github.com/hannahjliu/hannahjliu.github.io">repository</a>.
                     <br /><br />
-                    I cleaned for duplicate entries by removing rows that had identical unique identifiers and dates. I also
+                    I cleaned for duplicate entries by removing rows that had identical unique identifiers and dates. I
+                    also
                     removed unknown/missing data for a number of the charts – notes for replication can be found under
                     each section.
 
@@ -196,7 +201,8 @@
                 before and after inauguration. In both administrations, daily ICE arrests immediately increased
                 post-inauguration, but the change is much more dramatic in the second administration. Moreover, whereas
                 daily arrests stayed relatively stable during the first months of Trump 1.0, daily arrests seem to trend
-                upwards in Trump 2.0. Spikes in the 2025 data correspond with major ICE operations conducted during those times, namely in the Los Angeles, Washington D.C., and Chicago areas.</p>
+                upwards in Trump 2.0. Spikes in the 2025 data correspond with major ICE operations conducted during
+                those times, namely in the Los Angeles, Washington D.C., and Chicago areas.</p>
             <figure id="Location1"></figure>
 
             <div class="data-notes">
@@ -220,7 +226,9 @@
         <div class="container">
             <h2>Venezuela enters the top five nationalities of ICE arrests</h2>
             <p>The top nationality of people arrested by ICE continues to be Mexico, but its share has decreased by 25%.
-                Absent from the top 15 in 2017, Venezuela now ranks in the top five. All four nationalities that had access to temporary protection and work authorization under the CHNV (Cuba, Haiti, Nicaragua, Venezuela) program, which Trump abruptly ended in 2025, are represented in the top 15. </p>
+                Absent from the top 15 in 2017, Venezuela now ranks in the top five. All four nationalities that had
+                access to temporary protection and work authorization under the CHNV (Cuba, Haiti, Nicaragua, Venezuela)
+                program, which Trump abruptly ended in 2025, are represented in the top 15. </p>
             <figure id="Location5"></figure>
             <figure id="Location6"></figure>
         </div>
@@ -239,7 +247,10 @@
                 <div class="data-notes-content" id="notes2">
                     <div class="data-notes-text">
                         <p>The shapefiles for the Area of Responsibility (AOR) map are from the
-                            <a href = "https://deportationdata.org/data/processed/ice-offices.html">Deportation Data Project</a>. I used <a href = "mapshaper.org">mapshaper</a> to simplify and convert them to TopoJSONs.</p>
+                            <a href="https://deportationdata.org/data/processed/ice-offices.html">Deportation Data
+                                Project</a>. I used <a href="mapshaper.org">mapshaper</a> to simplify and convert them
+                            to TopoJSONs.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -250,7 +261,9 @@
         <div class="container">
             <h2>Arrest increase is primarily comprised of people who have no criminal record</h2>
             <figure id="Location3"></figure>
-<p>Although the distribution of arrests across age groups is similar between the two administrations, the Trump Administration has arrested nearly three times the number of children. The youngest child arrested in the first months of Trump 2.0 was less than a year old. </p>
+            <p>Although the distribution of arrests across age groups is similar between the two administrations, the
+                Trump Administration has arrested nearly three times the number of children. The youngest child arrested
+                in the first months of Trump 2.0 was less than a year old. </p>
             <div class="data-notes">
                 <div class="data-notes-header" onclick="toggleNotes(3)">
                     <h3 class="data-notes-title">Notes for replication</h3>
@@ -288,7 +301,8 @@
                             shared identifier but arrest data included crime fields. Some Trump 1.0 arrests shown may
                             not have resulted in detentions.
                             <br /><br />
-                            I scaraped the National Crime Information Center Code Manual from <a href="https://secure.ssa.gov/poms.nsf/lnx/0202613900#a1">here</a>.
+                            I scaraped the National Crime Information Center Code Manual from <a
+                                href="https://secure.ssa.gov/poms.nsf/lnx/0202613900#a1">here</a>.
                         </p>
                     </div>
                 </div>
@@ -309,7 +323,9 @@
                     consideration.
                     <br /><br />
                     Despite these limitations, it is still abundantly clear from the analysis that the administration is
-                    a far cry from its claim of only arresting the "<a href ="https://x.com/DHSgov/status/1932146233079976301">worst of the worst.</a>" In fact, even though it has
+                    a far cry from its claim of only arresting the "<a
+                        href="https://x.com/DHSgov/status/1932146233079976301">worst of the worst.</a>" In fact, even
+                    though it has
                     detained nearly twice as many people in its first months, it has arrested fewer people who have
                     committed violent crimes compared to its first term. The project provides a replicable framework to
                     monitor the administration as additional data become available and as the administration's policies
