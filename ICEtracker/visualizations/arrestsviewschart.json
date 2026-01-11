@@ -7,7 +7,7 @@
   "width": 500,
   "height": 500,
   "data": {
-    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/arrestviews.csv"
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICEtracker/data/arrestviewstracker.csv"
   },
   "mark": {"type": "bar", "color": "#155263"},
   "encoding": {
