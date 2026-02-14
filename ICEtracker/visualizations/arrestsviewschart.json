@@ -2,26 +2,49 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "description": "A simple bar chart with embedded data.",
   "title": {
-    "text": "Arrests in the First 9 Months by Selected Demographic"
+    "text":{
+    "expr": "'Arrests in the First 9 Months by ' + SelectParam + ''"}
   },
   "width": 500,
   "height": 500,
   "data": {
     "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICEtracker/data/arrestviewstracker.csv"
   },
-  "mark": {"type": "bar", "color": "#155263"},
+  "mark": {
+    "type": "bar",
+    "color": "#155263"
+  },
   "encoding": {
     "x": {
       "field": "characteristic",
       "type": "nominal",
-      "axis": {"labelAngle": 0},
+      "axis": {
+        "labelAngle": 0
+      },
       "title": null
     },
-    "y": {"field": "value", "type": "quantitative", "title": "Arrests"},
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "Arrests"
+    },
     "tooltip": [
-      {"field": "characteristic", "type": "nominal", "title": "Category"},
-      {"field": "value", "type": "quantitative", "title": "Arrest Numbers"},
-      {"field": "percentage", "type": "quantitative", "format": ".1%", "title": "Percentage of Total"}
+      {
+        "field": "characteristic",
+        "type": "nominal",
+        "title": "Category"
+      },
+      {
+        "field": "value",
+        "type": "quantitative",
+        "title": "Arrest Numbers"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "format": ".1%",
+        "title": "Percentage of Total"
+      }
     ]
   },
   "params": [
@@ -30,7 +53,10 @@
       "value": "age group",
       "bind": {
         "input": "select",
-        "options": ["gender", "age group"],
+        "options": [
+          "gender",
+          "age group"
+        ],
         "name": "Select category:"
       }
     }
@@ -136,5 +162,4 @@
       "tooltip": true
     }
   }
-
 }
