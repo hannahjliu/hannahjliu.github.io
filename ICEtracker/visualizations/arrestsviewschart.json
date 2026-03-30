@@ -3,7 +3,7 @@
   "description": "A simple bar chart with embedded data.",
   "title": {
     "text":{
-    "expr": "'Arrests in the First 9 Months by ' + SelectParam + ''"}
+    "expr": "'Arrests During Trump 2.0 by ' + SelectParam + ''"}
   },
   "width": 500,
   "height": 500,
