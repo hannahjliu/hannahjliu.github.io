@@ -55,7 +55,8 @@
         "input": "select",
         "options": [
           "gender",
-          "age group"
+          "age group",
+          "criminality"
         ],
         "name": "Select category:"
       }
