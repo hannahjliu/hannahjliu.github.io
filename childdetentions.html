@@ -621,7 +621,8 @@
         <div class="container">
             <h1>Child ICE Detentions Data Explorer</h1>
             <p class="subtitle">A searchable database of ICE detentions involving minors under 18. Filter by age,
-                gender, facility, country, and date — and download filtered results as CSV. Data is available from September 12, 2022 to 
+                gender, facility, country, and date — and download filtered results as CSV. Data is available from
+                September 12, 2022 to
                 March 10, 2026.</p>
         </div>
     </div>
@@ -636,7 +637,8 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Top Facilities</div>
-                    <div class="stat-value" id="st-topfacilities" style="font-size: 0.95rem; line-height: 1.4; text-align: left;">—</div>
+                    <div class="stat-value" id="st-topfacilities"
+                        style="font-size: 0.95rem; line-height: 1.4; text-align: left;">—</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Stays Over 20 Days</div>
@@ -741,8 +743,11 @@
                             the <a href="https://deportationdata.org">Deportation Data Project</a>. This tool filters
                             for detentions of individuals under 18 years of age. Records are deduplicated on unique
                             identifier and book-in date.</p>
-                        <p>Some entries list multiple facility codes separated by semicolons — the facility filter uses
-                            a "contains" match so selecting any one code will surface all records that include it. Age is calculated by birth year and book-in date.</p>
+                        <p>Some entries list multiple facility codes separated by semicolons; selecting any one code
+                            will return all records containing it. Age is calculated from birth year and book-in date.
+                            Stay length is the difference between book-out and book-in dates. Where no book-out date
+                            exists, the child is assumed to still be detained, and stay length is calculated through
+                            March 10, 2026.</p>
                         <p>Raw data can be downloaded from <a
                                 href="https://deportationdata.org/data/ice.html">deportationdata.org</a>.</p>
                     </div>
@@ -941,7 +946,7 @@
                 }
             });
             $('st-total').textContent = filtered.length.toLocaleString();
-            
+
             // Top 3 facilities
             var topFacs = Object.keys(facilityCount).sort(function (a, b) {
                 return facilityCount[b] - facilityCount[a];
@@ -950,10 +955,10 @@
                 topFacs.map(function (f, i) { return (i + 1) + '. ' + f; }).join('<br>') :
                 '—';
             $('st-topfacilities').innerHTML = facText;
-            
+
             // Stays over 20 days
             $('st-over20days').textContent = over20Days.toLocaleString();
-            
+
             // Average stay
             if (stays.length) {
                 var sum = 0; stays.forEach(function (s) { sum += s; });
