@@ -621,8 +621,8 @@
         <div class="container">
             <h1>Child ICE Detentions Data Explorer</h1>
             <p class="subtitle">A searchable database of ICE detentions involving minors under 18. Filter by age,
-                gender, facility, country, and date — and download filtered results as CSV. Data is available up to
-                mid-March 2026.</p>
+                gender, facility, country, and date — and download filtered results as CSV. Data is available from September 12, 2022 to 
+                March 10, 2026.</p>
         </div>
     </div>
 
@@ -779,7 +779,7 @@
         const btnClear = $('btn-clear'), btnDownload = $('btn-download'), recCount = $('record-count');
 
         // ── LOAD CSV ──
-        Papa.parse("childdetentions/data/childdetentions.csv", {
+        Papa.parse("childdetentions/data/allchilddetentions.csv", {
             download: true,
             header: true,
             dynamicTyping: true,
