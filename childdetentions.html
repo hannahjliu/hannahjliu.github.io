@@ -635,17 +635,16 @@
                     <div class="stat-value" id="st-total">—</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Youngest</div>
-                    <div class="stat-value" id="st-youngest">—</div>
-                    <div class="stat-sub">years old</div>
+                    <div class="stat-label">Top Facilities</div>
+                    <div class="stat-value" id="st-topfacilities" style="font-size: 0.95rem; line-height: 1.4; text-align: left;">—</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Oldest</div>
-                    <div class="stat-value" id="st-oldest">—</div>
-                    <div class="stat-sub">years old</div>
+                    <div class="stat-label">Stays Over 20 Days</div>
+                    <div class="stat-value" id="st-over20days">—</div>
+                    <div class="stat-sub">in violation of the Flores Settlement Agreement</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Avg Stay</div>
+                    <div class="stat-label">Average Stay</div>
                     <div class="stat-value" id="st-avgstay">—</div>
                     <div class="stat-sub">days</div>
                 </div>
@@ -924,14 +923,38 @@
         }
 
         function renderStats() {
-            var ages = [], stays = [];
+            var stays = [];
+            var facilityCount = {};
+            var over20Days = 0;
             filtered.forEach(function (r) {
-                if (r.age != null) ages.push(r.age);
-                if (r.stay_days != null) stays.push(r.stay_days);
+                if (r.stay_days != null) {
+                    stays.push(r.stay_days);
+                    if (r.stay_days > 20) over20Days++;
+                }
+                if (r.facility) {
+                    r.facility.split(';').forEach(function (f) {
+                        var t = f.trim();
+                        if (t) {
+                            facilityCount[t] = (facilityCount[t] || 0) + 1;
+                        }
+                    });
+                }
             });
             $('st-total').textContent = filtered.length.toLocaleString();
-            $('st-youngest').textContent = ages.length ? Math.min.apply(null, ages) : '—';
-            $('st-oldest').textContent = ages.length ? Math.max.apply(null, ages) : '—';
+            
+            // Top 3 facilities
+            var topFacs = Object.keys(facilityCount).sort(function (a, b) {
+                return facilityCount[b] - facilityCount[a];
+            }).slice(0, 3);
+            var facText = topFacs.length ?
+                topFacs.map(function (f, i) { return (i + 1) + '. ' + f; }).join('<br>') :
+                '—';
+            $('st-topfacilities').innerHTML = facText;
+            
+            // Stays over 20 days
+            $('st-over20days').textContent = over20Days.toLocaleString();
+            
+            // Average stay
             if (stays.length) {
                 var sum = 0; stays.forEach(function (s) { sum += s; });
                 $('st-avgstay').textContent = (sum / stays.length).toFixed(1);
