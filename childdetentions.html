@@ -680,10 +680,10 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Country</label>
-                        <select id="f-country">
-                            <option value="">All</option>
+                        <label>Country (multi-select)</label>
+                        <select id="f-country" multiple size="4" style="min-height: 90px;">
                         </select>
+                        <span style="font-size: 0.68rem; color: var(--neutral-gray); margin-top: 2px;">Ctrl/Cmd+click to select multiple · <a href="#" id="clear-country" style="font-weight: 600;">Clear</a></span>
                     </div>
                     <div class="filter-group">
                         <label>Book-In Date Start</label>
@@ -744,9 +744,10 @@
                             identifier and book-in date.</p>
                         <p>Some entries list multiple facility codes separated by semicolons; selecting any one code
                             will return all records containing it. Age is calculated from birth year and book-in date.
-                            Stay length is the difference between book-out and book-in dates. Where no book-out date
+                            Stay length is the difference between stay book-out and stay book-in dates. Where no
+                            book-out date or departure date
                             exists, the child is assumed to still be detained, and stay length is calculated through
-                            March 10, 2026.</p>
+                            March 11, 2026.</p>
                         <p>Raw data can be downloaded from <a
                                 href="https://deportationdata.org/data/ice.html">deportationdata.org</a>.</p>
                     </div>
@@ -845,7 +846,7 @@
             allData.forEach(function (d) { if (d.citizenship) countrySet.add(d.citizenship); });
             var countries = Array.from(countrySet).sort();
             fFacility.innerHTML = '<option value="">All</option>' + facs.map(function (f) { return '<option>' + f + '</option>'; }).join('');
-            fCountry.innerHTML = '<option value="">All</option>' + countries.map(function (c) { return '<option>' + c + '</option>'; }).join('');
+            fCountry.innerHTML = countries.map(function (c) { return '<option value="' + c + '">' + c + '</option>'; }).join('');
         }
 
         function bindEvents() {
@@ -865,7 +866,13 @@
             pgPrev.addEventListener('click', function () { if (page > 0) { page--; renderTable(); } });
             pgNext.addEventListener('click', function () { if ((page + 1) * PER_PAGE < filtered.length) { page++; renderTable(); } });
             btnClear.addEventListener('click', clearFilters);
-            btnDownload.addEventListener('click', downloadCSV);
+           btnDownload.addEventListener('click', downloadCSV);
+            document.getElementById('clear-country').addEventListener('click', function(e) {
+                e.preventDefault();
+                Array.from(fCountry.options).forEach(function(o) { o.selected = false; });
+                page = 0;
+                applyFilters();
+            });
         }
 
         function updateTrackFill() {
@@ -887,7 +894,8 @@
         function clearFilters() {
             ageMinEl.value = 0; ageMaxEl.value = 17;
             ageDisplay.textContent = 'Ages 0 – 17';
-            fGender.value = ''; fFacility.value = ''; fCountry.value = '';
+            fGender.value = ''; fFacility.value = '';
+            Array.from(fCountry.options).forEach(function (o) { o.selected = false; });
             fStart.value = DEFAULT_START;
             fEnd.value = DEFAULT_END;
             updateTrackFill();
@@ -898,14 +906,15 @@
         function applyFilters() {
             var lo = Math.min(+ageMinEl.value, +ageMaxEl.value);
             var hi = Math.max(+ageMinEl.value, +ageMaxEl.value);
-            var g = fGender.value, fac = fFacility.value, cty = fCountry.value;
+            var g = fGender.value, fac = fFacility.value;
+            var selectedCountries = Array.from(fCountry.selectedOptions).map(function (o) { return o.value; });
             var sd = fStart.value, ed = fEnd.value;
 
             filtered = allData.filter(function (r) {
                 if (r.age < lo || r.age > hi) return false;
                 if (g && r.gender !== g) return false;
                 if (fac && r.facility.indexOf(fac) === -1) return false;
-                if (cty && r.citizenship !== cty) return false;
+                if (selectedCountries.length > 0 && selectedCountries.indexOf(r.citizenship) === -1) return false;
                 if (sd && r.book_in < sd) return false;
                 if (ed && r.book_in > ed) return false;
                 return true;
@@ -919,7 +928,7 @@
                 return sortDir === 'asc' ? va - vb : vb - va;
             });
 
-            var hasFilters = lo > 0 || hi < 17 || g || fac || cty || sd !== DEFAULT_START || ed !== DEFAULT_END;
+            var hasFilters = lo > 0 || hi < 17 || g || fac || selectedCountries.length > 0 || sd !== DEFAULT_START || ed !== DEFAULT_END;
             btnClear.style.display = hasFilters ? 'inline' : 'none';
 
             renderStats();
