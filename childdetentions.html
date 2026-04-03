@@ -4,13 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Child Detention Tracker</title>
+    <title>Child Detentions Data Tool</title>
+    <link rel="shortcut icon" type="image/png" href="images/duck.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Besley:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Child Detentions Data Tool" />
+    <meta property="og:url" content="https://hannahjliu.github.io/childdetentions" />
+    <meta property="og:image" content="https://hannahjliu.github.io/images/childdets.png" />
+
+
+    <meta property="twitter:type" content="article" />
+    <meta property="twitter:title" content="Child Detentions Data Tool" />
+    <meta property="twitter:url" content="https://hannahjliu.github.io/childdetentions" />
+    <meta property="twitter:image" content="https://hannahjliu.github.io/images/childdets.png" />
+
     <style>
         :root {
             --first-color: #155263;
@@ -730,7 +743,7 @@
                             for detentions of individuals under 18 years of age. Records are deduplicated on unique
                             identifier and book-in date.</p>
                         <p>Some entries list multiple facility codes separated by semicolons — the facility filter uses
-                            a "contains" match so selecting any one code will surface all records that include it.</p>
+                            a "contains" match so selecting any one code will surface all records that include it. Age is calculated by birth year and book-in date.</p>
                         <p>Raw data can be downloaded from <a
                                 href="https://deportationdata.org/data/ice.html">deportationdata.org</a>.</p>
                     </div>
