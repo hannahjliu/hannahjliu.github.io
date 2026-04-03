@@ -1,118 +1,593 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Child Detention Tracker</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Besley:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-<style>
-:root {
-  --first-color: #155263;
-  --second-color: #ff6f3c;
-  --third-color: #ff9a3c;
-  --fourth-color: #ffc93c;
-  --neutral-dark: #0a0a0a;
-  --neutral-gray: #6b6b6b;
-  --neutral-light: #fafafa;
-  --white: #ffffff;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased; line-height: 1.5;
-  color: var(--neutral-dark); background-color: #f8f8f8;
-}
-h1, h2, h3 { font-family: 'Besley', serif; }
-h1 { font-size: 2.8rem; font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
-h2 { font-size: 1.5rem; font-weight: 500; line-height: 1.2; margin-bottom: 1rem; }
-p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem; }
-a { color: var(--second-color); text-decoration: none; transition: opacity 0.2s ease; }
-a:hover { opacity: 0.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
-header { padding: 1.5rem 0; }
-nav { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-.logo { font-size: 1.25rem; font-weight: 500; color: var(--neutral-dark); font-family: 'Besley', serif; }
-.logo a { color: var(--neutral-dark); text-decoration: none; }
-.nav-links { display: flex; gap: 2rem; font-size: 1rem; }
-.nav-links a { color: var(--neutral-gray); }
-.hero { padding: 2rem 0 1.5rem; text-align: center; }
-.hero h1 { max-width: 900px; margin: 0 auto 0.5rem; }
-.subtitle { color: var(--neutral-gray); font-size: 1.1rem; line-height: 1.6; max-width: 700px; margin: 0 auto; }
-.section { padding: 2rem 0; }
-.section p { font-size: 1rem; line-height: 1.8; }
-.stats-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 2rem; }
-.stat-card { background: var(--white); border-radius: 12px; padding: 16px 20px; flex: 1 1 140px; min-width: 140px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-.stat-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--neutral-gray); margin-bottom: 2px; }
-.stat-value { font-size: 1.7rem; font-weight: 700; color: var(--neutral-dark); }
-.stat-sub { font-size: 0.75rem; color: var(--neutral-gray); }
-.filter-box { background-color: var(--white); border-radius: 12px; padding: 2rem 2.5rem; margin: 0 0 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-.filter-box h3 { font-size: 1.1rem; font-weight: 500; margin-bottom: 1.25rem; color: var(--neutral-dark); }
-.filter-row { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start; }
-.filter-group { display: flex; flex-direction: column; gap: 5px; }
-.filter-group label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--neutral-gray); }
-.filter-group select, .filter-group input[type="date"] { padding: 8px 10px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.88rem; font-family: 'Inter', sans-serif; background: #fff; min-width: 130px; }
-.filter-group select:focus, .filter-group input[type="date"]:focus { outline: none; border-color: var(--second-color); }
-.age-slider-wrap { min-width: 230px; flex: 1 1 230px; }
-.age-slider-display { font-size: 0.92rem; font-weight: 600; margin-bottom: 10px; color: var(--neutral-dark); text-align: center; }
-.dual-range { position: relative; height: 24px; display: flex; align-items: center; }
-.dual-range .track { position: absolute; left: 0; right: 0; height: 4px; background: #e0e0e0; border-radius: 2px; top: 50%; transform: translateY(-50%); }
-.dual-range .track-fill { position: absolute; height: 4px; background: var(--second-color); border-radius: 2px; top: 50%; transform: translateY(-50%); }
-.dual-range input[type="range"] { position: absolute; width: 100%; top: 0; height: 24px; margin: 0; -webkit-appearance: none; appearance: none; background: transparent; pointer-events: none; z-index: 2; }
-.dual-range input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: var(--second-color); border: 3px solid var(--white); box-shadow: 0 1px 4px rgba(0,0,0,0.3); pointer-events: auto; cursor: pointer; position: relative; z-index: 3; }
-.dual-range input[type="range"]::-moz-range-thumb { height: 16px; width: 16px; border-radius: 50%; background: var(--second-color); border: 3px solid var(--white); box-shadow: 0 1px 4px rgba(0,0,0,0.3); pointer-events: auto; cursor: pointer; }
-.dual-range input[type="range"]::-webkit-slider-runnable-track { height: 0; background: transparent; }
-.dual-range input[type="range"]::-moz-range-track { height: 0; background: transparent; }
-.range-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--neutral-gray); margin-top: 4px; }
-.btn-row { display: flex; justify-content: space-between; align-items: center; margin: 0 0 0.75rem; flex-wrap: wrap; gap: 8px; }
-.btn-clear { background: none; border: none; color: var(--second-color); font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
-.btn-clear:hover { text-decoration: underline; }
-.record-count { font-size: 0.85rem; color: var(--neutral-gray); }
-.btn-download { padding: 9px 18px; border-radius: 8px; border: none; background: var(--neutral-dark); color: #fff; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; }
-.btn-download:hover { background: #333; }
-.btn-download:disabled { background: #d1d5db; cursor: default; }
-.table-wrap { overflow-x: auto; border-radius: 12px; margin-top: 0.5rem; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-thead th { padding: 11px 14px; text-align: left; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--neutral-gray); background: #fafafa; border-bottom: 1px solid #eee; cursor: pointer; user-select: none; white-space: nowrap; }
-thead th:hover { color: var(--neutral-dark); }
-tbody td { padding: 10px 14px; border-bottom: 1px solid #f3f4f6; }
-tbody tr:hover { background: #fafafa; }
-.age-badge { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 0.78rem; font-weight: 600; }
-.age-0-5 { background: #fef2f2; color: #991b1b; }
-.age-6-11 { background: #fffbeb; color: #92400e; }
-.age-12-14 { background: #f0fdf4; color: #166534; }
-.age-15-17 { background: #eff6ff; color: #1e40af; }
-.empty-row td { text-align: center; color: #9ca3af; padding: 2.5rem; }
-.pagination { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 1.25rem; }
-.pagination button { padding: 6px 16px; border-radius: 6px; border: 1px solid #ddd; background: #fff; font-size: 0.82rem; cursor: pointer; font-family: 'Inter', sans-serif; color: #374151; transition: border-color 0.2s; }
-.pagination button:hover:not(:disabled) { border-color: var(--second-color); }
-.pagination button:disabled { color: #d1d5db; cursor: default; }
-.pagination span { font-size: 0.82rem; color: var(--neutral-gray); }
-.data-notes { background-color: var(--white); border-radius: 12px; margin-top: 2.5rem; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-.data-notes-header { padding: 1rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
-.data-notes-header:hover { background-color: #fafafa; }
-.data-notes-title { font-family: 'Besley', serif; font-size: 1.05rem; font-weight: 500; }
-.data-notes-arrow { font-size: 1.1rem; transition: transform 0.3s ease; color: var(--neutral-gray); }
-.data-notes-arrow.open { transform: rotate(180deg); }
-.data-notes-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-.data-notes-content.open { max-height: 500px; }
-.data-notes-text { padding: 0 1.5rem 1.5rem; }
-.data-notes-text p { font-size: 0.95rem; margin-bottom: 0.5rem; line-height: 1.7; }
-footer { padding: 2.5rem 0; border-top: 1px solid #e5e5e5; text-align: center; }
-footer p { font-size: 0.875rem; color: var(--neutral-gray); }
-/* Loading state */
-.loading-msg { text-align: center; padding: 3rem; color: var(--neutral-gray); font-size: 0.95rem; }
-@media (max-width: 768px) {
-  h1 { font-size: 2.2rem; }
-  .container, nav { padding: 0 1.5rem; }
-  .filter-box { padding: 1.5rem; }
-  .filter-row { gap: 14px; }
-  .age-slider-wrap { min-width: 100%; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Detention Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Besley:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        :root {
+            --first-color: #155263;
+            --second-color: #ff6f3c;
+            --third-color: #ff9a3c;
+            --fourth-color: #ffc93c;
+            --neutral-dark: #0a0a0a;
+            --neutral-gray: #6b6b6b;
+            --neutral-light: #fafafa;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+            color: var(--neutral-dark);
+            background-color: #f8f8f8;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Besley', serif;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--second-color);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        a:hover {
+            opacity: 0.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            padding: 1.5rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--neutral-dark);
+            font-family: 'Besley', serif;
+        }
+
+        .logo a {
+            color: var(--neutral-dark);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 1rem;
+        }
+
+        .nav-links a {
+            color: var(--neutral-gray);
+        }
+
+        .hero {
+            padding: 2rem 0 1.5rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            margin: 0 auto 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--neutral-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 2rem 0;
+        }
+
+        .section p {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 3px;
+            padding: 16px 20px;
+            flex: 1 1 140px;
+            min-width: 140px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--neutral-gray);
+            margin-bottom: 2px;
+        }
+
+        .stat-value {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--neutral-dark);
+        }
+
+        .stat-sub {
+            font-size: 0.75rem;
+            color: var(--neutral-gray);
+        }
+
+        .filter-box {
+            background-color: var(--white);
+            border-radius: 3px;
+            padding: 2rem 2.5rem;
+            margin: 0 0 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-box h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+            color: var(--neutral-dark);
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: flex-start;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-group label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--neutral-gray);
+        }
+
+        .filter-group select,
+        .filter-group input[type="date"] {
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 0.88rem;
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            min-width: 130px;
+        }
+
+        .filter-group select:focus,
+        .filter-group input[type="date"]:focus {
+            outline: none;
+            border-color: var(--second-color);
+        }
+
+        .age-slider-wrap {
+            min-width: 230px;
+            flex: 1 1 230px;
+        }
+
+        .age-slider-display {
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--neutral-dark);
+            text-align: center;
+        }
+
+        .dual-range {
+            position: relative;
+            height: 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        .dual-range .track {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dual-range .track-fill {
+            position: absolute;
+            height: 4px;
+            background: var(--second-color);
+            border-radius: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dual-range input[type="range"] {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            height: 24px;
+            margin: 0;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .dual-range input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: var(--second-color);
+            border: 3px solid var(--white);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+            pointer-events: auto;
+            cursor: pointer;
+            position: relative;
+            z-index: 3;
+        }
+
+        .dual-range input[type="range"]::-moz-range-thumb {
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: var(--second-color);
+            border: 3px solid var(--white);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .dual-range input[type="range"]::-webkit-slider-runnable-track {
+            height: 0;
+            background: transparent;
+        }
+
+        .dual-range input[type="range"]::-moz-range-track {
+            height: 0;
+            background: transparent;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--neutral-gray);
+            margin-top: 4px;
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 0 0.75rem;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .btn-clear {
+            background: none;
+            border: none;
+            color: var(--second-color);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-clear:hover {
+            text-decoration: underline;
+        }
+
+        .record-count {
+            font-size: 0.85rem;
+            color: var(--neutral-gray);
+        }
+
+        .btn-download {
+            padding: 9px 18px;
+            border-radius: 8px;
+            border: none;
+            background: var(--neutral-dark);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.2s;
+        }
+
+        .btn-download:hover {
+            background: #333;
+        }
+
+        .btn-download:disabled {
+            background: #d1d5db;
+            cursor: default;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        thead th {
+            padding: 11px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--neutral-gray);
+            background: #fafafa;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        thead th:hover {
+            color: var(--neutral-dark);
+        }
+
+        tbody td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        tbody tr:hover {
+            background: #fafafa;
+        }
+
+        .age-badge {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .age-0-5 {
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        .age-6-11 {
+            background: #fffbeb;
+            color: #92400e;
+        }
+
+        .age-12-14 {
+            background: #f0fdf4;
+            color: #166534;
+        }
+
+        .age-15-17 {
+            background: #eff6ff;
+            color: #1e40af;
+        }
+
+        .empty-row td {
+            text-align: center;
+            color: #9ca3af;
+            padding: 2.5rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 1.25rem;
+        }
+
+        .pagination button {
+            padding: 6px 16px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background: #fff;
+            font-size: 0.82rem;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            color: #374151;
+            transition: border-color 0.2s;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            border-color: var(--second-color);
+        }
+
+        .pagination button:disabled {
+            color: #d1d5db;
+            cursor: default;
+        }
+
+        .pagination span {
+            font-size: 0.82rem;
+            color: var(--neutral-gray);
+        }
+
+        .data-notes {
+            background-color: var(--white);
+            border-radius: 12px;
+            margin-top: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .data-notes-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .data-notes-header:hover {
+            background-color: #fafafa;
+        }
+
+        .data-notes-title {
+            font-family: 'Besley', serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .data-notes-arrow {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+            color: var(--neutral-gray);
+        }
+
+        .data-notes-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .data-notes-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .data-notes-content.open {
+            max-height: 500px;
+        }
+
+        .data-notes-text {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .data-notes-text p {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 2.5rem 0;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.875rem;
+            color: var(--neutral-gray);
+        }
+
+        /* Loading state */
+        .loading-msg {
+            text-align: center;
+            padding: 3rem;
+            color: var(--neutral-gray);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .container,
+            nav {
+                padding: 0 1.5rem;
+            }
+
+            .filter-box {
+                padding: 1.5rem;
+            }
+
+            .filter-row {
+                gap: 14px;
+            }
+
+            .age-slider-wrap {
+                min-width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
     <header>
@@ -129,370 +604,406 @@ footer p { font-size: 0.875rem; color: var(--neutral-gray); }
         </nav>
     </header>
 
-<div class="hero">
-  <div class="container">
-    <h1>Child ICE Detentions Data Explorer</h1>
-    <p class="subtitle">A searchable database of ICE detentions involving minors under 18. Filter by age, gender, facility, country, and date — and download filtered results as CSV. Data is available up to mid-March 2026.</p>
-  </div>
-</div>
-
-<div class="section">
-  <div class="container">
-
-    <div class="stats-row">
-      <div class="stat-card"><div class="stat-label">Total Records</div><div class="stat-value" id="st-total">—</div></div>
-      <div class="stat-card"><div class="stat-label">Youngest</div><div class="stat-value" id="st-youngest">—</div><div class="stat-sub">years old</div></div>
-      <div class="stat-card"><div class="stat-label">Oldest</div><div class="stat-value" id="st-oldest">—</div><div class="stat-sub">years old</div></div>
-      <div class="stat-card"><div class="stat-label">Avg Stay</div><div class="stat-value" id="st-avgstay">—</div><div class="stat-sub">days</div></div>
+    <div class="hero">
+        <div class="container">
+            <h1>Child ICE Detentions Data Explorer</h1>
+            <p class="subtitle">A searchable database of ICE detentions involving minors under 18. Filter by age,
+                gender, facility, country, and date — and download filtered results as CSV. Data is available up to
+                mid-March 2026.</p>
+        </div>
     </div>
 
-    <div class="filter-box">
-      <h3>Filter Data</h3>
-      <div class="filter-row">
-        <div class="filter-group age-slider-wrap">
-          <label>Age Range</label>
-          <div class="age-slider-display" id="age-display">Ages 0 – 17</div>
-          <div class="dual-range" id="dual-range">
-            <div class="track"></div>
-            <div class="track-fill" id="track-fill"></div>
-            <input type="range" id="age-min" min="0" max="17" value="0">
-            <input type="range" id="age-max" min="0" max="17" value="17">
-          </div>
-          <div class="range-labels"><span>0</span><span>17</span></div>
+    <div class="section">
+        <div class="container">
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Total Records</div>
+                    <div class="stat-value" id="st-total">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Youngest</div>
+                    <div class="stat-value" id="st-youngest">—</div>
+                    <div class="stat-sub">years old</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Oldest</div>
+                    <div class="stat-value" id="st-oldest">—</div>
+                    <div class="stat-sub">years old</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Avg Stay</div>
+                    <div class="stat-value" id="st-avgstay">—</div>
+                    <div class="stat-sub">days</div>
+                </div>
+            </div>
+
+            <div class="filter-box">
+                <h3>Filter Data</h3>
+                <div class="filter-row">
+                    <div class="filter-group age-slider-wrap">
+                        <label>Age Range</label>
+                        <div class="age-slider-display" id="age-display">Ages 0 – 17</div>
+                        <div class="dual-range" id="dual-range">
+                            <div class="track"></div>
+                            <div class="track-fill" id="track-fill"></div>
+                            <input type="range" id="age-min" min="0" max="17" value="0">
+                            <input type="range" id="age-max" min="0" max="17" value="17">
+                        </div>
+                        <div class="range-labels"><span>0</span><span>17</span></div>
+                    </div>
+                    <div class="filter-group">
+                        <label>Gender</label>
+                        <select id="f-gender">
+                            <option value="">All</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Facility (contains)</label>
+                        <select id="f-facility">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Country</label>
+                        <select id="f-country">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Start Date</label>
+                        <input type="date" id="f-start" value="2025-01-20">
+                    </div>
+                    <div class="filter-group">
+                        <label>End Date</label>
+                        <input type="date" id="f-end" value="2026-03-10">
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-row">
+                <div>
+                    <span class="record-count" id="record-count"></span>
+                    <button class="btn-clear" id="btn-clear" style="margin-left:12px;display:none;">Clear all
+                        filters</button>
+                </div>
+                <button class="btn-download" id="btn-download">↓ Download CSV</button>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-col="book_in">Date <span id="sort-book_in"></span></th>
+                            <th data-col="facility">Facility <span id="sort-facility"></span></th>
+                            <th data-col="age">Age <span id="sort-age"></span></th>
+                            <th data-col="gender">Gender <span id="sort-gender"></span></th>
+                            <th data-col="citizenship">Country <span id="sort-citizenship"></span></th>
+                            <th data-col="stay_days">Days Held <span id="sort-stay_days"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <tr class="empty-row">
+                            <td colspan="6">Loading data…</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <button id="pg-prev">← Prev</button>
+                <span id="pg-info"></span>
+                <button id="pg-next">Next →</button>
+            </div>
+
+            <div class="data-notes">
+                <div class="data-notes-header" onclick="toggleNotes(1)">
+                    <h3 class="data-notes-title">About the Data</h3>
+                    <span class="data-notes-arrow" id="arrow1">▼</span>
+                </div>
+                <div class="data-notes-content" id="notes1">
+                    <div class="data-notes-text">
+                        <p>The ICE detention data were obtained through a Freedom of Information Act (FOIA) request by
+                            the <a href="https://deportationdata.org">Deportation Data Project</a>. This tool filters
+                            for detentions of individuals under 18 years of age. Records are deduplicated on unique
+                            identifier and book-in date.</p>
+                        <p>Some entries list multiple facility codes separated by semicolons — the facility filter uses
+                            a "contains" match so selecting any one code will surface all records that include it.</p>
+                        <p>Raw data can be downloaded from <a
+                                href="https://deportationdata.org/data/ice.html">deportationdata.org</a>.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="filter-group">
-          <label>Gender</label>
-          <select id="f-gender"><option value="">All</option><option>Male</option><option>Female</option></select>
-        </div>
-        <div class="filter-group">
-          <label>Facility (contains)</label>
-          <select id="f-facility"><option value="">All</option></select>
-        </div>
-        <div class="filter-group">
-          <label>Country</label>
-          <select id="f-country"><option value="">All</option></select>
-        </div>
-        <div class="filter-group">
-          <label>Start Date</label>
-          <input type="date" id="f-start" value="2025-01-20">
-        </div>
-        <div class="filter-group">
-          <label>End Date</label>
-          <input type="date" id="f-end" value="2026-03-10">
-        </div>
-      </div>
     </div>
 
-    <div class="btn-row">
-      <div>
-        <span class="record-count" id="record-count"></span>
-        <button class="btn-clear" id="btn-clear" style="margin-left:12px;display:none;">Clear all filters</button>
-      </div>
-      <button class="btn-download" id="btn-download">↓ Download CSV</button>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th data-col="book_in">Date <span id="sort-book_in"></span></th>
-            <th data-col="facility">Facility <span id="sort-facility"></span></th>
-            <th data-col="age">Age <span id="sort-age"></span></th>
-            <th data-col="gender">Gender <span id="sort-gender"></span></th>
-            <th data-col="citizenship">Country <span id="sort-citizenship"></span></th>
-            <th data-col="stay_days">Days Held <span id="sort-stay_days"></span></th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-          <tr class="empty-row"><td colspan="6">Loading data…</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="pagination">
-      <button id="pg-prev">← Prev</button>
-      <span id="pg-info"></span>
-      <button id="pg-next">Next →</button>
-    </div>
-
-    <div class="data-notes">
-      <div class="data-notes-header" onclick="toggleNotes(1)">
-        <h3 class="data-notes-title">About the Data</h3>
-        <span class="data-notes-arrow" id="arrow1">▼</span>
-      </div>
-      <div class="data-notes-content" id="notes1">
-        <div class="data-notes-text">
-          <p>The ICE detention data were obtained through a Freedom of Information Act (FOIA) request by the <a href="https://deportationdata.org">Deportation Data Project</a>. This tool filters for detentions of individuals under 18 years of age. Records are deduplicated on unique identifier and book-in date.</p>
-          <p>Some entries list multiple facility codes separated by semicolons — the facility filter uses a "contains" match so selecting any one code will surface all records that include it.</p>
-          <p>Raw data can be downloaded from <a href="https://deportationdata.org/data/ice.html">deportationdata.org</a>.</p>
+    <footer>
+        <div class="container">
+            <p>© 2025 Hannah Liu</p>
         </div>
-      </div>
-    </div>
+    </footer>
 
-  </div>
-</div>
+    <script>
+        // ── DEFAULT DATE RANGE ──
+        const DEFAULT_START = '2025-01-20';
+        const DEFAULT_END = '2026-03-10';
 
-<footer>
-  <div class="container"><p>© 2025 Hannah Liu</p></div>
-</footer>
+        // ── STATE ──
+        let allData = [];
+        let filtered = [];
+        let sortCol = 'book_in', sortDir = 'desc', page = 0;
+        const PER_PAGE = 25;
 
-<script>
-// ── DEFAULT DATE RANGE ──
-const DEFAULT_START = '2025-01-20';
-const DEFAULT_END = '2026-03-10';
+        const $ = id => document.getElementById(id);
+        const ageMinEl = $('age-min'), ageMaxEl = $('age-max'), ageDisplay = $('age-display');
+        const trackFill = $('track-fill');
+        const fGender = $('f-gender'), fFacility = $('f-facility'), fCountry = $('f-country');
+        const fStart = $('f-start'), fEnd = $('f-end');
+        const tbody = $('tbody'), pgInfo = $('pg-info'), pgPrev = $('pg-prev'), pgNext = $('pg-next');
+        const btnClear = $('btn-clear'), btnDownload = $('btn-download'), recCount = $('record-count');
 
-// ── STATE ──
-let allData = [];
-let filtered = [];
-let sortCol = 'book_in', sortDir = 'desc', page = 0;
-const PER_PAGE = 25;
+        // ── LOAD CSV ──
+        Papa.parse("childdetentions/data/childdetentions.csv", {
+            download: true,
+            header: true,
+            dynamicTyping: true,
+            skipEmptyLines: true,
+            delimitersToGuess: [',', '\t', '|', ';'],
+            complete: function (results) {
+                allData = [];
+                results.data.forEach(function (r) {
+                    // Skip rows missing critical fields
+                    var facility = (r.detention_facility_codes_all || '').trim();
+                    var bookRaw = r.stay_book_in_date_time || '';
+                    var bookIn = typeof bookRaw === 'string' ? bookRaw.slice(0, 10) : String(bookRaw).slice(0, 10);
+                    var gender = (r.gender || '').trim();
+                    var citizenship = (r.citizenship_country || '').trim();
+                    var age = r.Age;
+                    var stayDays = r.stay_days;
 
-const $ = id => document.getElementById(id);
-const ageMinEl = $('age-min'), ageMaxEl = $('age-max'), ageDisplay = $('age-display');
-const trackFill = $('track-fill');
-const fGender = $('f-gender'), fFacility = $('f-facility'), fCountry = $('f-country');
-const fStart = $('f-start'), fEnd = $('f-end');
-const tbody = $('tbody'), pgInfo = $('pg-info'), pgPrev = $('pg-prev'), pgNext = $('pg-next');
-const btnClear = $('btn-clear'), btnDownload = $('btn-download'), recCount = $('record-count');
-
-// ── LOAD CSV ──
-Papa.parse("childdetentions/data/childdetentions.csv", {
-  download: true,
-  header: true,
-  dynamicTyping: true,
-  skipEmptyLines: true,
-  delimitersToGuess: [',', '\t', '|', ';'],
-  complete: function(results) {
-    allData = [];
-    results.data.forEach(function(r) {
-      // Skip rows missing critical fields
-      var facility = (r.detention_facility_codes_all || '').trim();
-      var bookRaw = r.stay_book_in_date_time || '';
-      var bookIn = typeof bookRaw === 'string' ? bookRaw.slice(0, 10) : String(bookRaw).slice(0, 10);
-      var gender = (r.gender || '').trim();
-      var citizenship = (r.citizenship_country || '').trim();
-      var age = r.Age;
-      var stayDays = r.stay_days;
-
-      // Only include if we have at least a date and age
-      if (bookIn.length >= 10 && age != null && !isNaN(age)) {
-        allData.push({
-          facility: facility,
-          book_in: bookIn,
-          gender: gender,
-          birth_year: r.birth_year,
-          citizenship: citizenship,
-          age: age,
-          stay_days: (stayDays != null && !isNaN(stayDays)) ? stayDays : null
+                    // Only include if we have at least a date and age
+                    if (bookIn.length >= 10 && age != null && !isNaN(age)) {
+                        allData.push({
+                            facility: facility,
+                            book_in: bookIn,
+                            gender: gender,
+                            birth_year: r.birth_year,
+                            citizenship: citizenship,
+                            age: age,
+                            stay_days: (stayDays != null && !isNaN(stayDays)) ? stayDays : null
+                        });
+                    }
+                });
+                init();
+            },
+            error: function (err) {
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Error loading data: ' + err.message + '</td></tr>';
+            }
         });
-      }
-    });
-    init();
-  },
-  error: function(err) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Error loading data: ' + err.message + '</td></tr>';
-  }
-});
 
-function init() {
-  populateDropdowns();
-  bindEvents();
-  // Set default dates
-  fStart.value = DEFAULT_START;
-  fEnd.value = DEFAULT_END;
-  updateTrackFill();
-  applyFilters();
-}
+        function init() {
+            populateDropdowns();
+            bindEvents();
+            // Set default dates
+            fStart.value = DEFAULT_START;
+            fEnd.value = DEFAULT_END;
+            updateTrackFill();
+            applyFilters();
+        }
 
-function populateDropdowns() {
-  var facSet = new Set();
-  allData.forEach(function(d) {
-    if (d.facility) {
-      d.facility.split(';').forEach(function(f) {
-        var t = f.trim();
-        if (t) facSet.add(t);
-      });
-    }
-  });
-  var facs = Array.from(facSet).sort();
-  var countrySet = new Set();
-  allData.forEach(function(d) { if (d.citizenship) countrySet.add(d.citizenship); });
-  var countries = Array.from(countrySet).sort();
-  fFacility.innerHTML = '<option value="">All</option>' + facs.map(function(f) { return '<option>' + f + '</option>'; }).join('');
-  fCountry.innerHTML = '<option value="">All</option>' + countries.map(function(c) { return '<option>' + c + '</option>'; }).join('');
-}
+        function populateDropdowns() {
+            var facSet = new Set();
+            allData.forEach(function (d) {
+                if (d.facility) {
+                    d.facility.split(';').forEach(function (f) {
+                        var t = f.trim();
+                        if (t) facSet.add(t);
+                    });
+                }
+            });
+            var facs = Array.from(facSet).sort();
+            var countrySet = new Set();
+            allData.forEach(function (d) { if (d.citizenship) countrySet.add(d.citizenship); });
+            var countries = Array.from(countrySet).sort();
+            fFacility.innerHTML = '<option value="">All</option>' + facs.map(function (f) { return '<option>' + f + '</option>'; }).join('');
+            fCountry.innerHTML = '<option value="">All</option>' + countries.map(function (c) { return '<option>' + c + '</option>'; }).join('');
+        }
 
-function bindEvents() {
-  ageMinEl.addEventListener('input', onAgeSlider);
-  ageMaxEl.addEventListener('input', onAgeSlider);
-  [fGender, fFacility, fCountry, fStart, fEnd].forEach(function(el) {
-    el.addEventListener('change', function() { page = 0; applyFilters(); });
-  });
-  document.querySelectorAll('thead th').forEach(function(th) {
-    th.addEventListener('click', function() {
-      var col = th.dataset.col;
-      if (sortCol === col) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
-      else { sortCol = col; sortDir = 'asc'; }
-      applyFilters();
-    });
-  });
-  pgPrev.addEventListener('click', function() { if (page > 0) { page--; renderTable(); } });
-  pgNext.addEventListener('click', function() { if ((page + 1) * PER_PAGE < filtered.length) { page++; renderTable(); } });
-  btnClear.addEventListener('click', clearFilters);
-  btnDownload.addEventListener('click', downloadCSV);
-}
+        function bindEvents() {
+            ageMinEl.addEventListener('input', onAgeSlider);
+            ageMaxEl.addEventListener('input', onAgeSlider);
+            [fGender, fFacility, fCountry, fStart, fEnd].forEach(function (el) {
+                el.addEventListener('change', function () { page = 0; applyFilters(); });
+            });
+            document.querySelectorAll('thead th').forEach(function (th) {
+                th.addEventListener('click', function () {
+                    var col = th.dataset.col;
+                    if (sortCol === col) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+                    else { sortCol = col; sortDir = 'asc'; }
+                    applyFilters();
+                });
+            });
+            pgPrev.addEventListener('click', function () { if (page > 0) { page--; renderTable(); } });
+            pgNext.addEventListener('click', function () { if ((page + 1) * PER_PAGE < filtered.length) { page++; renderTable(); } });
+            btnClear.addEventListener('click', clearFilters);
+            btnDownload.addEventListener('click', downloadCSV);
+        }
 
-function updateTrackFill() {
-  var lo = Math.min(+ageMinEl.value, +ageMaxEl.value);
-  var hi = Math.max(+ageMinEl.value, +ageMaxEl.value);
-  trackFill.style.left = (lo / 17) * 100 + '%';
-  trackFill.style.width = ((hi - lo) / 17) * 100 + '%';
-}
+        function updateTrackFill() {
+            var lo = Math.min(+ageMinEl.value, +ageMaxEl.value);
+            var hi = Math.max(+ageMinEl.value, +ageMaxEl.value);
+            trackFill.style.left = (lo / 17) * 100 + '%';
+            trackFill.style.width = ((hi - lo) / 17) * 100 + '%';
+        }
 
-function onAgeSlider() {
-  var lo = +ageMinEl.value, hi = +ageMaxEl.value;
-  if (lo > hi) { var tmp = lo; lo = hi; hi = tmp; ageMinEl.value = lo; ageMaxEl.value = hi; }
-  ageDisplay.textContent = 'Ages ' + lo + ' – ' + hi;
-  updateTrackFill();
-  page = 0;
-  applyFilters();
-}
+        function onAgeSlider() {
+            var lo = +ageMinEl.value, hi = +ageMaxEl.value;
+            if (lo > hi) { var tmp = lo; lo = hi; hi = tmp; ageMinEl.value = lo; ageMaxEl.value = hi; }
+            ageDisplay.textContent = 'Ages ' + lo + ' – ' + hi;
+            updateTrackFill();
+            page = 0;
+            applyFilters();
+        }
 
-function clearFilters() {
-  ageMinEl.value = 0; ageMaxEl.value = 17;
-  ageDisplay.textContent = 'Ages 0 – 17';
-  fGender.value = ''; fFacility.value = ''; fCountry.value = '';
-  fStart.value = DEFAULT_START;
-  fEnd.value = DEFAULT_END;
-  updateTrackFill();
-  page = 0;
-  applyFilters();
-}
+        function clearFilters() {
+            ageMinEl.value = 0; ageMaxEl.value = 17;
+            ageDisplay.textContent = 'Ages 0 – 17';
+            fGender.value = ''; fFacility.value = ''; fCountry.value = '';
+            fStart.value = DEFAULT_START;
+            fEnd.value = DEFAULT_END;
+            updateTrackFill();
+            page = 0;
+            applyFilters();
+        }
 
-function applyFilters() {
-  var lo = Math.min(+ageMinEl.value, +ageMaxEl.value);
-  var hi = Math.max(+ageMinEl.value, +ageMaxEl.value);
-  var g = fGender.value, fac = fFacility.value, cty = fCountry.value;
-  var sd = fStart.value, ed = fEnd.value;
+        function applyFilters() {
+            var lo = Math.min(+ageMinEl.value, +ageMaxEl.value);
+            var hi = Math.max(+ageMinEl.value, +ageMaxEl.value);
+            var g = fGender.value, fac = fFacility.value, cty = fCountry.value;
+            var sd = fStart.value, ed = fEnd.value;
 
-  filtered = allData.filter(function(r) {
-    if (r.age < lo || r.age > hi) return false;
-    if (g && r.gender !== g) return false;
-    if (fac && r.facility.indexOf(fac) === -1) return false;
-    if (cty && r.citizenship !== cty) return false;
-    if (sd && r.book_in < sd) return false;
-    if (ed && r.book_in > ed) return false;
-    return true;
-  });
+            filtered = allData.filter(function (r) {
+                if (r.age < lo || r.age > hi) return false;
+                if (g && r.gender !== g) return false;
+                if (fac && r.facility.indexOf(fac) === -1) return false;
+                if (cty && r.citizenship !== cty) return false;
+                if (sd && r.book_in < sd) return false;
+                if (ed && r.book_in > ed) return false;
+                return true;
+            });
 
-  filtered.sort(function(a, b) {
-    var va = a[sortCol], vb = b[sortCol];
-    if (va == null) return 1;
-    if (vb == null) return -1;
-    if (typeof va === 'string') return sortDir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
-    return sortDir === 'asc' ? va - vb : vb - va;
-  });
+            filtered.sort(function (a, b) {
+                var va = a[sortCol], vb = b[sortCol];
+                if (va == null) return 1;
+                if (vb == null) return -1;
+                if (typeof va === 'string') return sortDir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+                return sortDir === 'asc' ? va - vb : vb - va;
+            });
 
-  var hasFilters = lo > 0 || hi < 17 || g || fac || cty || sd !== DEFAULT_START || ed !== DEFAULT_END;
-  btnClear.style.display = hasFilters ? 'inline' : 'none';
+            var hasFilters = lo > 0 || hi < 17 || g || fac || cty || sd !== DEFAULT_START || ed !== DEFAULT_END;
+            btnClear.style.display = hasFilters ? 'inline' : 'none';
 
-  renderStats();
-  renderTable();
-}
+            renderStats();
+            renderTable();
+        }
 
-function renderStats() {
-  var ages = [], stays = [];
-  filtered.forEach(function(r) {
-    if (r.age != null) ages.push(r.age);
-    if (r.stay_days != null) stays.push(r.stay_days);
-  });
-  $('st-total').textContent = filtered.length.toLocaleString();
-  $('st-youngest').textContent = ages.length ? Math.min.apply(null, ages) : '—';
-  $('st-oldest').textContent = ages.length ? Math.max.apply(null, ages) : '—';
-  if (stays.length) {
-    var sum = 0; stays.forEach(function(s) { sum += s; });
-    $('st-avgstay').textContent = (sum / stays.length).toFixed(1);
-  } else {
-    $('st-avgstay').textContent = '—';
-  }
-}
+        function renderStats() {
+            var ages = [], stays = [];
+            filtered.forEach(function (r) {
+                if (r.age != null) ages.push(r.age);
+                if (r.stay_days != null) stays.push(r.stay_days);
+            });
+            $('st-total').textContent = filtered.length.toLocaleString();
+            $('st-youngest').textContent = ages.length ? Math.min.apply(null, ages) : '—';
+            $('st-oldest').textContent = ages.length ? Math.max.apply(null, ages) : '—';
+            if (stays.length) {
+                var sum = 0; stays.forEach(function (s) { sum += s; });
+                $('st-avgstay').textContent = (sum / stays.length).toFixed(1);
+            } else {
+                $('st-avgstay').textContent = '—';
+            }
+        }
 
-function ageClass(a) {
-  if (a <= 5) return 'age-0-5';
-  if (a <= 11) return 'age-6-11';
-  if (a <= 14) return 'age-12-14';
-  return 'age-15-17';
-}
+        function ageClass(a) {
+            if (a <= 5) return 'age-0-5';
+            if (a <= 11) return 'age-6-11';
+            if (a <= 14) return 'age-12-14';
+            return 'age-15-17';
+        }
 
-function esc(s) {
-  if (!s) return '';
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+        function esc(s) {
+            if (!s) return '';
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
 
-function renderTable() {
-  var total = filtered.length;
-  var totalPages = Math.ceil(total / PER_PAGE) || 1;
-  if (page >= totalPages) page = totalPages - 1;
-  var start = page * PER_PAGE;
-  var slice = filtered.slice(start, start + PER_PAGE);
+        function renderTable() {
+            var total = filtered.length;
+            var totalPages = Math.ceil(total / PER_PAGE) || 1;
+            if (page >= totalPages) page = totalPages - 1;
+            var start = page * PER_PAGE;
+            var slice = filtered.slice(start, start + PER_PAGE);
 
-  recCount.textContent = 'Showing ' + total.toLocaleString() + ' record' + (total !== 1 ? 's' : '');
+            recCount.textContent = 'Showing ' + total.toLocaleString() + ' record' + (total !== 1 ? 's' : '');
 
-  document.querySelectorAll('thead th').forEach(function(th) {
-    var s = th.querySelector('span');
-    if (s) s.textContent = th.dataset.col === sortCol ? (sortDir === 'asc' ? ' ↑' : ' ↓') : '';
-  });
+            document.querySelectorAll('thead th').forEach(function (th) {
+                var s = th.querySelector('span');
+                if (s) s.textContent = th.dataset.col === sortCol ? (sortDir === 'asc' ? ' ↑' : ' ↓') : '';
+            });
 
-  if (!slice.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="6">No records match your filters.</td></tr>';
-  } else {
-    var html = '';
-    slice.forEach(function(r) {
-      html += '<tr>' +
-        '<td>' + esc(r.book_in) + '</td>' +
-        '<td>' + esc(r.facility) + '</td>' +
-        '<td><span class="age-badge ' + ageClass(r.age) + '">' + r.age + '</span></td>' +
-        '<td>' + esc(r.gender) + '</td>' +
-        '<td>' + esc(r.citizenship) + '</td>' +
-        '<td>' + (r.stay_days != null ? r.stay_days : '—') + '</td>' +
-        '</tr>';
-    });
-    tbody.innerHTML = html;
-  }
+            if (!slice.length) {
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="6">No records match your filters.</td></tr>';
+            } else {
+                var html = '';
+                slice.forEach(function (r) {
+                    html += '<tr>' +
+                        '<td>' + esc(r.book_in) + '</td>' +
+                        '<td>' + esc(r.facility) + '</td>' +
+                        '<td><span class="age-badge ' + ageClass(r.age) + '">' + r.age + '</span></td>' +
+                        '<td>' + esc(r.gender) + '</td>' +
+                        '<td>' + esc(r.citizenship) + '</td>' +
+                        '<td>' + (r.stay_days != null ? r.stay_days : '—') + '</td>' +
+                        '</tr>';
+                });
+                tbody.innerHTML = html;
+            }
 
-  pgInfo.textContent = 'Page ' + (page + 1) + ' of ' + totalPages;
-  pgPrev.disabled = page === 0;
-  pgNext.disabled = page >= totalPages - 1;
-  btnDownload.disabled = !total;
-}
+            pgInfo.textContent = 'Page ' + (page + 1) + ' of ' + totalPages;
+            pgPrev.disabled = page === 0;
+            pgNext.disabled = page >= totalPages - 1;
+            btnDownload.disabled = !total;
+        }
 
-function downloadCSV() {
-  if (!filtered.length) return;
-  var headers = ['book_in','facility','age','gender','citizenship','stay_days'];
-  var labels = ['Date','Facility','Age','Gender','Country','Days Held'];
-  var rows = [];
-  filtered.forEach(function(r) {
-    var row = headers.map(function(h) {
-      var v = r[h]; if (v == null) v = '';
-      if (typeof v === 'string' && (v.indexOf(',') !== -1 || v.indexOf('"') !== -1)) {
-        return '"' + v.replace(/"/g, '""') + '"';
-      }
-      return v;
-    });
-    rows.push(row.join(','));
-  });
-  var csv = labels.join(',') + '\n' + rows.join('\n');
-  var blob = new Blob([csv], { type: 'text/csv' });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  a.href = url; a.download = 'child_detentions_filtered.csv'; a.click();
-  URL.revokeObjectURL(url);
-}
+        function downloadCSV() {
+            if (!filtered.length) return;
+            var headers = ['book_in', 'facility', 'age', 'gender', 'citizenship', 'stay_days'];
+            var labels = ['Date', 'Facility', 'Age', 'Gender', 'Country', 'Days Held'];
+            var rows = [];
+            filtered.forEach(function (r) {
+                var row = headers.map(function (h) {
+                    var v = r[h]; if (v == null) v = '';
+                    if (typeof v === 'string' && (v.indexOf(',') !== -1 || v.indexOf('"') !== -1)) {
+                        return '"' + v.replace(/"/g, '""') + '"';
+                    }
+                    return v;
+                });
+                rows.push(row.join(','));
+            });
+            var csv = labels.join(',') + '\n' + rows.join('\n');
+            var blob = new Blob([csv], { type: 'text/csv' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url; a.download = 'child_detentions_filtered.csv'; a.click();
+            URL.revokeObjectURL(url);
+        }
 
-function toggleNotes(id) {
-  document.getElementById('notes' + id).classList.toggle('open');
-  document.getElementById('arrow' + id).classList.toggle('open');
-}
-</script>
+        function toggleNotes(id) {
+            document.getElementById('notes' + id).classList.toggle('open');
+            document.getElementById('arrow' + id).classList.toggle('open');
+        }
+    </script>
 </body>
+
 </html>
