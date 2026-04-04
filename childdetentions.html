@@ -964,7 +964,7 @@
             filtered.forEach(function (r) {
                 if (r.stay_days != null) {
                     stays.push(r.stay_days);
-                    if (r.stay_days > 20) over20Days++;
+                    if (r.stay_days >= 20) over20Days++;
                 }
                 if (r.facility) {
                     r.facility.split(';').forEach(function (f) {
