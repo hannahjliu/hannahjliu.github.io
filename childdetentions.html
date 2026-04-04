@@ -18,7 +18,6 @@
     <meta property="og:url" content="https://hannahjliu.github.io/childdetentions" />
     <meta property="og:image" content="https://hannahjliu.github.io/images/childdets.png" />
 
-
     <meta property="twitter:type" content="article" />
     <meta property="twitter:title" content="Child Detentions Data Tool" />
     <meta property="twitter:url" content="https://hannahjliu.github.io/childdetentions" />
@@ -432,14 +431,6 @@
             background: #fafafa;
         }
 
-        .age-badge {
-            display: inline-block;
-            padding: 2px 9px;
-            border-radius: 10px;
-            font-size: 0.78rem;
-            font-weight: 600;
-        }
-
         .empty-row td {
             text-align: center;
             color: #9ca3af;
@@ -482,7 +473,7 @@
 
         .data-notes {
             background-color: var(--white);
-            border-radius:3px;
+            border-radius: 3px;
             margin-top: 2.5rem;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -548,7 +539,6 @@
             color: var(--neutral-gray);
         }
 
-        /* Loading state */
         .loading-msg {
             text-align: center;
             padding: 3rem;
@@ -663,7 +653,26 @@
                         <label>Country (multi-select)</label>
                         <select id="f-country" multiple size="4" style="min-height: 90px;">
                         </select>
-                        <span style="font-size: 0.68rem; color: var(--neutral-gray); margin-top: 2px;">Ctrl/Cmd+click to select multiple · <a href="#" id="clear-country" style="font-weight: 600;">Clear</a></span>
+                        <span style="font-size: 0.68rem; color: var(--neutral-gray); margin-top: 2px;">Ctrl/Cmd+click
+                            to select multiple · <a href="#" id="clear-country"
+                                style="font-weight: 600;">Clear</a></span>
+                    </div>
+                    <!-- <div class="filter-group">
+                        <label>Final Program (multi-select)</label>
+                        <select id="f-program" multiple size="4" style="min-height: 90px;">
+                        </select>
+                        <span style="font-size: 0.68rem; color: var(--neutral-gray); margin-top: 2px;">Ctrl/Cmd+click
+                            · <a href="#" id="clear-program" style="font-weight: 600;">Clear</a></span>
+                    </div> -->
+                    <div class="filter-group" style="min-width: 200px;">
+                        <label>Min Stay (days)</label>
+                        <select id="f-minstay">
+                            <option value="0">All</option>
+                            <option value="1">1+ days</option>
+                            <option value="20">20+ days</option>
+                            <option value="50">50+ days</option>
+                            <option value="100">100+ days</option>
+                        </select>
                     </div>
                     <div class="filter-group">
                         <label>Book-In Date Start</label>
@@ -711,23 +720,42 @@
                 <button id="pg-next">Next →</button>
             </div>
 
+            <!-- <div
+                style="background: var(--white); border-radius: 3px; padding: 20px 24px; margin-top: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                <h3 style="font-size: 1.05rem; font-weight: 500; margin-bottom: 1rem; font-family: 'Besley', serif;">
+                    Distribution of Stay Length</h3>
+                <div id="histogram" style="display: flex; align-items: flex-end; height: 140px; gap: 2px;"></div>
+                <div id="hist-labels" style="display: flex; gap: 2px; margin-top: 4px;"></div>
+            </div> -->
+
             <div class="data-notes">
-                <div class="data-notes-header" onclick="toggleNotes(1)">
+                <div style="padding: 1rem 1.5rem;">
                     <h3 class="data-notes-title">About the Data</h3>
-                    <span class="data-notes-arrow" id="arrow1">▼</span>
                 </div>
-                <div class="data-notes-content" id="notes1">
+                <div>
                     <div class="data-notes-text">
                         <p>The ICE detention data were obtained through a Freedom of Information Act (FOIA) request by
                             the <a href="https://deportationdata.org">Deportation Data Project</a>. This tool filters
                             for detentions of individuals under 18 years of age. Records are deduplicated on unique
-                            identifier and book-in date.</p>
-                        <p>Some entries list multiple facility codes separated by semicolons; selecting any one code
-                            will return all records containing it. Age is calculated from birth year and book-in date.
-                            Stay length is the difference between stay book-out and stay book-in dates. Where no
-                            book-out date or departure date
-                            exists, the child is assumed to still be detained, and stay length is calculated through
-                            March 11, 2026.</p>
+                            identifier and book-in date. Some entries list multiple facility codes separated by
+                            semicolons; selecting any one code will return all records containing it.</p>
+                        <p>Age is calculated from birth year and book-in date. 0 day stay length indicates that the
+                            child was in ICE custody for less than a day. </p>
+                        <p>Stay length is calculated using the stay-level book-out and book-in dates, with a correction
+                            for records where the gap between stay-level duration and actual time in ICE facilities
+                            (summed across stints) exceeds 7 days. In these cases, stint-level duration is used instead,
+                            as the gap typically reflects time in ORR custody for unaccompanied minors rather than
+                            continuous ICE detention. This correction primarily affects pre-2025 records. Results are
+                            not
+                            sensitive to the gap threshold; varying it from 7 to 14 days changes the Flores violation
+                            count by fewer than 5 records.</p>
+                        <p>Where no book-out date exists, departure date is used if available. Otherwise, the child is
+                            assumed to still be detained, and stay length is calculated through the date of the latest
+                            data release (March 2026).</p>
+                        <p>The "Final Program" field indicates which ICE enforcement program was associated with the
+                            case. Values such as "Border Patrol" and "Inspections - Land" generally indicate border
+                            apprehensions by CBP, while "ERO Criminal Alien Program" and "Fugitive Operations" generally
+                            indicate interior enforcement by ICE.</p>
                         <p>Raw data can be downloaded from <a
                                 href="https://deportationdata.org/data/ice.html">deportationdata.org</a>.</p>
                     </div>
@@ -759,6 +787,8 @@
         const trackFill = $('track-fill');
         const fGender = $('f-gender'), fFacility = $('f-facility'), fCountry = $('f-country');
         const fStart = $('f-start'), fEnd = $('f-end');
+        // const fProgram = $('f-program'), fMinStay = $('f-minstay');
+        const fMinStay = $('f-minstay');
         const tbody = $('tbody'), pgInfo = $('pg-info'), pgPrev = $('pg-prev'), pgNext = $('pg-next');
         const btnClear = $('btn-clear'), btnDownload = $('btn-download'), recCount = $('record-count');
 
@@ -772,7 +802,6 @@
             complete: function (results) {
                 allData = [];
                 results.data.forEach(function (r) {
-                    // Skip rows missing critical fields
                     var facility = (r.detention_facility_codes_all || '').trim();
                     var bookRaw = r.stay_book_in_date_time || '';
                     var bookIn = typeof bookRaw === 'string' ? bookRaw.slice(0, 10) : String(bookRaw).slice(0, 10);
@@ -781,7 +810,6 @@
                     var age = r.Age;
                     var stayDays = r.stay_days;
 
-                    // Only include if we have at least a date and age
                     if (bookIn.length >= 10 && age != null && !isNaN(age)) {
                         allData.push({
                             facility: facility,
@@ -791,6 +819,7 @@
                             citizenship: citizenship,
                             age: age,
                             stay_days: (stayDays != null && !isNaN(stayDays)) ? stayDays : null
+                            // final_program: (r.final_program || '').trim() || null
                         });
                     }
                 });
@@ -804,7 +833,6 @@
         function init() {
             populateDropdowns();
             bindEvents();
-            // Set default dates
             fStart.value = DEFAULT_START;
             fEnd.value = DEFAULT_END;
             updateTrackFill();
@@ -827,12 +855,16 @@
             var countries = Array.from(countrySet).sort();
             fFacility.innerHTML = '<option value="">All</option>' + facs.map(function (f) { return '<option>' + f + '</option>'; }).join('');
             fCountry.innerHTML = countries.map(function (c) { return '<option value="' + c + '">' + c + '</option>'; }).join('');
+            // var programSet = new Set();
+            // allData.forEach(function (d) { if (d.final_program) programSet.add(d.final_program); });
+            // var programs = Array.from(programSet).sort();
+            // fProgram.innerHTML = programs.map(function (p) { return '<option value="' + p + '">' + p + '</option>'; }).join('');
         }
 
         function bindEvents() {
             ageMinEl.addEventListener('input', onAgeSlider);
             ageMaxEl.addEventListener('input', onAgeSlider);
-            [fGender, fFacility, fCountry, fStart, fEnd].forEach(function (el) {
+            [fGender, fFacility, fCountry, /* fProgram, */ fMinStay, fStart, fEnd].forEach(function (el) {
                 el.addEventListener('change', function () { page = 0; applyFilters(); });
             });
             document.querySelectorAll('thead th').forEach(function (th) {
@@ -846,13 +878,19 @@
             pgPrev.addEventListener('click', function () { if (page > 0) { page--; renderTable(); } });
             pgNext.addEventListener('click', function () { if ((page + 1) * PER_PAGE < filtered.length) { page++; renderTable(); } });
             btnClear.addEventListener('click', clearFilters);
-           btnDownload.addEventListener('click', downloadCSV);
-            document.getElementById('clear-country').addEventListener('click', function(e) {
+            btnDownload.addEventListener('click', downloadCSV);
+            document.getElementById('clear-country').addEventListener('click', function (e) {
                 e.preventDefault();
-                Array.from(fCountry.options).forEach(function(o) { o.selected = false; });
+                Array.from(fCountry.options).forEach(function (o) { o.selected = false; });
                 page = 0;
                 applyFilters();
             });
+            // document.getElementById('clear-program').addEventListener('click', function (e) {
+            //     e.preventDefault();
+            //     Array.from(fProgram.options).forEach(function (o) { o.selected = false; });
+            //     page = 0;
+            //     applyFilters();
+            // });
         }
 
         function updateTrackFill() {
@@ -876,6 +914,8 @@
             ageDisplay.textContent = 'Ages 0 – 17';
             fGender.value = ''; fFacility.value = '';
             Array.from(fCountry.options).forEach(function (o) { o.selected = false; });
+            // Array.from(fProgram.options).forEach(function (o) { o.selected = false; });
+            fMinStay.value = '0';
             fStart.value = DEFAULT_START;
             fEnd.value = DEFAULT_END;
             updateTrackFill();
@@ -888,6 +928,8 @@
             var hi = Math.max(+ageMinEl.value, +ageMaxEl.value);
             var g = fGender.value, fac = fFacility.value;
             var selectedCountries = Array.from(fCountry.selectedOptions).map(function (o) { return o.value; });
+            // var selectedPrograms = Array.from(fProgram.selectedOptions).map(function (o) { return o.value; });
+            var minStay = +fMinStay.value;
             var sd = fStart.value, ed = fEnd.value;
 
             filtered = allData.filter(function (r) {
@@ -895,6 +937,8 @@
                 if (g && r.gender !== g) return false;
                 if (fac && r.facility.indexOf(fac) === -1) return false;
                 if (selectedCountries.length > 0 && selectedCountries.indexOf(r.citizenship) === -1) return false;
+                // if (selectedPrograms.length > 0 && selectedPrograms.indexOf(r.final_program) === -1) return false;
+                if (minStay > 0 && (r.stay_days == null || r.stay_days < minStay)) return false;
                 if (sd && r.book_in < sd) return false;
                 if (ed && r.book_in > ed) return false;
                 return true;
@@ -908,11 +952,12 @@
                 return sortDir === 'asc' ? va - vb : vb - va;
             });
 
-            var hasFilters = lo > 0 || hi < 17 || g || fac || selectedCountries.length > 0 || sd !== DEFAULT_START || ed !== DEFAULT_END;
+            var hasFilters = lo > 0 || hi < 17 || g || fac || selectedCountries.length > 0 || /* selectedPrograms.length > 0 || */ minStay > 0 || sd !== DEFAULT_START || ed !== DEFAULT_END;
             btnClear.style.display = hasFilters ? 'inline' : 'none';
 
             renderStats();
             renderTable();
+            //renderHistogram();
         }
 
         function renderStats() {
@@ -935,29 +980,22 @@
             });
             $('st-total').textContent = filtered.length.toLocaleString();
 
-            // Top 3 facilities
             var topFacs = Object.keys(facilityCount).sort(function (a, b) {
                 return facilityCount[b] - facilityCount[a];
             }).slice(0, 3);
             var facText = topFacs.length ?
-                topFacs.map(function (f, i) { return (i + 1) + '. ' + f; }).join('<br>') :
+                topFacs.map(function (f, i) { return (i + 1) + '. ' + f + ' <span style="color: var(--neutral-gray); font-weight: 400;">(' + facilityCount[f] + ')</span>'; }).join('<br>') :
                 '—';
             $('st-topfacilities').innerHTML = facText;
 
-            // Stays over 20 days
             $('st-over20days').textContent = over20Days.toLocaleString();
 
-            // Average stay
             if (stays.length) {
                 var sum = 0; stays.forEach(function (s) { sum += s; });
                 $('st-avgstay').textContent = (sum / stays.length).toFixed(1);
             } else {
                 $('st-avgstay').textContent = '—';
             }
-        }
-
-        function ageClass(a) {
-            return '';
         }
 
         function esc(s) {
@@ -1004,8 +1042,8 @@
 
         function downloadCSV() {
             if (!filtered.length) return;
-            var headers = ['book_in', 'facility', 'age', 'gender', 'citizenship', 'stay_days'];
-            var labels = ['Date', 'Facility', 'Age', 'Gender', 'Country', 'Days Held'];
+            var headers = ['book_in', 'facility', 'age', 'gender', 'citizenship', 'stay_days']; // 'final_program'
+            var labels = ['Date', 'Facility', 'Age', 'Gender', 'Country', 'Days Held']; // 'Final Program'
             var rows = [];
             filtered.forEach(function (r) {
                 var row = headers.map(function (h) {
@@ -1023,6 +1061,60 @@
             var a = document.createElement('a');
             a.href = url; a.download = 'child_detentions_filtered.csv'; a.click();
             URL.revokeObjectURL(url);
+        }
+
+        function renderHistogram() {
+            // Create bins for each day 0-30, then wider bins after
+            var bins = [];
+            for (var d = 0; d <= 30; d++) {
+                bins.push({ label: d === 0 ? '0' : d === 20 ? '20' : '', min: d, max: d });
+            }
+            bins.push({ label: '', min: 31, max: 40 });
+            bins.push({ label: '', min: 41, max: 50 });
+            bins.push({ label: '', min: 51, max: 60 });
+            bins.push({ label: '', min: 61, max: 80 });
+            bins.push({ label: '', min: 81, max: 100 });
+            bins.push({ label: '100+', min: 101, max: Infinity });
+
+            var counts = bins.map(function () { return 0; });
+            filtered.forEach(function (r) {
+                if (r.stay_days == null) return;
+                for (var i = 0; i < bins.length; i++) {
+                    if (r.stay_days >= bins[i].min && r.stay_days <= bins[i].max) {
+                        counts[i]++;
+                        break;
+                    }
+                }
+            });
+            var max = Math.max.apply(null, counts) || 1;
+            var hist = $('histogram');
+            var lbls = $('hist-labels');
+
+            // Find the index of the 20-day bin
+            var twentyIdx = 20; // bin index for day 20
+
+            hist.innerHTML = counts.map(function (c, i) {
+                var pct = (c / max) * 100;
+                var isOver20 = bins[i].min > 20;
+                var is20 = bins[i].min === 20 && bins[i].max === 20;
+                var barColor = (isOver20 || is20) ? 'var(--second-color)' : 'var(--first-color)';
+                // Add left border on the 20-day bin to mark the Flores line
+                var borderStyle = is20 ? 'border-left: 2px solid var(--neutral-dark);' : '';
+                return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative;">' +
+                    '<div style="font-size:0.6rem;color:var(--neutral-gray);margin-bottom:1px;">' + (c > 0 && pct > 8 ? c : '') + '</div>' +
+                    '<div style="width:100%;background:' + barColor + ';border-radius:1px 1px 0 0;min-height:' + (c > 0 ? '1px' : '0') + ';height:' + pct + '%;opacity:0.75;' + borderStyle + '"></div>' +
+                    '</div>';
+            }).join('');
+
+            lbls.innerHTML = bins.map(function (b, i) {
+                var is20 = b.min === 20 && b.max === 20;
+                var text = '';
+                if (b.min === 0) text = '0';
+                else if (is20) text = '20 days';
+                else if (b.label === '100+') text = '100+';
+                var weight = is20 ? 'font-weight:600;color:var(--neutral-dark);' : '';
+                return '<div style="flex:1;text-align:center;font-size:0.58rem;color:var(--neutral-gray);' + weight + '">' + text + '</div>';
+            }).join('');
         }
 
         function toggleNotes(id) {
