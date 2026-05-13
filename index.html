@@ -134,18 +134,6 @@
             }
         }
 
-        @keyframes slideInFromLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         h1,
         h2,
         h3 {
@@ -158,14 +146,6 @@
             line-height: 1.1;
             letter-spacing: -0.02em;
             margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 500;
-            line-height: 1.2;
-            letter-spacing: -0.01em;
-            margin-bottom: 1rem;
         }
 
         h3 {
@@ -213,7 +193,6 @@
             display: block;
             border: 4px solid var(--second-color);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            animation: scaleIn 0.6s ease-out;
         }
 
         .hero h1 {
@@ -233,65 +212,110 @@
             animation: slideUp 0.8s ease-out 0.4s backwards;
         }
 
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            padding: 2rem 0 3rem;
+        /* ===== PROJECT ROWS ===== */
+        .projects {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1rem 2rem 3rem;
         }
 
-        .preview-card {
-            background-color: var(--white);
-            border-radius: 7px;
-            padding: 2.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .project-group {
+            margin-bottom: 2rem;
             animation: slideUp 0.8s ease-out 0.5s backwards;
-            cursor: pointer;
+        }
+
+        .project-group:last-child {
+            animation-delay: 0.6s;
+        }
+
+        .group-label {
+            font-family: 'Besley', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--neutral-dark);
+            margin-bottom: 0.75rem;
+            padding-left: 0.25rem;
+            letter-spacing: 0.02em;
+            padding-bottom: 0.15rem;
+            border-bottom: 2px solid var(--second-color);
+            display: -block;
+        }
+
+        .card-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .card {
+            flex: 1;
+            background: var(--white);
+            border-radius: 3px;
+            overflow: hidden;
             text-decoration: none !important;
             color: inherit;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e8e8e8;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
-        
-        .preview-card:hover {
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            border-color: var(--second-color);
             text-decoration: none !important;
         }
 
-        .preview-card:nth-child(2) {
-            animation: slideUp 0.8s ease-out 0.6s backwards;
+        .card-img {
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid #eee;
         }
 
-        .preview-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        .card-body {
+            padding: 1rem 1.15rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .preview-card h2 {
-            margin-bottom: 1rem;
-            text-align: center;
+        .card-body h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.35;
+            margin: 0 0 0.35rem;
             color: var(--neutral-dark);
         }
 
-        .preview-card p {
-            margin-bottom: 1.5rem;
+        .card-body p {
+            font-size: 0.85rem;
+            line-height: 1.5;
             color: var(--neutral-gray);
+            margin: 0;
         }
 
-        .preview-card img {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 0;
-        }
-
+        /* ===== FOOTER ===== */
         footer {
             padding: 2.5rem 0;
             border-top: 1px solid #e5e5e5;
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 1rem;
         }
 
         footer p {
             font-size: 0.875rem;
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 900px) {
+            .card-row {
+                flex-wrap: wrap;
+            }
+
+            .card-row .card {
+                flex: 1 1 calc(50% - 0.5rem);
+                min-width: calc(50% - 0.5rem);
+            }
         }
 
         @media (max-width: 768px) {
@@ -299,25 +323,27 @@
                 font-size: 2.5rem;
             }
 
-            h2 {
-                font-size: 1.5rem;
+            .projects {
+                padding: 1rem 1.5rem 2rem;
+            }
+
+            .hero {
+                padding: 2rem 0 0;
             }
 
             .container {
                 padding: 0 1.5rem;
             }
+        }
 
-            .hero {
-                padding: 2rem 0 2rem;
+        @media (max-width: 600px) {
+            .card-row {
+                flex-direction: column;
             }
 
-            .cards-grid {
-                grid-template-columns: 1fr;
-                padding: 2rem 0;
-            }
-
-            .preview-card {
-                padding: 2rem;
+            .card-row .card {
+                flex: 1 1 100%;
+                min-width: 100%;
             }
         }
     </style>
@@ -339,51 +365,66 @@
                 <a href="https://github.com/hannahjliu">GitHub</a>
             </p>
             <h3>Hello world! I'm a first year Master of Public Administration student at the London School of Economics
-                and Political Science. </h3>
+                and Political Science.</h3>
         </div>
     </div>
 
-    <div class="container">
-        <div class="cards-grid">
-            <a href="https://hannahjliu.github.io/ICEtracker" class="preview-card">
-                <h2>Tracking ICE Under Trump 2.0</h2>
-                <p>
-                    Interactive tools to track Immigration and Customs Enforcement (ICE) under the second Trump
-                    Administration.
-                </p>
-                <img src="images/datatool.png" alt="Data Tool Preview">
-            </a>
-            <a href="https://hannahjliu.github.io/examiningmassdeportation" class="preview-card">
-                <h2>Examining a new era of mass deportation</h2>
-                <p>
-                    How different is immigration policy in Trump 2.0? I did an exploratory analysis of individual-level
-                    ICE data to evaluate changes in volume of arrests, geographic
-                    targeting, demographic composition, and criminal backgrounds of those arrested.
-                </p>
-                <img src="images/projectpreview.png" alt="Project Preview">
-            </a>
-            <a href="https://hannahjliu.github.io/childdetentions" class="preview-card">
-                <h2>Child ICE Detentions Data Explorer</h2>
-                <p>
-                    A searchable database of ICE detentions involving minors under 18. 
-                </p>
-                <img src="images/childdets.png" alt="Child Detentions Preview">
-            </a>
-            <a href="https://hannahjliu.github.io/portfolio" class="preview-card">
-                <h2>PP434: Automated Data Visualization for Policymaking Portfolio</h2>
-                <img src="images/portfoliopreview.png" alt="Portfolio Preview">
-            </a>
-            <a href="https://hannahjliu.github.io/MoMoC" class="preview-card">
-                <h2>The Museum of Modern Chart</h2>
-                <p>Welcome to the MoMoC, a gallery of modern art recreated in Vega-Lite. Admission is free.</p>
-                <img src="images/momocpreview.png" alt="MoMoC Preview">
-            </a>
+    <section class="projects">
+
+        <div class="project-group">
+            <div class="group-label">Immigration Enforcement</div>
+            <div class="card-row">
+                <a href="https://hannahjliu.github.io/ICEtracker" class="card">
+                    <img class="card-img" src="images/trackermeta.png" alt="Data Tool Preview">
+                    <div class="card-body">
+                        <h2>Tracking ICE Under Trump 2.0</h2>
+                        <p>Interactive tools to track ICE under the second Trump Administration.</p>
+                        
+                    </div>
+                    
+                </a>
+                <a href="https://hannahjliu.github.io/examiningmassdeportation" class="card">
+                   <img class="card-img" src="images/projectpreview.png" alt="Project Preview">
+                    <div class="card-body">
+                        <h2>Examining a New Era of Mass Deportation</h2>
+                        <p>Exploratory analysis of individual-level ICE arrest data.</p>
+                    </div>
+                    
+                </a>
+                <a href="https://hannahjliu.github.io/childdetentions" class="card">
+                    <img class="card-img" src="images/childdets.png" alt="Child Detentions Preview">
+                    <div class="card-body">
+                        <h2>Child ICE Detentions Data Explorer</h2>
+                        <p>Searchable database of ICE detentions involving minors under 18.</p>
+                    </div>
+                    
+                </a>
+            </div>
         </div>
-    </div>
+
+        <div class="project-group">
+            <div class="group-label">Other Projects</div>
+            <div class="card-row">
+                <a href="https://hannahjliu.github.io/portfolio" class="card">
+                    <img class="card-img" src="images/portfoliopreview.png" alt="Portfolio Preview">
+                    <div class="card-body">
+                        <h2>PP434: Automated Data Visualization for Policymaking</h2>
+                    </div>
+                </a>
+                <a href="https://hannahjliu.github.io/MoMoC" class="card">
+                    <img class="card-img" src="images/momocpreview.png" alt="MoMoC Preview">
+                    <div class="card-body">
+                        <h2>The Museum of Modern Chart</h2>
+                        <p>Modern art recreated in Vega-Lite. Admission is free.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </section>
 
     <footer>
         <div class="container">
-            <p>© 2025 Hannah Liu</p>
         </div>
     </footer>
 </body>
