@@ -681,12 +681,18 @@
         });
 
         /* ===== EMBED CHARTS ===== */
-        vegaEmbed('#arrestsovertime', 'ICEtracker/visualizations/arrestsovertime.json');
-        vegaEmbed('#aormap', 'ICEtracker/visualizations/aormap.json');
-        vegaEmbed('#areachart', 'ICEtracker/visualizations/arrestsovertimecrim.json');
-        vegaEmbed('#typechart', 'ICEtracker/visualizations/collateralarrests.json');
-        vegaEmbed('#nationalities', 'ICEtracker/visualizations/topnationalities.json');
-        vegaEmbed('#arrestviews', 'ICEtracker/visualizations/arrestsviewschart.json');
+        Promise.all([
+            vegaEmbed('#arrestsovertime', 'ICEtracker/visualizations/arrestsovertime.json'),
+            vegaEmbed('#aormap', 'ICEtracker/visualizations/aormap.json'),
+            vegaEmbed('#areachart', 'ICEtracker/visualizations/arrestsovertimecrim.json'),
+            vegaEmbed('#typechart', 'ICEtracker/visualizations/collateralarrests.json'),
+            vegaEmbed('#nationalities', 'ICEtracker/visualizations/topnationalities.json'),
+            vegaEmbed('#arrestviews', 'ICEtracker/visualizations/arrestsviewschart.json')
+        ]).then(() => {
+            if (window.location.hash) {
+                document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     </script>
 
 </body>
