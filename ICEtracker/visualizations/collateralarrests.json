@@ -1,0 +1,270 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 750,
+  "height": 250,
+  "title": {
+    "text": {
+      "expr": "'Daily ICE Arrests by apprehension type (' + AORParam + ')'"
+    },
+    "subtitle": [
+      "This chart shows a seven-day rolling average of the number of daily ICE administrative arrests by apprehension type."
+    ]
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/data/apprehension_type_rolling_averages.csv"
+  },
+  "params": [
+    {
+      "name": "startDate",
+      "value": "2025-08-08",
+      "bind": {
+        "input": "date",
+        "name": "Start Date:",
+        "min": "2025-08-08",
+        "max": "2026-03-10"
+      }
+    },
+    {
+      "name": "endDate",
+      "value": "2026-03-10",
+      "bind": {
+        "input": "date",
+        "name": "End Date:",
+        "min": "2025-08-08",
+        "max": "2026-03-10"
+      }
+    },
+    {
+      "name": "TypeParam",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": ["All", "Collateral", "Targeted", "Unknown"],
+        "name": "Select type:"
+      }
+    },
+    {
+      "name": "AORParam",
+      "value": "National",
+      "bind": {
+        "input": "select",
+        "options": [
+          "National",
+          "Atlanta",
+          "Baltimore",
+          "Boston",
+          "Buffalo",
+          "Chicago",
+          "Dallas",
+          "Denver",
+          "Detroit",
+          "El Paso",
+          "HQ",
+          "Houston",
+          "Los Angeles",
+          "Miami",
+          "New Orleans",
+          "New York City",
+          "Newark",
+          "Philadelphia",
+          "Phoenix",
+          "Salt Lake City",
+          "San Antonio",
+          "San Diego",
+          "San Francisco",
+          "Seattle",
+          "St. Paul",
+          "Washington"
+        ],
+        "name": "Select area:"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum['Apprehension Date'] >= datetime(year(startDate), month(startDate), date(startDate)) && datum['Apprehension Date'] <= datetime(year(endDate), month(endDate), date(endDate))"
+    },
+    {"filter": "datum.aor_nam == AORParam"},
+    {"filter": "TypeParam == 'All' || datum.apprehension_type == TypeParam"},
+    {
+      "calculate": "datum.apprehension_type == 'Targeted' ? 1 : datum.apprehension_type == 'Collateral' ? 2 : 3",
+      "as": "TypeOrder"
+    },
+    {
+      "joinaggregate": [
+        {"op": "sum", "field": "rolling_avg_7d", "as": "TotalPerDay"}
+      ],
+      "groupby": ["Apprehension Date"]
+    },
+    {
+      "calculate": "(datum.rolling_avg_7d / datum.TotalPerDay) * 100",
+      "as": "Percentage"
+    },
+    {
+      "calculate": "datum.apprehension_type == 'Targeted' ? datum.Percentage : null",
+      "as": "TargetedValue"
+    },
+    {
+      "calculate": "datum.apprehension_type == 'Collateral' ? datum.Percentage : null",
+      "as": "CollateralValue"
+    },
+    {
+      "calculate": "datum.apprehension_type == 'Unknown' ? datum.Percentage : null",
+      "as": "UnknownValue"
+    },
+    {
+      "joinaggregate": [
+        {"op": "max", "field": "TargetedValue", "as": "TargetedShare"},
+        {"op": "max", "field": "CollateralValue", "as": "CollateralShare"},
+        {"op": "max", "field": "UnknownValue", "as": "UnknownShare"}
+      ],
+      "groupby": ["Apprehension Date"]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "area", "fillOpacity": 0.8},
+      "encoding": {
+        "x": {"field": "Apprehension Date", "type": "temporal"},
+        "y": {
+          "field": "rolling_avg_7d",
+          "type": "quantitative",
+          "scale": {
+          }
+        },
+        "color": {
+          "field": "apprehension_type",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Targeted", "Collateral", "Unknown"],
+            "range": ["#155263", "#ff6f3c", "#bfbfbf"]
+          },
+          "legend": {"orient": "bottom"}
+        },
+        "order": {
+          "field": "TypeOrder",
+          "type": "quantitative",
+          "sort": "ascending"
+        }
+      }
+    },
+    {
+      "mark": {"type": "rule"},
+      "encoding": {
+        "x": {"field": "Apprehension Date", "type": "temporal"},
+        "opacity": {
+          "condition": {"value": 0.7, "param": "hover", "empty": false},
+          "value": 0
+        },
+        "color": {"value": "gray"},
+        "strokeWidth": {"value": 1},
+        "tooltip": [
+          {
+            "field": "Apprehension Date",
+            "type": "temporal",
+            "title": "Date",
+            "format": "%b %d, %Y"
+          },
+          {
+            "field": "TargetedShare",
+            "type": "quantitative",
+            "title": "Targeted %",
+            "format": ".1f"
+          },
+          {
+            "field": "CollateralShare",
+            "type": "quantitative",
+            "title": "Collateral %",
+            "format": ".1f"
+          },
+          {
+            "field": "UnknownShare",
+            "type": "quantitative",
+            "title": "Unknown %",
+            "format": ".1f"
+          }
+        ]
+      },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": ["Apprehension Date"],
+            "nearest": true,
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "font": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "numberFormat": ".0f",
+    "view": {"stroke": "transparent"},
+    "background": "transparent",
+    "point": {"filled": true, "opacity": 0.95},
+    "axis": {
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 11,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelOpacity": 1,
+      "tickColor": "#0a0a0a",
+      "tickOpacity": 0.6,
+      "domainColor": "#0a0a0a",
+      "domainOpacity": 0.6,
+      "gridColor": "#bfbfbf",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.8,
+      "title": null,
+      "titleColor": "#0a0a0a",
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleOpacity": 1,
+      "titleFontWeight": 500,
+      "tickSize": 5
+    },
+    "axisXDiscrete": {
+      "grid": false,
+      "labelAngle": 0,
+      "tickCount": 10,
+      "tickOpacity": 0.6,
+      "title": null
+    },
+    "axisYDiscrete": {"ticks": false, "labelPadding": 5},
+    "axisXQuantitative": {"grid": true},
+    "axisYQuantitative": {
+      "gridColor": "#d0d0d0",
+      "gridDash": [1, 5],
+      "gridOpacity": 0.8,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 8,
+      "titleAngle": -90,
+      "titleAlign": "center",
+      "titleBaseline": "middle"
+    },
+    "legend": {
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleFontSize": 15,
+      "titleFontWeight": 500,
+      "titleColor": "#0a0a0a",
+      "title": null,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 12
+    },
+    "title": {
+      "font": "'Besley', 'Garamond', 'Georgia'",
+      "fontSize": 20,
+      "fontWeight": 500,
+      "color": "#0a0a0a",
+      "subtitleFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#0a0a0a",
+      "anchor": "start",
+      "offset": 10
+    },
+    "mark": {"tooltip": true}
+  }
+}
