@@ -451,6 +451,7 @@
                 <a href="#arrests-over-time">Over Time</a>
                 <a href="#aor-map">By Region</a>
                 <a href="#by-crim-record">By Criminal Record</a>
+                <a href="#by-arrest-type">By Arrest Type</a>
                 <a href="#nationalities">Top Nationalities</a>
                 <a href="#demographics">By Demographic</a>
             </nav>
@@ -495,10 +496,34 @@
                     <div class="data-notes-content" id="notes4">
                         <div class="data-notes-text">
                             <p>Fields on crime are missing from the arrest data, while AOR is absent from the
-                                detention data. I joined these files using shared unique identifiers. I cleaned for duplicates by removing entries that shared the same unique identifier and date.
+                                detention data. I joined these files using shared unique identifiers. I cleaned for
+                                duplicates by removing entries that shared the same unique identifier and date.
                                 <br /><br />
                                 I scraped the National Crime Information Center (NCIC) violent crime code manual from <a
-                                    href="https://secure.ssa.gov/poms.nsf/lnx/0202613900#a1">here</a>.
+                                    href="https://secure.ssa.gov/poms.nsf/lnx/0202613900#a1" target="_blank">here</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="section" id="by-arrest-type">
+                <figure id="typechart"></figure>
+
+                <div class="data-notes">
+                    <div class="data-notes-header" onclick="toggleNotes(5)">
+                        <h3 class="data-notes-title">Notes</h3>
+                        <span class="data-notes-arrow" id="arrow5">▼</span>
+                    </div>
+                    <div class="data-notes-content" id="notes5">
+                        <div class="data-notes-text">
+                            <p> A new field, 'Arrest Type,' appeared in the latest data release. Since August 2025, ICE
+                                has classified arrests as either 'Targeted' or 'Collateral.' According to <a
+                                    href="https://www.thecity.nyc/2026/04/02/ice-immigration-arrests-collateral-operation-trump/"
+                                    target="_blank">this analysis,</a> collateral arrests refer to people encountered
+                                incidentally during
+                                operations.
                             </p>
                         </div>
                     </div>
@@ -659,6 +684,7 @@
         vegaEmbed('#arrestsovertime', 'ICEtracker/visualizations/arrestsovertime.json');
         vegaEmbed('#aormap', 'ICEtracker/visualizations/aormap.json');
         vegaEmbed('#areachart', 'ICEtracker/visualizations/arrestsovertimecrim.json');
+        vegaEmbed('#typechart', 'ICEtracker/visualizations/collateralarrests.json');
         vegaEmbed('#nationalities', 'ICEtracker/visualizations/topnationalities.json');
         vegaEmbed('#arrestviews', 'ICEtracker/visualizations/arrestsviewschart.json');
     </script>
