@@ -1,7 +1,7 @@
 # hannahjliu.github.io
 
 Personal portfolio and data projects by Hannah Liu, first-year MPA 
-student at the London School of Economics.
+student at the London School of Economics and Political Science.
 
 **[View the site →](https://hannahjliu.github.io/)**
 
