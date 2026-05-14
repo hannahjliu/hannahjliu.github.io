@@ -10,7 +10,7 @@ student at the London School of Economics.
 | Project | Description |
 |---------|-------------|
 | [ICE Tracker](https://hannahjliu.github.io/ICEtracker) | Interactive tools tracking ICE enforcement under the second Trump administration |
-| [Examining Mass Deportation](https://hannahjliu.github.io/examiningmassdeportation) | Exploratory analysis of individual-level ICE data on arrests, geographic targeting, and demographics |
+| [Examining Mass Deportation](https://hannahjliu.github.io/examiningmassdeportation) | Exploratory analysis of individual-level ICE data on arrests comparing the first and second Trump administrations|
 | [Child ICE Detentions](https://hannahjliu.github.io/childdetentions) | Searchable database of ICE detentions involving minors under 18 |
 | [MoMoC](https://hannahjliu.github.io/MoMoC) | Modern art recreated in Vega-Lite |
 
