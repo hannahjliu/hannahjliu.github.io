@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PP478 Jeopardy</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { overflow-x: hidden; }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.2/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const CATEGORIES = [
+  {
+    name: "Name That Author",
+    questions: [
+      { value: 200, q: "This author coined 'competitive clientelism' to describe elections in the MENA region as contests over state resource access.", a: "Ellen Lust (2009)" },
+      { value: 400, q: "These authors found that citizens' perceptions of inequality are systematically wrong across three dimensions: level, own position, and trend.", a: "Gimpelson & Treisman (2015)" },
+      { value: 600, q: "This scholar argued that enhancing police capacity in the DRC entrenched a wartime political order rather than building peace.", a: "Milli Lake (2022)" },
+      { value: 800, q: "These authors found that over 11% of Forbes billionaires have held or sought political office, with far higher participation in autocracies.", a: "Krcmaric, Nelson & Roberts (2023)" },
+      { value: 1000, q: "This author's 'second-generation' behavioral theory adds reciprocity, trust, and reputation to rational choice models of collective action.", a: "Elinor Ostrom (1997/1998)" },
+    ],
+  },
+  {
+    name: "Key Concepts",
+    questions: [
+      { value: 200, q: "The set of policy alternatives that CAN beat the status quo in a pairwise contest under whatever voting rules are employed.", a: "Winset (Tsebelis, 2002)" },
+      { value: 400, q: "Mutually reinforcing negative attitudes between immigrant and host populations that become self-sustaining.", a: "Discriminatory Equilibrium (Adida, Laitin & Valfort, 2016)" },
+      { value: 600, q: "The paradox that redistribution from rich to poor is least present when and where it is most needed.", a: "Robin Hood Paradox (Lindert, 2004)" },
+      { value: 800, q: "The constitutional concentration of executive power in a single human being — the real danger of presidentialism according to Ganghof.", a: "Executive Personalism (Ganghof, 2021)" },
+      { value: 1000, q: "Keefer & Khemani's three political market imperfections that prevent democracies from spending effectively on the poor.", a: "Incomplete information, lack of credibility, social polarization" },
+    ],
+  },
+  {
+    name: "Case Studies",
+    questions: [
+      { value: 200, q: "This country's president declared martial law in December 2024 in a self-coup attempt, but was impeached days later.", a: "South Korea" },
+      { value: 400, q: "In this country, turnout dropped from 90%+ to 65% after compulsory voting was abolished.", a: "Belgium (Flanders)" },
+      { value: 600, q: "MacIntyre (2001) used this crisis to show that too many veto players cause rigidity and too few cause volatility.", a: "Asian Financial Crisis (1997-98)" },
+      { value: 800, q: "Sands & de Kadt (2020) conducted a field experiment using this luxury item to test whether visible inequality activates redistributive preferences.", a: "A BMW (in South Africa)" },
+      { value: 1000, q: "In this country, Acemoglu & Robinson (2013) showed that free-market privatization led to oligarchy, not democracy.", a: "Russia" },
+    ],
+  },
+  {
+    name: "Theories & Models",
+    questions: [
+      { value: 200, q: "Black (1948) / Downs (1957): In single-dimensional space with single-peaked preferences, this voter's ideal point wins against any alternative.", a: "The Median Voter" },
+      { value: 400, q: "Bueno de Mesquita et al.: The ratio of Winning Coalition to this larger group determines loyalty norms in dictatorships.", a: "The Selectorate" },
+      { value: 600, q: "Wlezien & Soroka's model where publics demand 'more' or 'less' policy in response to government action, creating a self-correcting feedback loop.", a: "Thermostatic Model" },
+      { value: 800, q: "Aklin & Mildenberger (2020) argue climate politics is NOT a collective action problem but instead this type of conflict within each country.", a: "Domestic Distributive Conflict" },
+      { value: 1000, q: "Dalton (1996/2002): The process by which traditional social cleavages weaken as predictors of voting, replaced by individualistic, issue-driven choice.", a: "Dealignment" },
+    ],
+  },
+  {
+    name: "Cross-Topic Links",
+    questions: [
+      { value: 200, q: "Orhan (2022) identifies THIS type of polarization (not ideological) as the one that enables democratic backsliding.", a: "Affective Polarization" },
+      { value: 400, q: "Harding & Stasavage (2013) found democracies only improve services when policies have these two characteristics.", a: "Visible and Attributable (to the executive)" },
+      { value: 600, q: "Both Lust (2009) in autocracies and Bussell (2019) in democracies study citizens accessing the state through personal connections — but Bussell's key distinction is that constituency service is this.", a: "Non-contingent (not dependent on electoral support)" },
+      { value: 800, q: "Chenoweth et al. (2017) found that nonviolent resistance succeeds more often partly because THIS group is more likely to defect from the regime.", a: "Security Forces" },
+      { value: 1000, q: "Gimpelson & Treisman (2015) undermine Meltzer-Richard AND Acemoglu & Robinson because both theories require citizens to accurately know THIS.", a: "The actual level of inequality in their society" },
+    ],
+  },
+  {
+    name: "Winter Term Special",
+    questions: [
+      { value: 200, q: "Kalin & Sambanis (2018) identify two scholarly camps on identity: instrumentalist (strategic) and this other view rooted in emotional bonds.", a: "Primordialist / Hard" },
+      { value: 400, q: "Choi, Poertner & Sambanis (2019) found that immigrants who did THIS at German train stations received 12pp more assistance.", a: "Enforced a social norm (anti-littering)" },
+      { value: 600, q: "Little & Meng (2024) argue there's little evidence of global backsliding in THESE types of indicators, as opposed to subjective expert scores.", a: "Objective indicators" },
+      { value: 800, q: "Barr & Serra (2010) found corruption behavior could be predicted by country of origin among undergraduates but NOT among this group.", a: "Graduate students (time in UK reduced propensity to bribe)" },
+      { value: 1000, q: "Rose-Ackerman & Palifka (2016) and Ferraz & Finan identify three accountability channels: vertical (citizens), horizontal (state institutions), and this third one.", a: "Diagonal (media and civil society)" },
+    ],
+  },
+];
+
+const TEAM_COLORS = ["#E74C3C", "#2E86C1", "#27AE60", "#F39C12"];
+const TEAM_NAMES_DEFAULT = ["Team 1", "Team 2", "Team 3", "Team 4"];
+
+function PP478Jeopardy() {
+  const [phase, setPhase] = useState("setup");
+  const [numTeams, setNumTeams] = useState(2);
+  const [teamNames, setTeamNames] = useState([...TEAM_NAMES_DEFAULT]);
+  const [scores, setScores] = useState([0, 0, 0, 0]);
+  const [answered, setAnswered] = useState({});
+  const [activeQ, setActiveQ] = useState(null);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [currentTeam, setCurrentTeam] = useState(0);
+  const [buzzedTeam, setBuzzedTeam] = useState(null);
+  const [timer, setTimer] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const timerRef = useRef(null);
+  const [celebrating, setCelebrating] = useState(null);
+  const [dailyDouble, setDailyDouble] = useState(null);
+  const [showDD, setShowDD] = useState(false);
+  const [ddActive, setDdActive] = useState(false);
+  const [wager, setWager] = useState("");
+  const [lastAction, setLastAction] = useState(null);
+
+  useEffect(() => {
+    const cat = Math.floor(Math.random() * CATEGORIES.length);
+    const qIdx = Math.floor(Math.random() * 3) + 2;
+    setDailyDouble(`${cat}-${qIdx}`);
+  }, []);
+
+  const startTimer = (seconds) => {
+    setTimeLeft(seconds);
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  const stopTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+  };
+
+  const handleSelectQ = (catIdx, qIdx) => {
+    const key = `${catIdx}-${qIdx}`;
+    if (answered[key]) return;
+    const q = CATEGORIES[catIdx].questions[qIdx];
+    setActiveQ({ catIdx, qIdx, ...q });
+    setShowAnswer(false);
+    setBuzzedTeam(null);
+    if (key === dailyDouble) {
+      setShowDD(true);
+      setDdActive(true);
+      setWager("");
+    } else {
+      setShowDD(false);
+      setDdActive(false);
+      startTimer(30);
+    }
+  };
+
+  const handleBuzz = (teamIdx) => {
+    if (buzzedTeam !== null) return;
+    setBuzzedTeam(teamIdx);
+    stopTimer();
+    startTimer(15);
+  };
+
+  const handleScore = (correct) => {
+    const team = buzzedTeam !== null ? buzzedTeam : currentTeam;
+    const points = ddActive ? (parseInt(wager) || 0) : activeQ.value;
+    const newScores = [...scores];
+    // Save state before changes for undo
+    setLastAction({
+      prevScores: [...scores],
+      prevAnswered: { ...answered },
+      prevCurrentTeam: currentTeam,
+      key: `${activeQ.catIdx}-${activeQ.qIdx}`,
+      team,
+      points,
+      correct,
+    });
+    if (correct) {
+      newScores[team] += points;
+      setCelebrating(team);
+      setTimeout(() => setCelebrating(null), 1500);
+    } else {
+      newScores[team] -= points;
+    }
+    setScores(newScores);
+    const key = `${activeQ.catIdx}-${activeQ.qIdx}`;
+    setAnswered({ ...answered, [key]: true });
+    setActiveQ(null);
+    setShowAnswer(false);
+    setBuzzedTeam(null);
+    setShowDD(false);
+    setDdActive(false);
+    stopTimer();
+    // If correct, that team picks next; otherwise rotate
+    if (correct) {
+      setCurrentTeam(team);
+    } else {
+      setCurrentTeam((currentTeam + 1) % numTeams);
+    }
+  };
+
+  const handleUndo = () => {
+    if (!lastAction) return;
+    setScores(lastAction.prevScores);
+    setAnswered(lastAction.prevAnswered);
+    setCurrentTeam(lastAction.prevCurrentTeam);
+    setLastAction(null);
+  };
+
+  const handleReveal = () => setShowAnswer(true);
+
+  const handleSkip = () => {
+    const key = `${activeQ.catIdx}-${activeQ.qIdx}`;
+    setAnswered({ ...answered, [key]: true });
+    setActiveQ(null);
+    setShowAnswer(false);
+    setBuzzedTeam(null);
+    setShowDD(false);
+    setDdActive(false);
+    stopTimer();
+  };
+
+  const handleDDWager = () => {
+    const w = parseInt(wager) || 0;
+    if (w < 0) return;
+    setShowDD(false);
+    startTimer(45);
+  };
+
+  const totalAnswered = Object.keys(answered).length;
+  const totalQuestions = CATEGORIES.length * 5;
+  const gameOver = totalAnswered === totalQuestions;
+
+  if (phase === "setup") {
+    return (
+      <div style={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 50%, #0d0d3d 100%)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+        padding: "20px",
+      }}>
+        <div style={{
+          background: "rgba(255,255,255,0.05)",
+          borderRadius: "20px",
+          padding: "50px 40px",
+          maxWidth: "500px",
+          width: "100%",
+          border: "2px solid rgba(255,215,0,0.3)",
+          boxShadow: "0 0 60px rgba(255,215,0,0.1)",
+        }}>
+          <h1 style={{
+            color: "#FFD700",
+            fontSize: "42px",
+            textAlign: "center",
+            margin: "0 0 8px 0",
+            textShadow: "0 0 20px rgba(255,215,0,0.5)",
+            letterSpacing: "3px",
+          }}>PP478</h1>
+          <h2 style={{
+            color: "#87CEEB",
+            fontSize: "22px",
+            textAlign: "center",
+            margin: "0 0 40px 0",
+            fontWeight: "normal",
+            letterSpacing: "6px",
+            textTransform: "uppercase",
+          }}>JEOPARDY</h2>
+
+          <div style={{ marginBottom: "30px" }}>
+            <label style={{ color: "#ccc", fontSize: "14px", display: "block", marginBottom: "10px", textTransform: "uppercase", letterSpacing: "2px" }}>
+              Number of Teams
+            </label>
+            <div style={{ display: "flex", gap: "10px" }}>
+              {[2, 3, 4].map((n) => (
+                <button
+                  key={n}
+                  onClick={() => setNumTeams(n)}
+                  style={{
+                    flex: 1,
+                    padding: "12px",
+                    background: numTeams === n ? "#FFD700" : "rgba(255,255,255,0.08)",
+                    color: numTeams === n ? "#0a0a2e" : "#ccc",
+                    border: "1px solid rgba(255,215,0,0.3)",
+                    borderRadius: "8px",
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                    transition: "all 0.2s",
+                  }}
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {Array.from({ length: numTeams }).map((_, i) => (
+            <div key={i} style={{ marginBottom: "15px" }}>
+              <label style={{ color: TEAM_COLORS[i], fontSize: "13px", display: "block", marginBottom: "5px", textTransform: "uppercase", letterSpacing: "2px" }}>
+                Team {i + 1} Name
+              </label>
+              <input
+                value={teamNames[i]}
+                onChange={(e) => {
+                  const names = [...teamNames];
+                  names[i] = e.target.value;
+                  setTeamNames(names);
+                }}
+                style={{
+                  width: "100%",
+                  padding: "10px 14px",
+                  background: "rgba(255,255,255,0.08)",
+                  border: `1px solid ${TEAM_COLORS[i]}44`,
+                  borderRadius: "8px",
+                  color: "#fff",
+                  fontSize: "16px",
+                  fontFamily: "inherit",
+                  boxSizing: "border-box",
+                }}
+              />
+            </div>
+          ))}
+
+          <button
+            onClick={() => {
+              setScores(new Array(numTeams).fill(0));
+              setPhase("board");
+            }}
+            style={{
+              width: "100%",
+              marginTop: "25px",
+              padding: "16px",
+              background: "linear-gradient(135deg, #FFD700, #FFA500)",
+              color: "#0a0a2e",
+              border: "none",
+              borderRadius: "10px",
+              fontSize: "20px",
+              fontWeight: "bold",
+              cursor: "pointer",
+              fontFamily: "inherit",
+              letterSpacing: "3px",
+              textTransform: "uppercase",
+              boxShadow: "0 4px 20px rgba(255,215,0,0.3)",
+            }}
+          >
+            Start Game
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (gameOver) {
+    const maxScore = Math.max(...scores.slice(0, numTeams));
+    const winner = scores.indexOf(maxScore);
+    return (
+      <div style={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 50%, #0d0d3d 100%)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+        padding: "20px",
+      }}>
+        <div style={{ fontSize: "60px", marginBottom: "10px" }}>🏆</div>
+        <h1 style={{ color: "#FFD700", fontSize: "36px", marginBottom: "5px", textShadow: "0 0 20px rgba(255,215,0,0.5)" }}>
+          {teamNames[winner]} Wins!
+        </h1>
+        <p style={{ color: "#87CEEB", fontSize: "24px", marginBottom: "40px" }}>
+          with {maxScore} points
+        </p>
+        <div style={{ display: "flex", gap: "30px", flexWrap: "wrap", justifyContent: "center" }}>
+          {scores.slice(0, numTeams).map((s, i) => (
+            <div key={i} style={{
+              background: "rgba(255,255,255,0.05)",
+              borderRadius: "16px",
+              padding: "25px 35px",
+              border: `2px solid ${TEAM_COLORS[i]}66`,
+              textAlign: "center",
+            }}>
+              <div style={{ color: TEAM_COLORS[i], fontSize: "18px", fontWeight: "bold", marginBottom: "8px" }}>
+                {teamNames[i]}
+              </div>
+              <div style={{ color: "#fff", fontSize: "32px", fontWeight: "bold" }}>${s}</div>
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={() => {
+            setPhase("setup");
+            setAnswered({});
+            setScores([0, 0, 0, 0]);
+            setActiveQ(null);
+          }}
+          style={{
+            marginTop: "40px",
+            padding: "14px 40px",
+            background: "linear-gradient(135deg, #FFD700, #FFA500)",
+            color: "#0a0a2e",
+            border: "none",
+            borderRadius: "10px",
+            fontSize: "18px",
+            fontWeight: "bold",
+            cursor: "pointer",
+            fontFamily: "inherit",
+            letterSpacing: "2px",
+          }}
+        >
+          Play Again
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{
+      minHeight: "100vh",
+      background: "linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 50%, #0d0d3d 100%)",
+      fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+      padding: "15px",
+      boxSizing: "border-box",
+    }}>
+      {/* Top bar: Main Menu + Undo */}
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        maxWidth: "1100px",
+        margin: "0 auto 10px auto",
+      }}>
+        <button
+          onClick={() => {
+            if (confirm("Return to main menu? Current game progress will be lost.")) {
+              setPhase("setup");
+              setAnswered({});
+              setScores([0, 0, 0, 0]);
+              setActiveQ(null);
+              setLastAction(null);
+              setCurrentTeam(0);
+            }
+          }}
+          style={{
+            background: "rgba(255,255,255,0.06)",
+            color: "#888",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: "8px",
+            padding: "6px 16px",
+            fontSize: "13px",
+            cursor: "pointer",
+            fontFamily: "inherit",
+            transition: "all 0.15s",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "rgba(255,255,255,0.12)";
+            e.currentTarget.style.color = "#ccc";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+            e.currentTarget.style.color = "#888";
+          }}
+        >
+          ← Main Menu
+        </button>
+
+        {lastAction && !activeQ ? (
+          <button
+            onClick={handleUndo}
+            style={{
+              background: "rgba(231,76,60,0.15)",
+              color: "#E74C3C",
+              border: "1px solid rgba(231,76,60,0.4)",
+              borderRadius: "8px",
+              padding: "6px 16px",
+              fontSize: "13px",
+              cursor: "pointer",
+              fontFamily: "inherit",
+              transition: "all 0.15s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(231,76,60,0.3)";
+              e.currentTarget.style.color = "#fff";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(231,76,60,0.15)";
+              e.currentTarget.style.color = "#E74C3C";
+            }}
+          >
+            ↩ Undo Last Score
+          </button>
+        ) : <div />}
+      </div>
+
+      {/* Scoreboard */}
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "15px",
+        marginBottom: "15px",
+        flexWrap: "wrap",
+      }}>
+        {scores.slice(0, numTeams).map((s, i) => (
+          <div
+            key={i}
+            style={{
+              background: currentTeam === i ? `${TEAM_COLORS[i]}33` : "rgba(255,255,255,0.04)",
+              borderRadius: "12px",
+              padding: "10px 24px",
+              border: `2px solid ${currentTeam === i ? TEAM_COLORS[i] : TEAM_COLORS[i] + "44"}`,
+              textAlign: "center",
+              minWidth: "120px",
+              transition: "all 0.3s",
+              transform: celebrating === i ? "scale(1.1)" : "scale(1)",
+              boxShadow: celebrating === i ? `0 0 30px ${TEAM_COLORS[i]}66` : "none",
+            }}
+          >
+            <div style={{ color: TEAM_COLORS[i], fontSize: "13px", fontWeight: "bold", textTransform: "uppercase", letterSpacing: "1px" }}>
+              {teamNames[i]} {currentTeam === i ? "⬅" : ""}
+            </div>
+            <div style={{ color: "#fff", fontSize: "26px", fontWeight: "bold" }}>
+              ${s}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Board */}
+      {!activeQ && (
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${CATEGORIES.length}, 1fr)`,
+          gap: "6px",
+          maxWidth: "1100px",
+          margin: "0 auto",
+        }}>
+          {/* Headers */}
+          {CATEGORIES.map((cat, ci) => (
+            <div key={ci} style={{
+              background: "rgba(255,215,0,0.15)",
+              borderRadius: "8px",
+              padding: "12px 6px",
+              textAlign: "center",
+              border: "1px solid rgba(255,215,0,0.25)",
+            }}>
+              <span style={{
+                color: "#FFD700",
+                fontSize: "11px",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+                lineHeight: "1.3",
+                display: "block",
+              }}>
+                {cat.name}
+              </span>
+            </div>
+          ))}
+
+          {/* Question cells */}
+          {[0, 1, 2, 3, 4].map((qIdx) =>
+            CATEGORIES.map((cat, ci) => {
+              const key = `${ci}-${qIdx}`;
+              const done = answered[key];
+              return (
+                <button
+                  key={key}
+                  onClick={() => !done && handleSelectQ(ci, qIdx)}
+                  disabled={done}
+                  style={{
+                    background: done ? "rgba(255,255,255,0.02)" : "linear-gradient(180deg, #1a3a6e, #0d2240)",
+                    borderRadius: "8px",
+                    padding: "18px 8px",
+                    textAlign: "center",
+                    border: done ? "1px solid rgba(255,255,255,0.05)" : "1px solid rgba(255,215,0,0.2)",
+                    cursor: done ? "default" : "pointer",
+                    transition: "all 0.2s",
+                    opacity: done ? 0.3 : 1,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!done) e.currentTarget.style.background = "linear-gradient(180deg, #264e8a, #143058)";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!done) e.currentTarget.style.background = "linear-gradient(180deg, #1a3a6e, #0d2240)";
+                  }}
+                >
+                  <span style={{
+                    color: done ? "#444" : "#FFD700",
+                    fontSize: "22px",
+                    fontWeight: "bold",
+                    textShadow: done ? "none" : "0 0 10px rgba(255,215,0,0.4)",
+                  }}>
+                    {done ? "" : `$${cat.questions[qIdx].value}`}
+                  </span>
+                </button>
+              );
+            })
+          )}
+        </div>
+      )}
+
+      {/* Active Question */}
+      {activeQ && (
+        <div style={{
+          maxWidth: "700px",
+          margin: "20px auto",
+          background: "rgba(255,255,255,0.05)",
+          borderRadius: "20px",
+          padding: "40px 35px",
+          border: showDD && wager === "" ? "2px solid #FFD700" : "2px solid rgba(255,215,0,0.2)",
+          boxShadow: "0 0 40px rgba(0,0,0,0.5)",
+          position: "relative",
+        }}>
+          {/* Back Button */}
+          <button
+            onClick={() => {
+              setActiveQ(null);
+              setShowAnswer(false);
+              setBuzzedTeam(null);
+              setShowDD(false);
+              setDdActive(false);
+              stopTimer();
+            }}
+            title="Back to board"
+            style={{
+              position: "absolute",
+              top: "14px",
+              right: "14px",
+              background: "rgba(255,255,255,0.08)",
+              color: "#888",
+              border: "1px solid rgba(255,255,255,0.15)",
+              borderRadius: "8px",
+              padding: "6px 14px",
+              fontSize: "13px",
+              cursor: "pointer",
+              fontFamily: "inherit",
+              transition: "all 0.15s",
+              letterSpacing: "1px",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.15)";
+              e.currentTarget.style.color = "#ccc";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+              e.currentTarget.style.color = "#888";
+            }}
+          >
+            ✕ Back
+          </button>
+
+          {/* Daily Double */}
+          {showDD && (
+            <div style={{ textAlign: "center" }}>
+              <div style={{
+                fontSize: "40px",
+                color: "#FFD700",
+                fontWeight: "bold",
+                textShadow: "0 0 30px rgba(255,215,0,0.6)",
+                marginBottom: "10px",
+                animation: "pulse 1s infinite",
+              }}>
+                ⭐ DAILY DOUBLE ⭐
+              </div>
+              <p style={{ color: "#87CEEB", fontSize: "16px", marginBottom: "20px" }}>
+                {teamNames[currentTeam]}, enter your wager (max: {Math.max(scores[currentTeam], 1000)})
+              </p>
+              <input
+                type="number"
+                value={wager}
+                onChange={(e) => setWager(e.target.value)}
+                placeholder="Enter wager..."
+                style={{
+                  padding: "12px 20px",
+                  fontSize: "24px",
+                  background: "rgba(255,255,255,0.1)",
+                  border: "2px solid #FFD700",
+                  borderRadius: "10px",
+                  color: "#FFD700",
+                  textAlign: "center",
+                  width: "200px",
+                  fontFamily: "inherit",
+                }}
+              />
+              <br />
+              <button
+                onClick={handleDDWager}
+                style={{
+                  marginTop: "15px",
+                  padding: "12px 40px",
+                  background: "linear-gradient(135deg, #FFD700, #FFA500)",
+                  color: "#0a0a2e",
+                  border: "none",
+                  borderRadius: "8px",
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                }}
+              >
+                Lock Wager
+              </button>
+            </div>
+          )}
+
+          {!showDD && (
+            <>
+              {/* Category + Value */}
+              <div style={{ textAlign: "center", marginBottom: "8px" }}>
+                <span style={{ color: "#87CEEB", fontSize: "13px", textTransform: "uppercase", letterSpacing: "2px" }}>
+                  {CATEGORIES[activeQ.catIdx].name}
+                </span>
+              </div>
+              <div style={{ textAlign: "center", marginBottom: "25px" }}>
+                <span style={{ color: "#FFD700", fontSize: "28px", fontWeight: "bold" }}>
+                  ${activeQ.value}
+                </span>
+              </div>
+
+              {/* Timer */}
+              <div style={{
+                textAlign: "center",
+                marginBottom: "25px",
+              }}>
+                <span style={{
+                  color: timeLeft <= 5 ? "#E74C3C" : "#87CEEB",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  transition: "color 0.3s",
+                }}>
+                  ⏱ {timeLeft}s
+                </span>
+              </div>
+
+              {/* Question */}
+              <p style={{
+                color: "#fff",
+                fontSize: "20px",
+                lineHeight: "1.6",
+                textAlign: "center",
+                margin: "0 0 30px 0",
+              }}>
+                {activeQ.q}
+              </p>
+
+              {/* Buzz In */}
+              {!showAnswer && buzzedTeam === null && (
+                <div>
+                  <p style={{ color: "#888", fontSize: "13px", textAlign: "center", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "12px" }}>
+                    Buzz In
+                  </p>
+                  <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
+                    {Array.from({ length: numTeams }).map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => handleBuzz(i)}
+                        style={{
+                          padding: "12px 28px",
+                          background: `${TEAM_COLORS[i]}33`,
+                          color: TEAM_COLORS[i],
+                          border: `2px solid ${TEAM_COLORS[i]}`,
+                          borderRadius: "10px",
+                          fontSize: "15px",
+                          fontWeight: "bold",
+                          cursor: "pointer",
+                          fontFamily: "inherit",
+                          transition: "all 0.15s",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = `${TEAM_COLORS[i]}66`;
+                          e.currentTarget.style.color = "#fff";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = `${TEAM_COLORS[i]}33`;
+                          e.currentTarget.style.color = TEAM_COLORS[i];
+                        }}
+                      >
+                        {teamNames[i]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Buzzed Team */}
+              {buzzedTeam !== null && !showAnswer && (
+                <div style={{ textAlign: "center" }}>
+                  <p style={{
+                    color: TEAM_COLORS[buzzedTeam],
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    marginBottom: "20px",
+                  }}>
+                    🔔 {teamNames[buzzedTeam]} buzzed in!
+                  </p>
+                  <button
+                    onClick={handleReveal}
+                    style={{
+                      padding: "12px 35px",
+                      background: "rgba(255,255,255,0.1)",
+                      color: "#FFD700",
+                      border: "1px solid #FFD700",
+                      borderRadius: "8px",
+                      fontSize: "15px",
+                      cursor: "pointer",
+                      fontFamily: "inherit",
+                    }}
+                  >
+                    Reveal Answer
+                  </button>
+                </div>
+              )}
+
+              {/* No buzz - reveal anyway */}
+              {buzzedTeam === null && !showAnswer && timeLeft === 0 && (
+                <div style={{ textAlign: "center", marginTop: "15px" }}>
+                  <p style={{ color: "#E74C3C", fontSize: "16px", marginBottom: "15px" }}>Time's up!</p>
+                  <button
+                    onClick={handleReveal}
+                    style={{
+                      padding: "12px 35px",
+                      background: "rgba(255,255,255,0.1)",
+                      color: "#FFD700",
+                      border: "1px solid #FFD700",
+                      borderRadius: "8px",
+                      fontSize: "15px",
+                      cursor: "pointer",
+                      fontFamily: "inherit",
+                    }}
+                  >
+                    Reveal Answer
+                  </button>
+                </div>
+              )}
+
+              {/* Answer */}
+              {showAnswer && (
+                <div style={{
+                  marginTop: "20px",
+                  background: "rgba(255,215,0,0.08)",
+                  borderRadius: "12px",
+                  padding: "20px",
+                  border: "1px solid rgba(255,215,0,0.3)",
+                }}>
+                  <p style={{ color: "#888", fontSize: "12px", textTransform: "uppercase", letterSpacing: "2px", margin: "0 0 8px 0" }}>
+                    Answer
+                  </p>
+                  <p style={{
+                    color: "#FFD700",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    margin: "0 0 20px 0",
+                    lineHeight: "1.5",
+                  }}>
+                    {activeQ.a}
+                  </p>
+
+                  {buzzedTeam !== null ? (
+                    <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
+                      <button
+                        onClick={() => handleScore(true)}
+                        style={{
+                          padding: "12px 30px",
+                          background: "#27AE60",
+                          color: "#fff",
+                          border: "none",
+                          borderRadius: "8px",
+                          fontSize: "15px",
+                          fontWeight: "bold",
+                          cursor: "pointer",
+                          fontFamily: "inherit",
+                        }}
+                      >
+                        ✓ Correct
+                      </button>
+                      <button
+                        onClick={() => handleScore(false)}
+                        style={{
+                          padding: "12px 30px",
+                          background: "#E74C3C",
+                          color: "#fff",
+                          border: "none",
+                          borderRadius: "8px",
+                          fontSize: "15px",
+                          fontWeight: "bold",
+                          cursor: "pointer",
+                          fontFamily: "inherit",
+                        }}
+                      >
+                        ✗ Incorrect
+                      </button>
+                    </div>
+                  ) : (
+                    <div style={{ textAlign: "center" }}>
+                      <button
+                        onClick={handleSkip}
+                        style={{
+                          padding: "12px 30px",
+                          background: "rgba(255,255,255,0.1)",
+                          color: "#ccc",
+                          border: "1px solid rgba(255,255,255,0.2)",
+                          borderRadius: "8px",
+                          fontSize: "15px",
+                          cursor: "pointer",
+                          fontFamily: "inherit",
+                        }}
+                      >
+                        No one got it — Next Question
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<PP478Jeopardy />);
+</script>
+</body>
+</html>
