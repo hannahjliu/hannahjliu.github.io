@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Which Research Design for Causal Inference Are You?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 40%, #0f172a 100%);
+      font-family: 'Source Sans 3', sans-serif;
+      color: #cbd5e1;
+      overflow-x: hidden;
+    }
+    .screen { display: none; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; position: relative; }
+    .screen.active { display: flex; }
+    .glow { position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none; }
+    .glow-1 { top: -15%; right: -8%; width: 450px; height: 450px; background: radial-gradient(circle, rgba(139,92,246,0.14) 0%, transparent 70%); }
+    .glow-2 { bottom: -8%; left: -8%; width: 380px; height: 380px; background: radial-gradient(circle, rgba(245,158,11,0.11) 0%, transparent 70%); }
+    .glow-center { top: 5%; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; filter: blur(60px); pointer-events: none; position: absolute; border-radius: 50%; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .serif { font-family: 'Playfair Display', Georgia, serif; }
+
+    /* Start */
+    .start-wrap { position: relative; z-index: 1; max-width: 600px; text-align: center; }
+    .start-wrap .icon { font-size: 64px; margin-bottom: 16px; }
+    .start-wrap .label { font-size: 13px; letter-spacing: 4px; color: #a78bfa; text-transform: uppercase; margin-bottom: 8px; }
+    .start-wrap h1 { font-size: clamp(32px, 6vw, 52px); font-weight: 700; color: #f8fafc; line-height: 1.15; margin-bottom: 20px; }
+    .start-wrap .sub { font-size: 17px; color: #94a3b8; line-height: 1.6; max-width: 480px; margin: 0 auto 40px; }
+    .btn-start {
+      font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600;
+      color: #0f172a; background: #f59e0b; border: none; border-radius: 50px; padding: 16px 48px;
+      cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
+      box-shadow: 0 0 20px rgba(245,158,11,0.2); transition: all 0.3s ease;
+    }
+    .btn-start:hover { background: #fbbf24; transform: scale(1.05); box-shadow: 0 0 30px rgba(245,158,11,0.4); }
+
+    /* Quiz */
+    .quiz-wrap { position: relative; z-index: 1; max-width: 640px; width: 100%; }
+    .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #f59e0b, #ef4444, #8b5cf6); border-radius: 3px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 12px; letter-spacing: 2px; color: #64748b; }
+    .q-text { font-size: clamp(22px, 4vw, 30px); font-weight: 600; color: #f1f5f9; line-height: 1.35; margin: 24px 0 32px; transition: opacity 0.35s, transform 0.35s; }
+    .q-text.entering { opacity: 0; transform: translateY(18px); }
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .opt-btn {
+      font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.5;
+      color: #cbd5e1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; padding: 16px 20px; cursor: pointer; text-align: left;
+      transition: all 0.3s ease; display: flex; align-items: flex-start; gap: 12px;
+    }
+    .opt-btn:hover { background: rgba(255,255,255,0.08); }
+    .opt-btn.selected { color: #f8fafc; background: linear-gradient(135deg, rgba(139,92,246,0.4), rgba(99,102,241,0.3)); border-color: rgba(139,92,246,0.6); transform: scale(1.02); box-shadow: 0 0 20px rgba(139,92,246,0.2); }
+    .opt-btn.entering { opacity: 0; }
+    .opt-letter {
+      display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+      width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.08);
+      font-size: 12px; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: #64748b;
+      transition: all 0.3s ease;
+    }
+    .opt-btn.selected .opt-letter { background: rgba(139,92,246,0.5); color: #fff; }
+
+    /* Back button */
+    .btn-back {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px;
+      color: #334155; background: none; border: none; cursor: pointer;
+      text-transform: uppercase; transition: color 0.2s; padding: 0;
+    }
+    .btn-back:hover { color: #64748b; }
+
+    /* Result */
+    .result-wrap { position: relative; z-index: 1; max-width: 580px; width: 100%; text-align: center; transition: opacity 0.8s, transform 0.8s; opacity: 0; transform: translateY(30px); }
+    .result-wrap.revealed { opacity: 1; transform: translateY(0); }
+    .result-label { font-size: 12px; letter-spacing: 4px; color: #64748b; text-transform: uppercase; margin-bottom: 12px; }
+    .result-emoji { font-size: 72px; margin-bottom: 12px; }
+    .result-name { font-size: clamp(30px, 6vw, 44px); font-weight: 700; color: #f8fafc; line-height: 1.2; margin-bottom: 8px; }
+    .result-tagline { font-size: 14px; letter-spacing: 1px; margin-bottom: 32px; }
+    .result-desc {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px; padding: 28px 24px; text-align: left; margin-bottom: 24px;
+      font-size: 16px; color: #cbd5e1; line-height: 1.7;
+    }
+    .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+    .btn-restart {
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+      color: #e2e8f0; background: transparent; border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px; padding: 12px 28px; cursor: pointer; letter-spacing: 1px;
+      text-transform: uppercase; transition: all 0.3s ease;
+    }
+    .btn-restart:hover { color: #0f172a; background: #f59e0b; border-color: #f59e0b; }
+
+    /* Score tally */
+    @keyframes barGrow { from { width: 4%; } }
+    .scores-box {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px; padding: 20px 24px; margin-bottom: 24px; text-align: left;
+    }
+    .scores-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #475569; margin-bottom: 16px; }
+    .score-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .score-row:last-child { margin-bottom: 0; }
+    .score-emoji { font-size: 15px; width: 22px; text-align: center; flex-shrink: 0; }
+    .score-name { font-size: 12px; width: 110px; color: #94a3b8; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; }
+    .score-track { flex: 1; height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
+    .score-fill { height: 100%; border-radius: 3px; animation: barGrow 0.9s ease-out; }
+    .score-num { font-size: 11px; color: #475569; width: 24px; text-align: right; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; }
+
+    /* OLS easter egg teaser */
+    @keyframes teaserSlideIn {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .ols-teaser {
+      padding: 16px 20px; margin-bottom: 24px;
+      background: rgba(37,99,235,0.06); border: 1px dashed rgba(37,99,235,0.35);
+      border-radius: 14px; cursor: pointer;
+      display: flex; align-items: center; gap: 14px;
+      animation: teaserSlideIn 0.5s cubic-bezier(0.22,1,0.36,1) both;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .ols-teaser:hover { background: rgba(37,99,235,0.12); border-color: rgba(37,99,235,0.6); }
+    .ols-teaser-icon { font-size: 24px; flex-shrink: 0; }
+    .ols-teaser-body { flex: 1; min-width: 0; text-align: left; }
+    .ols-teaser-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #2563EB; margin-bottom: 4px; }
+    .ols-teaser-text { font-size: 13px; color: #94a3b8; line-height: 1.45; }
+    .ols-teaser-cta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2563EB; margin-top: 6px; letter-spacing: 1px; }
+    .ols-teaser-dismiss {
+      flex-shrink: 0; background: none; border: none; color: #334155; cursor: pointer;
+      font-size: 16px; line-height: 1; padding: 4px; transition: color 0.2s; align-self: flex-start;
+    }
+    .ols-teaser-dismiss:hover { color: #64748b; }
+
+    /* BONUS QUIZ */
+    #bonus-start-screen, #bonus-quiz-screen, #bonus-result-screen {
+      background: linear-gradient(160deg, #0f172a 0%, #1c1208 40%, #0f172a 100%);
+    }
+    .bonus-wrap { position: relative; z-index: 1; max-width: 600px; text-align: center; }
+    .bonus-badge {
+      display: inline-block; font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: #92400e; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 20px; padding: 5px 14px; margin-bottom: 20px;
+    }
+    .bonus-wrap h1 { font-size: clamp(26px, 5vw, 40px); font-weight: 700; color: #fef3c7; line-height: 1.2; margin-bottom: 16px; }
+    .bonus-wrap .sub { font-size: 15px; color: #78716c; line-height: 1.6; max-width: 460px; margin: 0 auto 36px; }
+    .btn-bonus-start {
+      font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;
+      color: #0f172a; background: #f59e0b; border: none; border-radius: 50px; padding: 14px 40px;
+      cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
+      box-shadow: 0 0 16px rgba(245,158,11,0.15); transition: all 0.3s ease;
+    }
+    .btn-bonus-start:hover { background: #fbbf24; transform: scale(1.04); }
+    .btn-back-link {
+      display: block; margin-top: 20px; font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 2px; color: #44403c; text-transform: uppercase;
+      background: none; border: none; cursor: pointer; transition: color 0.2s;
+    }
+    .btn-back-link:hover { color: #78716c; }
+
+    .bonus-quiz-wrap { position: relative; z-index: 1; max-width: 620px; width: 100%; }
+    .bonus-progress-bar { width: 100%; height: 4px; background: rgba(245,158,11,0.12); border-radius: 2px; overflow: hidden; }
+    .bonus-progress-fill { height: 100%; background: linear-gradient(90deg, #f59e0b, #d97706); border-radius: 2px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+    .bonus-q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 11px; letter-spacing: 2px; color: #44403c; font-family: 'JetBrains Mono', monospace; }
+    .bonus-q-text { font-size: clamp(20px, 3.5vw, 26px); font-weight: 600; color: #fef3c7; line-height: 1.4; margin: 20px 0 28px; transition: opacity 0.35s, transform 0.35s; font-family: 'Playfair Display', Georgia, serif; }
+    .bonus-q-text.entering { opacity: 0; transform: translateY(18px); }
+    .bonus-options { display: flex; flex-direction: column; gap: 10px; }
+    .bonus-opt-btn {
+      font-family: 'Source Sans 3', sans-serif; font-size: 14px; line-height: 1.5;
+      color: #a8a29e; background: rgba(245,158,11,0.03); border: 1px solid rgba(245,158,11,0.1);
+      border-radius: 12px; padding: 14px 18px; cursor: pointer; text-align: left;
+      transition: all 0.3s ease; display: flex; align-items: flex-start; gap: 12px;
+    }
+    .bonus-opt-btn:hover { background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.25); color: #d6d3d1; }
+    .bonus-opt-btn.selected { color: #fef3c7; background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.4); transform: scale(1.02); }
+    .bonus-opt-btn.entering { opacity: 0; }
+    .bonus-opt-letter {
+      display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+      width: 24px; height: 24px; border-radius: 50%; background: rgba(245,158,11,0.08);
+      font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: #44403c;
+      transition: all 0.3s ease;
+    }
+    .bonus-opt-btn.selected .bonus-opt-letter { background: rgba(245,158,11,0.3); color: #fef3c7; }
+    .btn-bonus-back {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px;
+      color: #44403c; background: none; border: none; cursor: pointer;
+      text-transform: uppercase; transition: color 0.2s; padding: 0;
+    }
+    .btn-bonus-back:hover { color: #78716c; }
+
+    .bonus-result-wrap { position: relative; z-index: 1; max-width: 560px; width: 100%; text-align: center; transition: opacity 0.8s, transform 0.8s; opacity: 0; transform: translateY(30px); }
+    .bonus-result-wrap.revealed { opacity: 1; transform: translateY(0); }
+    .bonus-result-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 4px; color: #44403c; text-transform: uppercase; margin-bottom: 12px; }
+    .bonus-result-emoji { font-size: 64px; margin-bottom: 12px; }
+    .bonus-result-name { font-size: clamp(26px, 5vw, 38px); font-weight: 700; color: #fef3c7; line-height: 1.2; margin-bottom: 6px; font-family: 'Playfair Display', Georgia, serif; }
+    .bonus-result-tagline { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 1px; margin-bottom: 28px; color: #f59e0b; }
+    .bonus-result-desc {
+      background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.1);
+      border-radius: 16px; padding: 24px; text-align: left; margin-bottom: 28px;
+      font-size: 15px; color: #a8a29e; line-height: 1.75;
+    }
+    .btn-bonus-restart {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+      color: #78716c; background: transparent; border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 50px; padding: 11px 28px; cursor: pointer; letter-spacing: 1px;
+      text-transform: uppercase; transition: all 0.3s ease; margin: 0 6px;
+    }
+    .btn-bonus-restart:hover { color: #0f172a; background: #f59e0b; border-color: #f59e0b; }
+  </style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="start-screen" class="screen active">
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="start-wrap">
+    <div class="icon">📊</div>
+    <p class="mono label">PP455 Personality Quiz</p>
+    <h1 class="serif">Which Research Design Are You?</h1>
+    <p class="sub">Are you the dependable workhorse of OLS? The exclusive rarity of IV? The gold standard with hidden struggles? Answer 9 questions to discover your econometric alter ego.</p>
+    <button class="btn-start" onclick="startQuiz()">Start Quiz →</button>
+  </div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quiz-screen" class="screen">
+  <div class="glow" style="top:10%;left:-5%;width:300px;height:300px;background:radial-gradient(circle,rgba(99,102,241,0.1) 0%,transparent 70%);filter:blur(40px)"></div>
+  <div class="quiz-wrap">
+    <div>
+      <div class="q-meta mono">
+        <span id="q-counter"></span>
+        <button class="btn-back" id="btn-back" onclick="goBack()" style="display:none">← back</button>
+        <span id="q-pct"></span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+    <h2 class="serif q-text" id="q-text"></h2>
+    <div class="options" id="options"></div>
+  </div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="result-screen" class="screen">
+  <div class="glow glow-center" id="result-glow"></div>
+  <div class="result-wrap" id="result-wrap">
+    <p class="mono result-label">Your result</p>
+    <div class="result-emoji" id="result-emoji"></div>
+    <h1 class="serif result-name" id="result-name"></h1>
+    <p class="mono result-tagline" id="result-tagline"></p>
+    <div class="result-desc" id="result-desc"></div>
+    <div class="ols-teaser" id="ols-teaser" style="display:none" onclick="show('bonus-start-screen')">
+      <div class="ols-teaser-icon">⚠️</div>
+      <div class="ols-teaser-body">
+        <p class="ols-teaser-label">wait — there's more</p>
+        <p class="ols-teaser-text">You got OLS. But something in that error term isn't right and we both know it.</p>
+        <p class="ols-teaser-cta">Find your violation of OLS 1 →</p>
+      </div>
+      <button class="ols-teaser-dismiss" onclick="event.stopPropagation(); this.closest('.ols-teaser').style.display='none'">✕</button>
+    </div>
+    <div class="scores-box" id="scores-box"></div>
+    <div class="btn-row">
+      <button class="btn-restart" onclick="startQuiz()">Retake Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- BONUS START -->
+<div id="bonus-start-screen" class="screen">
+  <div class="glow" style="top:-10%;right:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(245,158,11,0.08) 0%,transparent 70%);filter:blur(60px)"></div>
+  <div class="bonus-wrap">
+    <span class="bonus-badge">OLS Bonus Round</span>
+    <h1>Which Violation of Exogeneity Are You?</h1>
+    <p class="sub">Something in that error term is correlated with your regressors and we need to find out why.</p>
+    <button class="btn-bonus-start" onclick="startBonusQuiz()">Let's do this →</button>
+    <button class="btn-back-link" onclick="show('result-screen')">← back to my result</button>
+  </div>
+</div>
+
+<!-- BONUS QUIZ SCREEN -->
+<div id="bonus-quiz-screen" class="screen">
+  <div class="glow" style="top:10%;right:-5%;width:300px;height:300px;background:radial-gradient(circle,rgba(245,158,11,0.06) 0%,transparent 70%);filter:blur(40px)"></div>
+  <div class="bonus-quiz-wrap">
+    <div>
+      <div class="bonus-q-meta">
+        <span id="bq-counter"></span>
+        <button class="btn-bonus-back" id="btn-bonus-back" onclick="bonusGoBack()" style="display:none">← back</button>
+        <span id="bq-pct"></span>
+      </div>
+      <div class="bonus-progress-bar"><div class="bonus-progress-fill" id="bonus-progress-fill"></div></div>
+    </div>
+    <h2 class="bonus-q-text" id="bq-text"></h2>
+    <div class="bonus-options" id="bonus-options"></div>
+  </div>
+</div>
+
+<!-- BONUS RESULT SCREEN -->
+<div id="bonus-result-screen" class="screen">
+  <div class="glow" style="top:5%;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,0.07) 0%,transparent 70%);filter:blur(60px);pointer-events:none;position:absolute;border-radius:50%;"></div>
+  <div class="bonus-result-wrap" id="bonus-result-wrap">
+    <p class="bonus-result-label">your violation</p>
+    <div class="bonus-result-emoji" id="br-emoji"></div>
+    <h1 class="bonus-result-name" id="br-name"></h1>
+    <p class="bonus-result-tagline" id="br-tagline"></p>
+    <div class="bonus-result-desc" id="br-desc"></div>
+    <div class="btn-row">
+      <button class="btn-bonus-restart" onclick="startBonusQuiz()">Retake Bonus</button>
+      <button class="btn-bonus-restart" onclick="startQuiz()">Back to Main Quiz</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const METHODS = {
+    OLS:       { name: "OLS Regression",              emoji: "📏", tagline: "The Reliable Workhorse",           color: "#2563EB",
+      description: "You are the backbone of the group and you know it. You're dependable, versatile, and always willing to show up. In return, you like consistency and predictability. Sure, some people underestimate you — you know that most of empirical economics runs on your back. Your weakness? You can be a little naive about what's hiding in that error term. You prefer to assume it's fine. It's probably fine." },
+    MATCHING:  { name: "Matching",                    emoji: "🪞", tagline: "The Selective Matchmaker",         color: "#7C3AED",
+      description: "People call you shallow, and honestly? They're not entirely wrong. You only care about what's on the surface (observables), and you've made your peace with that. But within your domain, nobody finds a better match. You keep a mental score for everyone you meet. They don't know this. You also have strong opinions about who belongs in your sample and will remove outliers from your life without a second thought." },
+    IV:        { name: "Instrumental Variables",      emoji: "🎯", tagline: "The Rare and Exclusive One",       color: "#DC2626",
+      description: "You're that friend who's incredibly hard to find but absolutely worth it when you show up. You have three non-negotiable standards and you refuse to compromise on any of them. You literally cannot function if you're irrelevant. You only really speak for the compliers, which makes you a bit niche — but honestly, being niche has never bothered you. It just makes you unique." },
+    DID:       { name: "Difference-in-Differences",   emoji: "⚡", tagline: "The Parallel Universe Powerhouse",  color: "#059669",
+      description: "You are constitutionally incapable of evaluating anything without asking \"but what would have happened otherwise?\" You will run a placebo test on your own emotions before deciding if something is real. People find this exhausting. You find it responsible. Your core assumption requires a little faith, yes, but you've checked it six times and it looks fine. Mostly." },
+    SHARP_RDD: { name: "Sharp RDD",                   emoji: "🔪", tagline: "Smooth Operator with a Sharp Edge", color: "#EA580C",
+      description: "You are, genuinely, the most easy-going person in the room. Relaxed, smooth, no sharp edges — until you're not. People find out where the line is by crossing it, at which point everything changes completely and there is no ambiguity about it whatsoever. Both sides of the threshold would describe you completely differently. You find this totally reasonable." },
+    FUZZY_RDD: { name: "Fuzzy RDD",                   emoji: "🌫️", tagline: "An IV in a Trench Coat",           color: "#0891B2",
+      description: "Let's be honest: you're basically an IV with a better origin story. The cutoff nudges you, it doesn't own you, and you think that's a more honest way to live, frankly. You're the pragmatic middle child between Sharp RDD's clean certainty and IV's abstract cleverness. You estimate LATE for compliers at the cutoff, which is very specific, but at least it's honest." },
+    RCT:       { name: "Randomised Controlled Trial",  emoji: "👑", tagline: "The Gold Standard",                color: "#CA8A04",
+      description: "Everyone calls you the gold standard, and you've learned to wear the crown gracefully. Random assignment makes you unbiased by design. You walk into a room and other methods audibly sigh. But what people don't see is how much work it takes to be this perfect. Attrition. Spillover. Non-compliance. And don't even get you started on the ethics review board. The pressure of being everyone's benchmark? It's a lot. But when it all comes together? Immaculate." }
+  };
+
+  const SHORT = { OLS:'OLS', MATCHING:'Matching', IV:'IV', DID:'DiD', SHARP_RDD:'Sharp RDD', FUZZY_RDD:'Fuzzy RDD', RCT:'RCT' };
+
+  const QUESTIONS = [
+    { q: "Your friends are planning a group holiday. What's your role?", opts: [
+      { text: "I compare everyone's calendars and find the date that works", scores: { OLS: 3, MATCHING: 1 } },
+      { text: "I find the one perfect Airbnb that satisfies everyone's conditions", scores: { IV: 3, FUZZY_RDD: 1 } },
+      { text: "I pair each person with their ideal roommate based on detailed compatibility profiles", scores: { MATCHING: 3 } },
+      { text: "Ditch everyone else and do whatever I want", scores: { FUZZY_RDD: 3 } }
+    ]},
+    { q: "What is your favourite dinner party topic of conversation?", opts: [
+      { text: "Reminiscing over memories", scores: { DID: 3 } },
+      { text: "Who should get with who", scores: { MATCHING: 3 } },
+      { text: "Gossiping about the many assumptions I make", scores: { OLS: 3 } },
+      { text: "Whatever was on the front page of the Financial Times", scores: { SHARP_RDD: 3 } }
+    ]},
+    { q: "Where do you usually like to study?", opts: [
+      { text: "5th Floor CBG", scores: { IV: 3 } },
+      { text: "The Bean Counter", scores: { SHARP_RDD: 3 } },
+      { text: "Library Postgrad Study Room", scores: { DID: 3 } },
+      { text: "Somewhere off campus", scores: { FUZZY_RDD: 3 } }
+    ]},
+    { q: "How do you handle a messy breakup?", opts: [
+      { text: "I look at how we were both trending before the split to figure out what really changed", scores: { DID: 3 } },
+      { text: "I find someone who looks identical to my ex but is better", scores: { MATCHING: 3 } },
+      { text: "I only process the breakup within a very narrow emotional bandwidth around the exact moment it happened", scores: { SHARP_RDD: 3, FUZZY_RDD: 1 } },
+      { text: "I find a completely unrelated life event and use it as the reason to move on", scores: { IV: 3 } }
+    ]},
+    { q: "What are you drinking at The George?", opts: [
+      { text: "A classic Guinness", scores: { DID: 3 } },
+      { text: "A very sensible half pint of Asahi", scores: { OLS: 3 } },
+      { text: "A Spritz — who knew they had them?", scores: { FUZZY_RDD: 3 } },
+      { text: "Nothing, just there for the vibes", scores: { SHARP_RDD: 3 } }
+    ]},
+    { q: "What's your approach to making a big life decision?", opts: [
+      { text: "I control for everything within my grasp and accept the rest is unknowable", scores: { OLS: 3, MATCHING: 1 } },
+      { text: "I flip a coin", scores: { RCT: 3 } },
+      { text: "The moment I cross the line, I commit fully", scores: { SHARP_RDD: 3 } },
+      { text: "I wait for an external nudge and then let it carry me", scores: { IV: 2, FUZZY_RDD: 2 } }
+    ]},
+    { q: "Where are you sitting in the lecture hall?", opts: [
+      { text: "With all the other late people at the back", scores: { OLS: 3 } },
+      { text: "Whichever seat has a desk that isn't broken", scores: { IV: 2, FUZZY_RDD: 2 } },
+      { text: "By the door (get me out of here)", scores: { DID: 3 } },
+      { text: "Front and center so I can be Mark Schankerman's favorite little boy", scores: { RCT: 3 } }
+    ]},
+    { q: "What is your texting style?", opts: [
+      { text: "Consistent response time, I don't play games", scores: { OLS: 3 } },
+      { text: "I only text back when reminded — but if reminded, I will text back", scores: { IV: 3 } },
+      { text: "I double text if the first one wasn't delivered properly", scores: { RCT: 3 } },
+      { text: "I just read old text chains over and over", scores: { DID: 3 } }
+    ]},
+    { q: "What's your opening line?", opts: [
+      { text: "\"I'm rejecting all the H0s because you're a much better alternative.\"", scores: { SHARP_RDD: 3 } },
+      { text: "\"We must have the same propensity score, because we make a great match.\"", scores: { MATCHING: 3 } },
+      { text: "\"Thank god for error terms, because it means I'll always have u.\"", scores: { OLS: 3 } },
+      { text: "\"I would still love you if you were a parasitic worm.\"", scores: { RCT: 3 } }
+    ]}
+  ];
+
+  // ── MAIN QUIZ STATE ──
+  let currentQ = 0, scores = {}, locked = false;
+  let answerHistory = []; // stores selected option index per question
+
+  function show(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+    if (id !== 'result-screen') {
+      const t = document.getElementById('ols-teaser');
+      if (t) t.style.display = 'none';
+    }
+  }
+
+  function startQuiz() {
+    currentQ = 0; scores = {}; locked = false; answerHistory = [];
+    show('quiz-screen');
+    renderQuestion();
+  }
+
+  function recalcScores() {
+    scores = {};
+    for (let i = 0; i < answerHistory.length; i++) {
+      const chosen = answerHistory[i];
+      if (chosen === null) continue;
+      for (const [m, pts] of Object.entries(QUESTIONS[i].opts[chosen].scores)) {
+        scores[m] = (scores[m] || 0) + pts;
+      }
+    }
+  }
+
+  function renderQuestion(previousAnswer = null) {
+    const q = QUESTIONS[currentQ];
+    const total = QUESTIONS.length;
+    document.getElementById('q-counter').textContent = `QUESTION ${currentQ + 1} OF ${total}`;
+    document.getElementById('q-pct').textContent = `${Math.round(((currentQ + 1) / total) * 100)}%`;
+    document.getElementById('progress-fill').style.width = `${((currentQ + 1) / total) * 100}%`;
+    document.getElementById('btn-back').style.display = currentQ > 0 ? 'inline-block' : 'none';
+
+    const qEl = document.getElementById('q-text');
+    qEl.classList.add('entering');
+    qEl.textContent = q.q;
+
+    const optsEl = document.getElementById('options');
+    optsEl.innerHTML = '';
+    const letters = ['A','B','C','D'];
+    q.opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn entering';
+      if (previousAnswer === i) btn.classList.add('selected');
+      btn.innerHTML = `<span class="opt-letter mono">${letters[i]}</span><span>${opt.text}</span>`;
+      btn.onclick = () => selectOption(i);
+      optsEl.appendChild(btn);
+    });
+
+    requestAnimationFrame(() => setTimeout(() => {
+      qEl.classList.remove('entering');
+      optsEl.querySelectorAll('.opt-btn').forEach((b, i) => setTimeout(() => b.classList.remove('entering'), i * 60));
+    }, 30));
+  }
+
+  function selectOption(i) {
+    if (locked) return;
+    locked = true;
+    document.querySelectorAll('.opt-btn')[i].classList.add('selected');
+    answerHistory[currentQ] = i;
+    recalcScores();
+    setTimeout(() => {
+      locked = false;
+      currentQ++;
+      currentQ < QUESTIONS.length ? renderQuestion() : showResult();
+    }, 550);
+  }
+
+  function goBack() {
+    if (currentQ === 0) return;
+    currentQ--;
+    const prev = answerHistory[currentQ] !== undefined ? answerHistory[currentQ] : null;
+    locked = false;
+    renderQuestion(prev);
+  }
+
+  function showResult() {
+    let best = null, bestScore = -1;
+    for (const [m, s] of Object.entries(scores)) if (s > bestScore) { best = m; bestScore = s; }
+    const method = METHODS[best];
+    show('result-screen');
+    document.getElementById('result-glow').style.background = `radial-gradient(circle, ${method.color}22 0%, transparent 70%)`;
+    document.getElementById('result-emoji').textContent = method.emoji;
+    document.getElementById('result-name').textContent = `You are ${method.name}`;
+    const tl = document.getElementById('result-tagline');
+    tl.textContent = method.tagline;
+    tl.style.color = method.color;
+    document.getElementById('result-desc').textContent = method.description;
+
+    const allMethods = Object.entries(METHODS)
+      .map(([key, m]) => ({ key, emoji: m.emoji, name: m.name, color: m.color, score: scores[key] || 0 }))
+      .sort((a, b) => b.score - a.score);
+    const maxScore = allMethods[0].score || 1;
+    document.getElementById('scores-box').innerHTML = '<p class="scores-label">Score Breakdown</p>' +
+      allMethods.map(m => {
+        const pct = Math.max(4, (m.score / maxScore) * 100);
+        const fill = m.key === best ? `background:linear-gradient(90deg,${m.color},${m.color}88)` : 'background:rgba(255,255,255,0.18)';
+        return `<div class="score-row"><span class="score-emoji">${m.emoji}</span><span class="score-name">${SHORT[m.key]}</span><div class="score-track"><div class="score-fill" style="width:${pct}%;${fill}"></div></div><span class="score-num">${m.score}</span></div>`;
+      }).join('');
+
+    const teaser = document.getElementById('ols-teaser');
+    teaser.style.display = 'none';
+    if (best === 'OLS') {
+      setTimeout(() => {
+        teaser.style.animation = 'none';
+        teaser.style.display = 'flex';
+        teaser.offsetHeight;
+        teaser.style.animation = 'teaserSlideIn 0.5s cubic-bezier(0.22,1,0.36,1) both';
+      }, 1600);
+    }
+
+    const wrap = document.getElementById('result-wrap');
+    wrap.classList.remove('revealed');
+    requestAnimationFrame(() => setTimeout(() => wrap.classList.add('revealed'), 50));
+  }
+
+  // ── BONUS QUIZ ──
+  const VIOLATIONS = {
+    OVB:     { name: "Omitted Variable Bias",              emoji: "👻", tagline: "The thing nobody saw coming",
+      description: "You are the elephant in the room that nobody can see. You're not hiding — you're just not being looked for. You affect everything, you're connected to everything, and the official explanation for what's going on is quietly wrong because of you. You find this more funny than anything else." },
+    ME:      { name: "Measurement Error",                  emoji: "📡", tagline: "Close enough",
+      description: "Chaotic, a little scrambled, but ultimately well-meaning. You're never quite what you say you are — not because you're dishonest, but because something always gets lost in translation. Sometimes it washes out. Sometimes it doesn't. There's always a little something else going on with you that nobody has fully accounted for." },
+    RC:      { name: "Reverse Causality",                  emoji: "🔄", tagline: "Confidently backwards",
+      description: "You have very confident opinions about what caused what, and the direction is always wrong. You're not careless — you're just so certain that you never stop to check which way the arrow is pointing. You've been doing this your whole life and it has never once occurred to you that you might have it backwards." },
+    SB:      { name: "Selection Bias",                     emoji: "🪟", tagline: "Great sample. Wrong population.",
+      description: "A bit of a wannabe with the worst FOMO. You curate your surroundings carefully — the right people, the right rooms, the right energy — and then act surprised when your conclusions don't apply to anyone outside of them. You just never quite admit that the people who didn't show up might have changed everything." },
+    MISSPEC: { name: "Misspecification of Functional Form", emoji: "〰️", tagline: "You're not difficult. You're nonlinear.",
+      description: "People have been trying to put you in a box your entire life and you have never once fit. They draw a straight line through you and call it done. It is not done. You're more complicated than that, more interesting than that, and eventually the residuals always give it away. You're not difficult. You're just not linear." }
+  };
+
+  const BONUS_QUESTIONS = [
+    { q: "Your friends are trying to explain you to someone new. What do they say?", opts: [
+      { text: "They trail off. There's something they can't quite put into words.", scores: { OVB: 3 } },
+      { text: "\"They really try but they do tend to mess things up.\"", scores: { ME: 3 } },
+      { text: "\"They have very strong opinions. All of them wrong.\"", scores: { RC: 3 } },
+      { text: "\"You'd love them. Everyone in our friend group does.\"", scores: { SB: 3 } },
+      { text: "\"Honestly it's tough to describe them.\"", scores: { MISSPEC: 3 } }
+    ]},
+    { q: "When you had to write your data analysis memo:", opts: [
+      { text: "You knew something important was missing the whole time and just stuck it in the limitations section.", scores: { OVB: 3 } },
+      { text: "You barely got into the portal in time and used the wrong data series.", scores: { ME: 3 } },
+      { text: "You blamed Stata for something that was not Stata.", scores: { RC: 3 } },
+      { text: "You only looked at countries you already knew would work.", scores: { SB: 3 } },
+      { text: "Your research question didn't fit any available variable so you made it work anyway.", scores: { MISSPEC: 3 } }
+    ]},
+    { q: "It's your turn to share what happened at the party. You say:", opts: [
+      { text: "\"There were clearly forces at work that nobody was talking about.\"", scores: { OVB: 3 } },
+      { text: "Something mostly accurate with a few details scrambled.", scores: { ME: 3 } },
+      { text: "You explain exactly who did what to whom, in completely the wrong order.", scores: { RC: 3 } },
+      { text: "\"Everyone I spoke to had a great time\" — you spoke to four people, all of whom you invited.", scores: { SB: 3 } },
+      { text: "Something that technically answers the question but defies categorisation.", scores: { MISSPEC: 3 } }
+    ]},
+    { q: "What is your role in a group presentation with 7-8 people?", opts: [
+      { text: "Not on the slides, not listed as a contributor, and yet somehow responsible for half of it.", scores: { OVB: 3 } },
+      { text: "Trying to help but accidentally mixing up the whole slide format.", scores: { ME: 3 } },
+      { text: "Thinking you're doing something but really everyone else is doing your job for you.", scores: { RC: 3 } },
+      { text: "Making a group chat but only adding your besties.", scores: { SB: 3 } },
+      { text: "Thinking outside of the box in a way nobody quite asked for.", scores: { MISSPEC: 3 } }
+    ]}
+  ];
+
+  let bonusQ = 0, bonusScores = {}, bonusLocked = false;
+  let bonusHistory = [];
+
+  function startBonusQuiz() {
+    bonusQ = 0; bonusScores = {}; bonusLocked = false; bonusHistory = [];
+    show('bonus-quiz-screen');
+    renderBonusQuestion();
+  }
+
+  function bonusRecalcScores() {
+    bonusScores = {};
+    for (let i = 0; i < bonusHistory.length; i++) {
+      const chosen = bonusHistory[i];
+      if (chosen === null) continue;
+      for (const [v, pts] of Object.entries(BONUS_QUESTIONS[i].opts[chosen].scores)) {
+        bonusScores[v] = (bonusScores[v] || 0) + pts;
+      }
+    }
+  }
+
+  function renderBonusQuestion(previousAnswer = null) {
+    const q = BONUS_QUESTIONS[bonusQ];
+    const total = BONUS_QUESTIONS.length;
+    document.getElementById('bq-counter').textContent = `QUESTION ${bonusQ + 1} OF ${total}`;
+    document.getElementById('bq-pct').textContent = `${Math.round(((bonusQ + 1) / total) * 100)}%`;
+    document.getElementById('bonus-progress-fill').style.width = `${((bonusQ + 1) / total) * 100}%`;
+    document.getElementById('btn-bonus-back').style.display = bonusQ > 0 ? 'inline-block' : 'none';
+
+    const qEl = document.getElementById('bq-text');
+    qEl.classList.add('entering');
+    qEl.textContent = q.q;
+
+    const optsEl = document.getElementById('bonus-options');
+    optsEl.innerHTML = '';
+    const letters = ['A','B','C','D','E'];
+    q.opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'bonus-opt-btn entering';
+      if (previousAnswer === i) btn.classList.add('selected');
+      btn.innerHTML = `<span class="bonus-opt-letter">${letters[i]}</span><span>${opt.text}</span>`;
+      btn.onclick = () => selectBonusOption(i);
+      optsEl.appendChild(btn);
+    });
+
+    requestAnimationFrame(() => setTimeout(() => {
+      qEl.classList.remove('entering');
+      optsEl.querySelectorAll('.bonus-opt-btn').forEach((b, i) => setTimeout(() => b.classList.remove('entering'), i * 60));
+    }, 30));
+  }
+
+  function selectBonusOption(i) {
+    if (bonusLocked) return;
+    bonusLocked = true;
+    document.querySelectorAll('.bonus-opt-btn')[i].classList.add('selected');
+    bonusHistory[bonusQ] = i;
+    bonusRecalcScores();
+    setTimeout(() => {
+      bonusLocked = false;
+      bonusQ++;
+      bonusQ < BONUS_QUESTIONS.length ? renderBonusQuestion() : showBonusResult();
+    }, 550);
+  }
+
+  function bonusGoBack() {
+    if (bonusQ === 0) return;
+    bonusQ--;
+    const prev = bonusHistory[bonusQ] !== undefined ? bonusHistory[bonusQ] : null;
+    bonusLocked = false;
+    renderBonusQuestion(prev);
+  }
+
+  function showBonusResult() {
+    let best = null, bestScore = -1;
+    for (const [v, s] of Object.entries(bonusScores)) if (s > bestScore) { best = v; bestScore = s; }
+    const violation = VIOLATIONS[best];
+    show('bonus-result-screen');
+    document.getElementById('br-emoji').textContent = violation.emoji;
+    document.getElementById('br-name').textContent = violation.name;
+    document.getElementById('br-tagline').textContent = violation.tagline;
+    document.getElementById('br-desc').textContent = violation.description;
+    const wrap = document.getElementById('bonus-result-wrap');
+    wrap.classList.remove('revealed');
+    requestAnimationFrame(() => setTimeout(() => wrap.classList.add('revealed'), 50));
+  }
+</script>
+</body>
+</html>
