@@ -333,7 +333,7 @@
   const QUESTIONS = [
     { q: "Your friends are planning a group holiday. What's your role?", opts: [
       { text: "I compare everyone's calendars and find the date that works", scores: { OLS: 3, MATCHING: 1 } },
-      { text: "I find the one perfect Airbnb that satisfies everyone's conditions", scores: { IV: 3, FUZZY_RDD: 1 } },
+      { text: "I find the one perfect Airbnb that satisfies everyone's conditions", scores: { IV: 2, FUZZY_RDD: 1 } },
       { text: "I pair each person with their ideal roommate based on detailed compatibility profiles", scores: { MATCHING: 3 } },
       { text: "Ditch everyone else and do whatever I want", scores: { FUZZY_RDD: 3 } }
     ]},
@@ -344,7 +344,7 @@
       { text: "That one thing that makes you really angry", scores: { SHARP_RDD: 3 } }
     ]},
     { q: "Where do you usually like to study?", opts: [
-      { text: "5th Floor CBG (when it's not overrun by European Institute students)", scores: { IV: 3 } },
+      { text: "5th Floor CBG (when it's not overrun by European Institute students)", scores: { IV: 2 } },
       { text: "The Bean Counter", scores: { SHARP_RDD: 3 } },
       { text: "Library Postgrad Study Room", scores: { DID: 3 } },
       { text: "Somewhere off campus", scores: { FUZZY_RDD: 3 } }
@@ -369,7 +369,7 @@
     ]},
     { q: "Where are you sitting in the lecture hall?", opts: [
       { text: "With all the other late people at the back", scores: { OLS: 3 } },
-      { text: "Whichever seat has a desk that isn't broken", scores: { IV: 2, FUZZY_RDD: 2 } },
+      { text: "Whichever seat has a desk that isn't broken", scores: { IV: 1, FUZZY_RDD: 2 } },
       { text: "In the exact same place I sit every single week", scores: { DID: 3 } },
       { text: "Front and center so I can be Mark Schankerman's favorite little boy", scores: { RCT: 3 } }
     ]},
