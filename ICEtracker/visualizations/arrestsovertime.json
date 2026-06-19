@@ -96,7 +96,7 @@
         ]
       },
       "layer": [
-        {"mark": {"type": "line", "strokeWidth": 2.5, "color": "#155263", "interpolate":"basis"}},
+        {"mark": {"type": "line", "strokeWidth": 3, "color": "#155263", "interpolate":"basis"}},
         {
           "transform": [{"filter": {"param": "hover", "empty": false}}],
           "mark": {"type": "point", "size": 100, "filled": true}
