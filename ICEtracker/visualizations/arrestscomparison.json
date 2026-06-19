@@ -1,0 +1,230 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Comparing Daily Arrest Averages of Trump 1.0 and 2.0",
+  "title": {
+    "text": "Comparing Daily Arrest Averages of Trump 1.0 and 2.0",
+    "subtitle": "Seven-day rolling average of daily ICE administrative arrests."
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICEtracker/data/dailyarrestscombined.csv"
+  },
+  "params": [
+    {
+      "name": "startDay",
+      "value": -250,
+      "bind": {
+        "input": "select",
+        "options": [-250, -200, -150, -100, -50, 0],
+        "name": "Start day:"
+      }
+    },
+    {
+      "name": "endDay",
+      "value": 410,
+      "bind": {
+        "input": "select",
+        "options": [0, 50, 100, 150, 200, 250, 300, 350, 410],
+        "name": "End day:"
+      }
+    },
+    {
+      "name": "AORParam",
+      "value": "National",
+      "bind": {
+        "input": "select",
+        "options": [
+          "National",
+          "Atlanta",
+          "Baltimore",
+          "Boston",
+          "Buffalo",
+          "Chicago",
+          "Dallas",
+          "Denver",
+          "Detroit",
+          "El Paso",
+          "HQ",
+          "Houston",
+          "Los Angeles",
+          "Miami",
+          "New Orleans",
+          "New York City",
+          "Newark",
+          "Philadelphia",
+          "Phoenix",
+          "Salt Lake City",
+          "San Antonio",
+          "San Diego",
+          "San Francisco",
+          "Seattle",
+          "St. Paul",
+          "Washington"
+        ],
+        "name": "Select area:"
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum['aor_nam'] == AORParam"},
+    {"filter": "datum['days_since_inauguration'] >= startDay && datum['days_since_inauguration'] <= endDay"}
+  ],
+  "height": 400,
+  "width": 680,
+  "layer": [
+    {
+      "encoding": {
+        "x": {
+          "field": "days_since_inauguration",
+          "type": "quantitative",
+          "title": "Days since inauguration",
+          "axis": {"tickCount": 10}
+        },
+        "y": {
+          "field": "week_rolling_avg",
+          "type": "quantitative",
+          "title": "Average Daily Arrests"
+        },
+        "color": {
+          "field": "Administration",
+          "type": "nominal",
+          "legend": {"title": "Term", "orient": "top"},
+          "scale": {
+            "domain": ["Trump 1.0", "Trump 2.0"],
+            "range": ["#155263", "#ff6f3c"]
+          }
+        },
+        "tooltip": [
+          {"field": "days_since_inauguration", "type": "quantitative", "title": "Day"},
+          {"field": "Administration", "type": "nominal", "title": "Administration"},
+          {"field": "week_rolling_avg", "type": "quantitative", "title": "Arrests", "format": ".1f"}
+        ]
+      },
+      "layer": [
+        {"mark": {"type": "line", "strokeWidth": 3, "interpolate": "basis"}},
+        {
+          "transform": [{"filter": {"param": "hover", "empty": false}}],
+          "mark": {"type": "point", "size": 100, "filled": true}
+        }
+      ]
+    },
+    {
+      "data": {"values": [{"x": 0}]},
+      "mark": {
+        "type": "rule",
+        "color": "tomato",
+        "strokeWidth": 1,
+        "strokeDash": [6, 4]
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"}
+      }
+    },
+    {
+      "mark": {"type": "rule"},
+      "transform": [
+        {
+          "calculate": "replace(datum.Administration, '.0', '')",
+          "as": "Administration"
+        },
+        {
+          "pivot": "Administration",
+          "value": "week_rolling_avg",
+          "groupby": ["days_since_inauguration"]
+        }
+      ],
+      "encoding": {
+        "x": {"field": "days_since_inauguration", "type": "quantitative"},
+        "opacity": {
+          "condition": {"value": 0.3, "param": "hover", "empty": false},
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "days_since_inauguration", "type": "quantitative", "title": "Days Since Inauguration"},
+          {"field": "Trump 1", "title": "First Term Arrests", "type": "quantitative", "format": ".1f"},
+          {"field": "Trump 2", "title": "Second Term Arrests", "type": "quantitative", "format": ".1f"}
+        ]
+      },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": ["days_since_inauguration"],
+            "nearest": true,
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "font": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "numberFormat": ".0f",
+    "view": {"stroke": "transparent"},
+    "background": "transparent",
+    "point": {"filled": true, "opacity": 0.95},
+    "axis": {
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 11,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelOpacity": 1,
+      "tickColor": "#0a0a0a",
+      "tickOpacity": 0.6,
+      "domainColor": "#0a0a0a",
+      "domainOpacity": 0.6,
+      "gridColor": "#bfbfbf",
+      "gridDash": [2, 2],
+      "gridOpacity": 0.8,
+      "title": null,
+      "titleColor": "#0a0a0a",
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleOpacity": 1,
+      "titleFontSize": 14,
+      "titleFontWeight": 500,
+      "tickSize": 5
+    },
+    "axisXDiscrete": {
+      "grid": false,
+      "labelAngle": 0,
+      "tickCount": 10,
+      "tickOpacity": 0.6,
+      "title": null
+    },
+    "axisYDiscrete": {"ticks": false, "labelPadding": 5},
+    "axisXQuantitative": {"grid": true},
+    "axisYQuantitative": {
+      "gridColor": "#d0d0d0",
+      "gridDash": [1, 5],
+      "gridOpacity": 0.8,
+      "ticks": false,
+      "labelPadding": 5,
+      "tickCount": 8,
+      "titleAngle": -90,
+      "titleAlign": "center",
+      "titleBaseline": "middle"
+    },
+    "legend": {
+      "titleFont": "'Besley', 'Merriweather', serif",
+      "titleFontSize": 15,
+      "titleFontWeight": 500,
+      "titleColor": "#0a0a0a",
+      "title": null,
+      "labelFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelColor": "#0a0a0a",
+      "labelFontSize": 12
+    },
+    "title": {
+      "font": "'Besley', 'Garamond', 'Georgia'",
+      "fontSize": 20,
+      "fontWeight": 500,
+      "color": "#0a0a0a",
+      "subtitleFont": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#0a0a0a",
+      "anchor": "start",
+      "offset": 10
+    },
+    "mark": {"tooltip": true}
+  }
+}
