@@ -449,6 +449,7 @@
         <aside class="sidebar">
             <nav class="sidebar-nav" id="sidebarNav">
                 <a href="#arrests-over-time">Over Time</a>
+                <a href="#arrestcomparison">Comparison</a>
                 <a href="#aor-map">By Region</a>
                 <a href="#by-crim-record">By Criminal Record</a>
                 <a href="#by-arrest-type">By Arrest Type</a>
@@ -464,6 +465,31 @@
             <div class="section" id="arrests-over-time">
                 <figure id="arrestsovertime"></figure>
             </div>
+
+            <div class="section" id="arrestcomparison">
+                <figure id="arrestcomparison"></figure>
+            </div>
+
+            <div class="section" id="aor-map">
+                <figure id="aormap"></figure>
+                <div class="data-notes">
+                    <div class="data-notes-header" onclick="toggleNotes(2)">
+                        <h3 class="data-notes-title">Notes for replication</h3>
+                        <span class="data-notes-arrow" id="arrow2">▼</span>
+                    </div>
+                    <div class="data-notes-content" id="notes2">
+                        <div class="data-notes-text">
+                            <p>The shapefiles for the Area of Responsibility (AOR) map are from the
+                                <a href="https://deportationdata.org/data/processed/ice-offices.html">Deportation Data
+                                    Project</a>. I used <a href="mapshaper.org">mapshaper</a> to simplify and convert
+                                them
+                                to TopoJSONs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="section" id="aor-map">
                 <figure id="aormap"></figure>
@@ -687,7 +713,8 @@
             vegaEmbed('#areachart', 'ICEtracker/visualizations/arrestsovertimecrim.json'),
             vegaEmbed('#typechart', 'ICEtracker/visualizations/collateralarrests.json'),
             vegaEmbed('#nationalities', 'ICEtracker/visualizations/topnationalities.json'),
-            vegaEmbed('#arrestviews', 'ICEtracker/visualizations/arrestsviewschart.json')
+            vegaEmbed('#arrestviews', 'ICEtracker/visualizations/arrestsviewschart.json'),
+            vegaEmbed('#arrestcomparison', 'ICEtracker/visualizations/arrestscomparison.json')
         ]).then(() => {
             if (window.location.hash) {
                 document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'smooth' });
