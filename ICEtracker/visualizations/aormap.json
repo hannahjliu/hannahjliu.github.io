@@ -21,7 +21,7 @@
     },
     {
       "name": "endDate",
-      "value": "2026-09-01",
+      "value": "2026-08-06",
       "bind": {
         "input": "date",
         "name": "End Date:",
