@@ -16,17 +16,17 @@
         "input": "date",
         "name": "Start Date:",
         "min": "2023-09-01",
-        "max": "2026-03-10"
+        "max": "2026-08-06"
       }
     },
     {
       "name": "endDate",
-      "value": "2026-03-10",
+      "value": "2026-09-01",
       "bind": {
         "input": "date",
         "name": "End Date:",
         "min": "2023-09-01",
-        "max": "2026-03-10"
+        "max": "2026-08-06"
       }
     },
     {

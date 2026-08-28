@@ -5,7 +5,7 @@
     "url": "https://raw.githubusercontent.com/hannahjliu/hannahjliu.github.io/refs/heads/main/ICEtracker/data/topcountryarrests2025.csv"
   },
   "title": {
-     "text": {"expr": "excludeMexico ? 'Top nationalities of arrests in 2025 (excluding Mexico)' : 'Top nationalities of arrests in 2025'"},
+     "text": {"expr": "excludeMexico ? 'Top nationalities of arrests in Trump 2.0 (excluding Mexico)' : 'Top nationalities of arrests in Trump 2.0'"},
     "subtitle": "Nationalities are based on citizenship."
   },
   "width": 600,
