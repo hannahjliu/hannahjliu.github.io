@@ -591,8 +591,8 @@
         <div class="container">
             <h1>Child ICE Detentions Data Explorer</h1>
             <p class="subtitle">A searchable database of ICE detentions involving minors under 18. Filter by age,
-                gender, facility, country, and date — and download filtered results as CSV. Data is available from
-                September 2022 to mid-March 2026.</p>
+                gender, facility, country, and date - and download filtered results as CSV. Data is available from
+                September 2022 to early August 2026.</p>
         </div>
     </div>
 
@@ -676,11 +676,11 @@
                     </div>
                     <div class="filter-group">
                         <label>Book-In Date Start</label>
-                        <input type="date" id="f-start" value="2025-01-20" min="2022-09-10" max="2026-03-10">
+                        <input type="date" id="f-start" value="2025-08-06" min="2022-09-10" max="2026-08-06">
                     </div>
                     <div class="filter-group">
                         <label>Book-In Date End</label>
-                        <input type="date" id="f-end" value="2026-03-10" min="2022-09-10" max="2026-03-10">
+                        <input type="date" id="f-end" value="2026-08-06" min="2022-09-10" max="2026-08-06">
                     </div>
                 </div>
             </div>
@@ -751,7 +751,7 @@
                             count by fewer than 5 records.</p>
                         <p>Where no book-out date exists, departure date is used if available. Otherwise, the child is
                             assumed to still be detained, and stay length is calculated through the date of the latest
-                            data release (March 2026).</p>
+                            data release (August 2026).</p>
 
                         <p>Raw data can be downloaded from <a
                                 href="https://deportationdata.org/data/ice.html">deportationdata.org</a>.</p>
@@ -771,7 +771,7 @@
     <script>
         // ── DEFAULT DATE RANGE ──
         const DEFAULT_START = '2025-01-20';
-        const DEFAULT_END = '2026-03-10';
+        const DEFAULT_END = '2026-08-06';
 
         // ── STATE ──
         let allData = [];
